@@ -1,6 +1,6 @@
 from __future__ import annotations
 import typing
-__all__ = ['Composite', 'Observer', 'ResourceRetriever', 'Subject', 'Uri', 'UriComponent']
+__all__: list[str] = ['Composite', 'Observer', 'ResourceRetriever', 'Subject', 'Uri', 'UriComponent']
 class Composite:
     def __init__(self) -> None:
         ...

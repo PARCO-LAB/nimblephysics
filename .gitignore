@@ -1,4 +1,10 @@
 build/
+.deps/
+.venv/
+python/nimblephysics_libs/
+python/**/__pycache__/
+python/*.egg-info/
+*.deb
 cmake-build-debug/
 cmake-build-release/
 syntax: glob

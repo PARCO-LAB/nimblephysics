@@ -1,8 +1,8 @@
 """Bindings for Eigen geometric types."""
 from __future__ import annotations
-import nimblephysics_libs._nimblephysics.math
+import nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.math
 import typing
-import nimblephysics_libs._nimblephysics.dynamics
+import nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics
 import numpy
 _Shape = typing.Tuple[int, ...]
 
@@ -356,7 +356,7 @@ def quatToExp(q: Quaternion) -> numpy.ndarray[numpy.float64, _Shape[3, 1]]:
     pass
 def rightMultiplyInFreeJointSpace(R: numpy.ndarray[numpy.float64, _Shape[3, 3]], p: numpy.ndarray[numpy.float64, _Shape[3, 1]], S: numpy.ndarray[numpy.float64, _Shape[6, 1]]) -> numpy.ndarray[numpy.float64, _Shape[6, 1]]:
     pass
-def roundEulerAnglesToNearest(angle: numpy.ndarray[numpy.float64, _Shape[3, 1]], previousAngle: numpy.ndarray[numpy.float64, _Shape[3, 1]], axisOrder: nimblephysics_libs._nimblephysics.dynamics.AxisOrder = AxisOrder.XYZ) -> numpy.ndarray[numpy.float64, _Shape[3, 1]]:
+def roundEulerAnglesToNearest(angle: numpy.ndarray[numpy.float64, _Shape[3, 1]], previousAngle: numpy.ndarray[numpy.float64, _Shape[3, 1]], axisOrder: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.AxisOrder = AxisOrder.XYZ) -> numpy.ndarray[numpy.float64, _Shape[3, 1]]:
     pass
 def transformBy(T: Isometry3, p: numpy.ndarray[numpy.float64, _Shape[3, 1]]) -> numpy.ndarray[numpy.float64, _Shape[3, 1]]:
     pass

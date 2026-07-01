@@ -1,4 +1,4 @@
-Metadata-Version: 2.1
+Metadata-Version: 2.4
 Name: nimblephysics
 Version: 0.10.52.1
 Summary: A differentiable fully featured physics engine
@@ -7,6 +7,16 @@ Author-email: keenonwerling@gmail.com
 License: MIT
 Description-Content-Type: text/markdown
 License-File: LICENSE
+Requires-Dist: torch
+Requires-Dist: numpy
+Dynamic: author
+Dynamic: author-email
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: license
+Dynamic: license-file
+Dynamic: requires-dist
+Dynamic: summary
 
 ![Stanford Nimble Logo](https://nimblephysics.org/README/README_Splash.svg)
 
@@ -15,6 +25,22 @@ License-File: LICENSE
 # Stanford Nimble
 
 `pip3 install nimblephysics`
+
+### Build wheel locale
+
+Se vuoi usare questa checkout in un altro progetto, costruisci e installa il wheel:
+
+```bash
+python -m pip install build wheel
+python -m build --wheel
+python -m pip install dist/nimblephysics-*.whl
+```
+
+Se invece stai sviluppando dentro la repo, usa l'editable install:
+
+```bash
+python -m pip install -e .
+```
 
 ** BETA SOFTWARE **
 

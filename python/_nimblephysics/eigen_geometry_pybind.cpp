@@ -39,6 +39,7 @@
 
 #include <dart/common/common.hpp>
 
+#include "pybind11/numpy.h"
 #include "pybind11/pybind11.h"
 
 using std::fabs;
@@ -82,6 +83,12 @@ void CheckRotMat(const Eigen::Matrix<T, 3, 3>& R)
       && "Rotation matrix violates right-hand rule");
 }
 
+template <typename Derived>
+void CheckRotMat(const Eigen::Ref<const Derived>& R)
+{
+  CheckRotMat<typename Derived::Scalar>(R);
+}
+
 template <typename T>
 void CheckIsometry(const Eigen::Transform<T, 3, Eigen::Isometry>& X)
 {
@@ -113,6 +120,31 @@ void CheckAngleAxis(const Eigen::AngleAxis<T>& value)
   assert(norm_error < kCheckTolerance && "Axis is not normalized");
 }
 
+template <typename T>
+Eigen::Matrix<T, 3, 1> ToVector3(
+    const ::pybind11::array_t<T,
+        ::pybind11::array::c_style | ::pybind11::array::forcecast>& array)
+{
+  const auto info = array.request();
+  if (info.ndim != 1 || info.shape[0] != 3) {
+    throw ::pybind11::value_error("Expected a 3-vector.");
+  }
+
+  const auto values = array.template unchecked<1>();
+  return Eigen::Matrix<T, 3, 1>(values(0), values(1), values(2));
+}
+
+template <typename T>
+::pybind11::array_t<T> ToArray3(const Eigen::Matrix<T, 3, 1>& value)
+{
+  ::pybind11::array_t<T> out(3);
+  auto values = out.template mutable_unchecked<1>();
+  values(0) = value(0);
+  values(1) = value(1);
+  values(2) = value(2);
+  return out;
+}
+
 } // namespace
 
 // PYBIND11_MODULE(eigen_geometry, m) {
@@ -140,7 +172,8 @@ void eigen_geometry(pybind11::module& parent_m)
     py_class.def(::pybind11::init([]() { return Class::Identity(); }))
         .def_static("Identity", []() { return Class::Identity(); })
         .def(
-            ::pybind11::init([](const Eigen::Matrix<T, 4, 1>& wxyz) {
+            ::pybind11::init([](
+                const Eigen::Ref<const Eigen::Matrix<T, 4, 1>>& wxyz) {
               Class out(wxyz(0), wxyz(1), wxyz(2), wxyz(3));
               CheckQuaternion(out);
               return out;
@@ -157,7 +190,8 @@ void eigen_geometry(pybind11::module& parent_m)
             ::pybind11::arg("y"),
             ::pybind11::arg("z"))
         .def(
-            ::pybind11::init([](const Eigen::Matrix<T, 3, 3>& rotation) {
+            ::pybind11::init([](
+                const Eigen::Ref<const Eigen::Matrix<T, 3, 3>>& rotation) {
               Class out(rotation);
               CheckQuaternion(out);
               return out;
@@ -183,7 +217,8 @@ void eigen_geometry(pybind11::module& parent_m)
             })
         .def(
             "set_wxyz",
-            [](Class* self, const Eigen::Matrix<T, 4, 1>& wxyz) {
+            [](Class* self,
+               const Eigen::Ref<const Eigen::Matrix<T, 4, 1>>& wxyz) {
               Class update;
               update.w() = wxyz(0);
               update.vec() = wxyz.tail(3);
@@ -207,7 +242,8 @@ void eigen_geometry(pybind11::module& parent_m)
             [](const Class* self) { return self->toRotationMatrix(); })
         .def(
             "set_rotation",
-            [](Class* self, const Eigen::Matrix<T, 3, 3>& rotation) {
+            [](Class* self,
+               const Eigen::Ref<const Eigen::Matrix<T, 3, 3>>& rotation) {
               Class update(rotation);
               CheckQuaternion(update);
               *self = update;
@@ -230,8 +266,12 @@ void eigen_geometry(pybind11::module& parent_m)
             [](const Class& self, const Class& other) { return self * other; })
         .def(
             "multiply",
-            [](const Class& self, const Eigen::Matrix<T, 3, 1>& position) {
-              return self * position;
+            [](const Class& self,
+               const ::pybind11::array_t<T,
+                   ::pybind11::array::c_style
+                   | ::pybind11::array::forcecast>& position) {
+              // ponytail: NumPy in, NumPy out avoids the old Eigen caster crash.
+              return ToArray3<T>(self * ToVector3<T>(position));
             },
             ::pybind11::arg("position"))
         .def("inverse", [](const Class* self) { return self->inverse(); })
@@ -258,15 +298,17 @@ void eigen_geometry(pybind11::module& parent_m)
     py_class.def(::pybind11::init([]() { return Class::Identity(); }))
         .def_static("Identity", []() { return Class::Identity(); })
         .def(
-            ::pybind11::init([](const Eigen::Matrix<T, 4, 4>& matrix) {
+            ::pybind11::init([](
+                const Eigen::Ref<const Eigen::Matrix<T, 4, 4>>& matrix) {
               Class out(matrix);
               CheckIsometry(out);
               return out;
             }),
             ::pybind11::arg("matrix"))
         .def(
-            ::pybind11::init([](const Eigen::Matrix<T, 3, 3>& rotation,
-                                const Eigen::Matrix<T, 3, 1>& translation) {
+            ::pybind11::init([](
+                const Eigen::Ref<const Eigen::Matrix<T, 3, 3>>& rotation,
+                const Eigen::Ref<const Eigen::Matrix<T, 3, 1>>& translation) {
               CheckRotMat(rotation);
               Class out = Class::Identity();
               out.linear() = rotation;
@@ -277,7 +319,8 @@ void eigen_geometry(pybind11::module& parent_m)
             ::pybind11::arg("translation"))
         .def(
             ::pybind11::init([](const Eigen::Quaternion<T>& q,
-                                const Eigen::Matrix<T, 3, 1>& translation) {
+                                const Eigen::Ref<const Eigen::Matrix<T, 3, 1>>&
+                                    translation) {
               CheckQuaternion(q);
               Class out = Class::Identity();
               out.linear() = q.toRotationMatrix();
@@ -299,7 +342,8 @@ void eigen_geometry(pybind11::module& parent_m)
             })
         .def(
             "set_matrix",
-            [](Class* self, const Eigen::Matrix<T, 4, 4>& matrix) {
+            [](Class* self,
+               const Eigen::Ref<const Eigen::Matrix<T, 4, 4>>& matrix) {
               Class update(matrix);
               CheckIsometry(update);
               *self = update;
@@ -311,7 +355,8 @@ void eigen_geometry(pybind11::module& parent_m)
             })
         .def(
             "set_translation",
-            [](Class* self, const Eigen::Matrix<T, 3, 1>& translation) {
+            [](Class* self,
+               const Eigen::Ref<const Eigen::Matrix<T, 3, 1>>& translation) {
               self->translation() = translation;
             })
         .def(
@@ -321,7 +366,8 @@ void eigen_geometry(pybind11::module& parent_m)
             })
         .def(
             "set_rotation",
-            [](Class* self, const Eigen::Matrix<T, 3, 3>& rotation) {
+            [](Class* self,
+               const Eigen::Ref<const Eigen::Matrix<T, 3, 3>>& rotation) {
               CheckRotMat(rotation);
               self->linear() = rotation;
             })
@@ -349,8 +395,12 @@ void eigen_geometry(pybind11::module& parent_m)
             ::pybind11::arg("other"))
         .def(
             "multiply",
-            [](const Class& self, const Eigen::Matrix<T, 3, 1>& position) {
-              return self * position;
+            [](const Class& self,
+               const ::pybind11::array_t<T,
+                   ::pybind11::array::c_style
+                   | ::pybind11::array::forcecast>& position) {
+              // ponytail: NumPy in, NumPy out avoids the old Eigen caster crash.
+              return ToArray3<T>(self * ToVector3<T>(position));
             },
             ::pybind11::arg("position"))
         .def("inverse", [](const Class* self) { return self->inverse(); })
@@ -359,13 +409,15 @@ void eigen_geometry(pybind11::module& parent_m)
         //========================
         .def(
             "translate",
-            [](Class* self, const Eigen::Matrix<T, 3, 1>& other) {
+            [](Class* self,
+               const Eigen::Ref<const Eigen::Matrix<T, 3, 1>>& other) {
               self->translate(other);
             },
             ::pybind11::arg("other"))
         .def(
             "pretranslate",
-            [](Class* self, const Eigen::Matrix<T, 3, 1>& other) {
+            [](Class* self,
+               const Eigen::Ref<const Eigen::Matrix<T, 3, 1>>& other) {
               self->pretranslate(other);
             },
             ::pybind11::arg("other"))
@@ -386,7 +438,8 @@ void eigen_geometry(pybind11::module& parent_m)
         .def_static("Identity", []() { return Class::Identity(); })
         .def(
             ::pybind11::init(
-                [](const T& angle, const Eigen::Matrix<T, 3, 1>& axis) {
+                [](const T& angle,
+                   const Eigen::Ref<const Eigen::Matrix<T, 3, 1>>& axis) {
                   Class out(angle, axis);
                   CheckAngleAxis(out);
                   return out;
@@ -401,7 +454,8 @@ void eigen_geometry(pybind11::module& parent_m)
             }),
             ::pybind11::arg("quaternion"))
         .def(
-            ::pybind11::init([](const Eigen::Matrix<T, 3, 3>& rotation) {
+            ::pybind11::init([](
+                const Eigen::Ref<const Eigen::Matrix<T, 3, 3>>& rotation) {
               Class out(rotation);
               CheckAngleAxis(out);
               return out;
@@ -425,7 +479,8 @@ void eigen_geometry(pybind11::module& parent_m)
             ::pybind11::arg("angle"))
         .def(
             "set_axis",
-            [](Class* self, const Eigen::Matrix<T, 3, 1>& axis) {
+            [](Class* self,
+               const Eigen::Ref<const Eigen::Matrix<T, 3, 1>>& axis) {
               Class update(self->angle(), axis);
               CheckAngleAxis(update);
               *self = update;
@@ -436,7 +491,8 @@ void eigen_geometry(pybind11::module& parent_m)
             [](const Class* self) { return self->toRotationMatrix(); })
         .def(
             "set_rotation",
-            [](Class* self, const Eigen::Matrix<T, 3, 3>& rotation) {
+            [](Class* self,
+               const Eigen::Ref<const Eigen::Matrix<T, 3, 3>>& rotation) {
               Class update(rotation);
               CheckAngleAxis(update);
               *self = update;

@@ -6,6 +6,22 @@
 
 `pip3 install nimblephysics`
 
+### Build a local wheel
+
+If you want to use this checkout in another project, build and install the wheel:
+
+```bash
+python -m pip install build wheel
+python -m build --wheel
+python -m pip install dist/nimblephysics-*.whl
+```
+
+If you're developing inside this repo, use an editable install:
+
+```bash
+python -m pip install -e .
+```
+
 ** BETA SOFTWARE **
 
 [Read our docs](http://www.nimblephysics.org/docs) and [the paper](https://arxiv.org/abs/2103.16021).

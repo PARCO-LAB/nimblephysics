@@ -2,21 +2,58 @@ from __future__ import annotations
 import _nimblephysics.common
 import _nimblephysics.dynamics
 import _nimblephysics.simulation
+import collections.abc
 import numpy
+import numpy.typing
 import typing
 from . import SdfParser
 from . import SkelParser
 from . import StringUtils
 from . import UniversalLoader
-__all__ = ['AccelerationSmoother', 'DartLoader', 'MJCFExporter', 'SdfParser', 'SkelParser', 'StringUtils', 'UniversalLoader']
+__all__: list[str] = ['AccelerationMinimizer', 'AccelerationSmoother', 'AccelerationTrackAndMinimize', 'AccelerationTrackingResult', 'DartLoader', 'MJCFExporter', 'SdfParser', 'SkelParser', 'StringUtils', 'UniversalLoader']
+class AccelerationMinimizer:
+    def __init__(self, numTimesteps: typing.SupportsInt | typing.SupportsIndex, smoothingWeight: typing.SupportsFloat | typing.SupportsIndex = 1.0, regularizationWeight: typing.SupportsFloat | typing.SupportsIndex = 0.01, startPositionZeroWeight: typing.SupportsFloat | typing.SupportsIndex = 0.0, endPositionZeroWeight: typing.SupportsFloat | typing.SupportsIndex = 0.0, startVelocityZeroWeight: typing.SupportsFloat | typing.SupportsIndex = 0.0, endVelocityZeroWeight: typing.SupportsFloat | typing.SupportsIndex = 0.0, numIterations: typing.SupportsInt | typing.SupportsIndex = 10000) -> None:
+        ...
+    def minimize(self, series: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[m, 1]"]) -> typing.Annotated[numpy.typing.NDArray[numpy.float64], "[m, 1]"]:
+        ...
+    def setConvergenceTolerance(self, tolerance: typing.SupportsFloat | typing.SupportsIndex) -> None:
+        ...
+    def setDebugIterationBackoff(self, iterations: bool) -> None:
+        ...
+    def setNumIterationsBackoff(self, series: typing.SupportsInt | typing.SupportsIndex) -> None:
+        ...
 class AccelerationSmoother:
-    def __init__(self, timesteps: int, smoothingWeight: float, regularizationWeight: float, useSparse: bool = ..., useIterative: bool = ...) -> None:
+    def __init__(self, timesteps: typing.SupportsInt | typing.SupportsIndex, smoothingWeight: typing.SupportsFloat | typing.SupportsIndex, regularizationWeight: typing.SupportsFloat | typing.SupportsIndex, useSparse: bool = True, useIterative: bool = True) -> None:
         ...
-    def debugTimeSeries(self, series: numpy.ndarray[numpy.float64[m, 1]]) -> None:
+    def debugTimeSeries(self, series: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[m, 1]"]) -> None:
         ...
-    def setIterations(self, iterations: int) -> None:
+    def setIterations(self, iterations: typing.SupportsInt | typing.SupportsIndex) -> None:
         ...
-    def smooth(self, series: numpy.ndarray[numpy.float64[m, n]]) -> numpy.ndarray[numpy.float64[m, n]]:
+    def smooth(self, series: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[m, n]"]) -> typing.Annotated[numpy.typing.NDArray[numpy.float64], "[m, n]"]:
+        ...
+class AccelerationTrackAndMinimize:
+    def __init__(self, numTimesteps: typing.SupportsInt | typing.SupportsIndex, trackAccelerationAtTimesteps: collections.abc.Sequence[bool], zeroUnobservedAccWeight: typing.SupportsFloat | typing.SupportsIndex = 1.0, trackObservedAccWeight: typing.SupportsFloat | typing.SupportsIndex = 1.0, regularizationWeight: typing.SupportsFloat | typing.SupportsIndex = 0.01, dt: typing.SupportsFloat | typing.SupportsIndex = 1.0, numIterations: typing.SupportsInt | typing.SupportsIndex = 10000) -> None:
+        ...
+    def minimize(self, series: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[m, 1]"], trackAcc: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[m, 1]"]) -> AccelerationTrackingResult:
+        ...
+    def setConvergenceTolerance(self, tolerance: typing.SupportsFloat | typing.SupportsIndex) -> None:
+        ...
+    def setDebugIterationBackoff(self, iterations: bool) -> None:
+        ...
+    def setNumIterationsBackoff(self, series: typing.SupportsInt | typing.SupportsIndex) -> None:
+        ...
+class AccelerationTrackingResult:
+    @property
+    def accelerationOffset(self) -> float:
+        ...
+    @accelerationOffset.setter
+    def accelerationOffset(self, arg0: typing.SupportsFloat | typing.SupportsIndex) -> None:
+        ...
+    @property
+    def series(self) -> typing.Annotated[numpy.typing.NDArray[numpy.float64], "[m, 1]"]:
+        ...
+    @series.setter
+    def series(self, arg0: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[m, 1]"]) -> None:
         ...
 class DartLoader:
     def __init__(self) -> None:

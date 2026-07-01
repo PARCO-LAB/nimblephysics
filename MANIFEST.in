@@ -1,0 +1,14 @@
+include README.md
+include LICENSE
+include VERSION.txt
+include pyproject.toml
+
+recursive-include python *.py *.pyi
+recursive-include python/new_examples *.py
+recursive-include python/tests *.py
+recursive-include data/skel *.skel
+
+prune .deps
+prune .venv
+prune build
+prune wheelhouse

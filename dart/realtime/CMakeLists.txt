@@ -1,6 +1,12 @@
 # Search all header and source files
 file(GLOB hdrs "*.hpp")
 file(GLOB srcs "*.cpp")
+if(NOT gRPC_FOUND)
+  list(REMOVE_ITEM srcs
+    "${CMAKE_CURRENT_SOURCE_DIR}/MPCLocal.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/MPCRemote.cpp"
+  )
+endif()
 dart_add_core_headers(${hdrs})
 dart_add_core_sources(${srcs})
 

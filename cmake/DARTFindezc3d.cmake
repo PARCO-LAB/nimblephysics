@@ -6,7 +6,7 @@
 #
 # This file is provided under the "BSD-style" License
 
-find_package(ezc3d REQUIRED)
+find_package(ezc3d QUIET)
 
 # Set target ezc3d if not set
 if((EZC3D_FOUND OR ezc3d_FOUND) AND NOT TARGET ezc3d)
@@ -15,4 +15,8 @@ if((EZC3D_FOUND OR ezc3d_FOUND) AND NOT TARGET ezc3d)
     INTERFACE_INCLUDE_DIRECTORIES "${EZC3D_INCLUDE_DIRS}"
     INTERFACE_LINK_LIBRARIES "${EZC3D_LIBRARIES}"
   )
+endif()
+
+if(NOT EZC3D_FOUND AND NOT ezc3d_FOUND)
+  message(FATAL_ERROR "Could NOT find ezc3d")
 endif()

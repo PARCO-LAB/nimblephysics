@@ -2,7 +2,7 @@
 This provides performance measurement utilities, to aid performance optimization work.
 """
 from __future__ import annotations
-__all__ = ['FinalizedPerformanceLog', 'PerformanceLog']
+__all__: list[str] = ['FinalizedPerformanceLog', 'PerformanceLog']
 class FinalizedPerformanceLog:
     def prettyPrint(self) -> str:
         ...

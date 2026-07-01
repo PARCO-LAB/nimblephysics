@@ -67,17 +67,19 @@ add_subdirectory(math)
 add_subdirectory(lcpsolver)
 add_subdirectory(neural)
 add_subdirectory(trajectory)
-add_subdirectory(realtime)
 add_subdirectory(performance)
-add_subdirectory(server)
 add_subdirectory(dynamics)
 add_subdirectory(collision)
 add_subdirectory(constraint)
 add_subdirectory(simulation)
 add_subdirectory(utils) # tinyxml2, bullet
-add_subdirectory(proto)
 add_subdirectory(biomechanics)
 add_subdirectory(exo)
+add_subdirectory(proto)
+
+add_subdirectory(realtime)
+
+add_subdirectory(server)
 
 set(DART_CONFIG_HPP_IN ${CMAKE_SOURCE_DIR}/dart/config.hpp.in)
 set(DART_CONFIG_HPP_OUT ${CMAKE_BINARY_DIR}/dart/config.hpp)
@@ -132,26 +134,32 @@ target_link_libraries(dart
   Boost::system
   Boost::filesystem
   IPOPT::ipopt
-
   protobuf::libprotobuf
-  # protobuf::libprotobuf-lite
-  # protobuf::libprotoc
-  gRPC::grpc++
-  absl::log
-  absl::strings
-  absl::status
-  absl::base
-  absl::raw_hash_set
-  absl::str_format
-  absl::synchronization
-  absl::time
-  absl::statusor
-  absl::log_internal_message
-  absl::log_internal_check_op
-
-  utf8_range::utf8_range
-  utf8_range::utf8_validity
 )
+
+if(gRPC_FOUND)
+  target_compile_definitions(dart PUBLIC DART_HAS_GRPC)
+  target_link_libraries(dart
+    PUBLIC
+      # protobuf::libprotobuf-lite
+      # protobuf::libprotoc
+      gRPC::grpc++
+      absl::log
+      absl::strings
+      absl::status
+      absl::base
+      absl::raw_hash_set
+      absl::str_format
+      absl::synchronization
+      absl::time
+      absl::statusor
+      absl::log_internal_message
+      absl::log_internal_check_op
+
+      utf8_range::utf8_range
+      utf8_range::utf8_validity
+  )
+endif()
 
 if(PerfUtils_FOUND)
   target_link_libraries(dart

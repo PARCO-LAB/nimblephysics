@@ -10,6 +10,11 @@ from setuptools.command.build_ext import build_ext
 from distutils.version import LooseVersion
 from pathlib import Path
 
+try:
+    import pybind11
+except ImportError:
+    pybind11 = None
+
 
 class CMakeExtension(Extension):
     def __init__(self, name, sourcedir='', target=None):
@@ -38,6 +43,40 @@ class CMakeBuild(build_ext):
     def build_extension(self, ext):
         extdir = os.path.abspath(os.path.dirname(
             self.get_ext_fullpath(ext.name)))
+
+        def ensure_external_path(source_path, link_name):
+            if not os.path.exists(source_path):
+                return None
+            if os.path.exists(link_name):
+                return link_name
+            os.makedirs(os.path.dirname(link_name), exist_ok=True)
+            os.symlink(source_path, link_name)
+            return link_name
+
+        def ensure_deb_root(deb_name, target_root):
+            source_deb = os.path.join(os.path.dirname(__file__), deb_name)
+            if os.path.exists(target_root):
+                return target_root
+            if os.path.exists(source_deb):
+                os.makedirs(target_root, exist_ok=True)
+                subprocess.check_call(['dpkg-deb', '-x', source_deb, target_root])
+                return target_root
+            return None
+
+        temp_dep_root = os.path.join('/tmp', 'nimblephysics-deps')
+        ccd_root = ensure_deb_root('libccd-dev_2.1-2_amd64.deb', os.path.join(temp_dep_root, 'ccd-root'))
+        ensure_deb_root('libccd2_2.1-2_amd64.deb', os.path.join(temp_dep_root, 'ccd-root'))
+        external_prefixes = [
+            ccd_root,
+            ensure_external_path(os.path.join(os.path.dirname(__file__), '.deps', 'eigen-install'),
+                                 os.path.join(temp_dep_root, 'eigen-install')),
+            ensure_external_path(os.path.join(os.path.dirname(__file__), '.deps', 'ezc3d-install'),
+                                 os.path.join(temp_dep_root, 'ezc3d-install')),
+            ensure_external_path(os.path.join(os.path.dirname(__file__), '.deps', 'apt-root', 'usr'),
+                                 os.path.join(temp_dep_root, 'usr')),
+            ensure_external_path(os.path.join('/tmp', 'nimblephysics-deps', 'draco-root', 'usr'),
+                                 os.path.join(temp_dep_root, 'draco-root', 'usr')),
+        ]
         # required for auto-detection of auxiliary "native" libs
         if not extdir.endswith(os.path.sep):
             extdir += os.path.sep
@@ -46,6 +85,28 @@ class CMakeBuild(build_ext):
         print('Add python path args: '+str(add_python_path_args))
 
         cmake_args = []
+        existing_prefix_path = os.getenv('CMAKE_PREFIX_PATH', '')
+        cmake_prefix_path = ';'.join(
+            [p for p in external_prefixes if p] +
+            ([existing_prefix_path] if existing_prefix_path else [])
+        )
+        if cmake_prefix_path:
+            cmake_args += ['-DCMAKE_PREFIX_PATH=' + cmake_prefix_path]
+
+        existing_pkg_config = os.getenv('PKG_CONFIG_PATH', '')
+        local_pkg_configs = [
+            os.path.join(temp_dep_root, 'ccd-root', 'usr', 'lib', 'x86_64-linux-gnu', 'pkgconfig'),
+            os.path.join(temp_dep_root, 'ezc3d-install', 'lib', 'pkgconfig'),
+            os.path.join(temp_dep_root, 'usr', 'lib', 'x86_64-linux-gnu', 'pkgconfig'),
+        ]
+        pkg_config_path = os.pathsep.join(
+            [p for p in local_pkg_configs if os.path.exists(p)] +
+            ([existing_pkg_config] if existing_pkg_config else [])
+        )
+        if pkg_config_path:
+            cmake_args += ['-DPKG_CONFIG_PATH=' + pkg_config_path]
+        if pybind11 is not None:
+            cmake_args += ['-Dpybind11_DIR=' + pybind11.get_cmake_dir()]
         # Set our Python version, default to 3.6
         cmake_args += ['-DDARTPY_PYTHON_VERSION:STRING=' +
                        os.getenv('PYTHON_VERSION_NUMBER', '3.6')]
@@ -96,6 +157,13 @@ class CMakeBuild(build_ext):
             build_args += ['--', '-j2']
 
         env = os.environ.copy()
+        library_paths = []
+        for dep_name in os.listdir(temp_dep_root):
+            dep_lib_path = os.path.join(temp_dep_root, dep_name, 'usr', 'lib', 'x86_64-linux-gnu')
+            if os.path.isdir(dep_lib_path):
+                library_paths.append(dep_lib_path)
+        if library_paths:
+            env['LD_LIBRARY_PATH'] = os.pathsep.join(library_paths + ([env['LD_LIBRARY_PATH']] if env.get('LD_LIBRARY_PATH') else []))
         env['CXXFLAGS'] = '{} -DVERSION_INFO=\\"{}\\"'.format(env.get('CXXFLAGS', ''),
                                                               self.distribution.get_version())
         if not os.path.exists(self.build_temp):

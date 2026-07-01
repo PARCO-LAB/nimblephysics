@@ -2,22 +2,24 @@ from __future__ import annotations
 import _nimblephysics.collision
 import _nimblephysics.dynamics
 import _nimblephysics.math
+import collections.abc
 import numpy
+import numpy.typing
 import typing
-__all__ = ['BallJointConstraint', 'BoxedLcpConstraintSolver', 'BoxedLcpSolver', 'ConstrainedGroup', 'ConstraintBase', 'ConstraintInfo', 'ConstraintSolver', 'DantzigBoxedLcpSolver', 'JointConstraint', 'JointCoulombFrictionConstraint', 'JointLimitConstraint', 'LcpInputs', 'PgsBoxedLcpSolver', 'PgsBoxedLcpSolverOption', 'WeldJointConstraint']
+__all__: list[str] = ['BallJointConstraint', 'BoxedLcpConstraintSolver', 'BoxedLcpSolver', 'ConstrainedGroup', 'ConstraintBase', 'ConstraintInfo', 'ConstraintSolver', 'DantzigBoxedLcpSolver', 'JointConstraint', 'JointCoulombFrictionConstraint', 'JointLimitConstraint', 'LcpInputs', 'PgsBoxedLcpSolver', 'PgsBoxedLcpSolverOption', 'WeldJointConstraint']
 class BallJointConstraint(JointConstraint):
     @typing.overload
-    def __init__(self, body: _nimblephysics.dynamics.BodyNode, jointPos: numpy.ndarray[numpy.float64[3, 1]]) -> None:
+    def __init__(self, body: _nimblephysics.dynamics.BodyNode, jointPos: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[3, 1]"]) -> None:
         ...
     @typing.overload
-    def __init__(self, body1: _nimblephysics.dynamics.BodyNode, body2: _nimblephysics.dynamics.BodyNode, jointPos: numpy.ndarray[numpy.float64[3, 1]]) -> None:
+    def __init__(self, body1: _nimblephysics.dynamics.BodyNode, body2: _nimblephysics.dynamics.BodyNode, jointPos: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[3, 1]"]) -> None:
         ...
 class BoxedLcpConstraintSolver(ConstraintSolver):
     @typing.overload
-    def __init__(self, timeStep: float) -> None:
+    def __init__(self, timeStep: typing.SupportsFloat | typing.SupportsIndex) -> None:
         ...
     @typing.overload
-    def __init__(self, timeStep: float, boxedLcpSolver: BoxedLcpSolver) -> None:
+    def __init__(self, timeStep: typing.SupportsFloat | typing.SupportsIndex, boxedLcpSolver: BoxedLcpSolver) -> None:
         ...
     def buildLcpInputs(self, arg0: ConstrainedGroup) -> LcpInputs:
         ...
@@ -34,12 +36,12 @@ class BoxedLcpConstraintSolver(ConstraintSolver):
 class BoxedLcpSolver:
     def getType(self) -> str:
         ...
-    def solve(self, n: int, A: float, x: float, b: float, nub: int, lo: float, hi: float, findex: int) -> None:
+    def solve(self, n: typing.SupportsInt | typing.SupportsIndex, A: typing.SupportsFloat | typing.SupportsIndex, x: typing.SupportsFloat | typing.SupportsIndex, b: typing.SupportsFloat | typing.SupportsIndex, nub: typing.SupportsInt | typing.SupportsIndex, lo: typing.SupportsFloat | typing.SupportsIndex, hi: typing.SupportsFloat | typing.SupportsIndex, findex: typing.SupportsInt | typing.SupportsIndex) -> None:
         ...
 class ConstrainedGroup:
     def __init__(self) -> None:
         ...
-    def getConstraint(self, arg0: int) -> ConstraintBase:
+    def getConstraint(self, arg0: typing.SupportsInt | typing.SupportsIndex) -> ConstraintBase:
         ...
     def getNumConstraints(self) -> int:
         ...
@@ -50,9 +52,9 @@ class ConstraintBase:
     @staticmethod
     def getRootSkeletonOf(skeleton: _nimblephysics.dynamics.Skeleton) -> _nimblephysics.dynamics.Skeleton:
         ...
-    def applyImpulse(self, impulse: float) -> None:
+    def applyImpulse(self, impulse: typing.SupportsFloat | typing.SupportsIndex) -> None:
         ...
-    def applyUnitImpulse(self, index: int) -> None:
+    def applyUnitImpulse(self, index: typing.SupportsInt | typing.SupportsIndex) -> None:
         ...
     def excite(self) -> None:
         ...
@@ -62,7 +64,7 @@ class ConstraintBase:
         ...
     def getRootSkeleton(self) -> _nimblephysics.dynamics.Skeleton:
         ...
-    def getVelocityChange(self, vel: float, withCfm: bool) -> None:
+    def getVelocityChange(self, vel: typing.SupportsFloat | typing.SupportsIndex, withCfm: bool) -> None:
         ...
     def isActive(self) -> bool:
         ...
@@ -81,9 +83,9 @@ class ConstraintSolver:
         ...
     def addSkeleton(self, skeleton: _nimblephysics.dynamics.Skeleton) -> None:
         ...
-    def addSkeletons(self, skeletons: list[_nimblephysics.dynamics.Skeleton]) -> None:
+    def addSkeletons(self, skeletons: collections.abc.Sequence[_nimblephysics.dynamics.Skeleton]) -> None:
         ...
-    def applyConstraintImpulses(self, arg0: list[ConstraintBase], arg1: list[float]) -> None:
+    def applyConstraintImpulses(self, arg0: collections.abc.Sequence[ConstraintBase], arg1: collections.abc.Sequence[typing.SupportsFloat | typing.SupportsIndex]) -> None:
         ...
     def buildConstrainedGroups(self) -> None:
         ...
@@ -119,19 +121,19 @@ class ConstraintSolver:
         ...
     def removeSkeleton(self, skeleton: _nimblephysics.dynamics.Skeleton) -> None:
         ...
-    def removeSkeletons(self, skeletons: list[_nimblephysics.dynamics.Skeleton]) -> None:
+    def removeSkeletons(self, skeletons: collections.abc.Sequence[_nimblephysics.dynamics.Skeleton]) -> None:
         ...
-    def replaceEnforceContactAndJointAndCustomConstraintsFn(self, arg0: typing.Callable[[], None]) -> None:
+    def replaceEnforceContactAndJointAndCustomConstraintsFn(self, arg0: collections.abc.Callable[[], None]) -> None:
         ...
     def setCollisionDetector(self, collisionDetector: _nimblephysics.collision.CollisionDetector) -> None:
         ...
-    def setContactClippingDepth(self, arg0: float) -> None:
+    def setContactClippingDepth(self, arg0: typing.SupportsFloat | typing.SupportsIndex) -> None:
         ...
     def setGradientEnabled(self, arg0: bool) -> None:
         ...
     def setPenetrationCorrectionEnabled(self, arg0: bool) -> None:
         ...
-    def setTimeStep(self, timeStep: float) -> None:
+    def setTimeStep(self, timeStep: typing.SupportsFloat | typing.SupportsIndex) -> None:
         ...
     def solve(self) -> None:
         ...
@@ -145,7 +147,7 @@ class DantzigBoxedLcpSolver(BoxedLcpSolver):
         ...
     def getType(self) -> str:
         ...
-    def solve(self, n: int, A: float, x: float, b: float, nub: int, lo: float, hi: float, findex: int, earlyTermination: bool) -> bool:
+    def solve(self, n: typing.SupportsInt | typing.SupportsIndex, A: typing.SupportsFloat | typing.SupportsIndex, x: typing.SupportsFloat | typing.SupportsIndex, b: typing.SupportsFloat | typing.SupportsIndex, nub: typing.SupportsInt | typing.SupportsIndex, lo: typing.SupportsFloat | typing.SupportsIndex, hi: typing.SupportsFloat | typing.SupportsIndex, findex: typing.SupportsInt | typing.SupportsIndex, earlyTermination: bool) -> bool:
         ...
 class JointConstraint(ConstraintBase):
     @staticmethod
@@ -161,23 +163,23 @@ class JointConstraint(ConstraintBase):
     def getMaxErrorReductionVelocity() -> float:
         ...
     @staticmethod
-    def setConstraintForceMixing(cfm: float) -> None:
+    def setConstraintForceMixing(cfm: typing.SupportsFloat | typing.SupportsIndex) -> None:
         ...
     @staticmethod
-    def setErrorAllowance(allowance: float) -> None:
+    def setErrorAllowance(allowance: typing.SupportsFloat | typing.SupportsIndex) -> None:
         ...
     @staticmethod
-    def setErrorReductionParameter(erp: float) -> None:
+    def setErrorReductionParameter(erp: typing.SupportsFloat | typing.SupportsIndex) -> None:
         ...
     @staticmethod
-    def setMaxErrorReductionVelocity(erv: float) -> None:
+    def setMaxErrorReductionVelocity(erv: typing.SupportsFloat | typing.SupportsIndex) -> None:
         ...
 class JointCoulombFrictionConstraint(ConstraintBase):
     @staticmethod
     def getConstraintForceMixing() -> float:
         ...
     @staticmethod
-    def setConstraintForceMixing(cfm: float) -> None:
+    def setConstraintForceMixing(cfm: typing.SupportsFloat | typing.SupportsIndex) -> None:
         ...
     def __init__(self, joint: _nimblephysics.dynamics.Joint) -> None:
         ...
@@ -195,28 +197,68 @@ class JointLimitConstraint(ConstraintBase):
     def getMaxErrorReductionVelocity() -> float:
         ...
     @staticmethod
-    def setConstraintForceMixing(cfm: float) -> None:
+    def setConstraintForceMixing(cfm: typing.SupportsFloat | typing.SupportsIndex) -> None:
         ...
     @staticmethod
-    def setErrorAllowance(allowance: float) -> None:
+    def setErrorAllowance(allowance: typing.SupportsFloat | typing.SupportsIndex) -> None:
         ...
     @staticmethod
-    def setErrorReductionParameter(erp: float) -> None:
+    def setErrorReductionParameter(erp: typing.SupportsFloat | typing.SupportsIndex) -> None:
         ...
     @staticmethod
-    def setMaxErrorReductionVelocity(erv: float) -> None:
+    def setMaxErrorReductionVelocity(erv: typing.SupportsFloat | typing.SupportsIndex) -> None:
         ...
     def __init__(self, joint: _nimblephysics.dynamics.Joint) -> None:
         ...
 class LcpInputs:
-    mA: numpy.ndarray[numpy.float64[m, n]]
-    mB: numpy.ndarray[numpy.float64[m, 1]]
-    mFIndex: numpy.ndarray[numpy.int32[m, 1]]
-    mHi: numpy.ndarray[numpy.float64[m, 1]]
-    mLo: numpy.ndarray[numpy.float64[m, 1]]
-    mOffset: numpy.ndarray[numpy.int32[m, 1]]
-    mW: numpy.ndarray[numpy.float64[m, 1]]
-    mX: numpy.ndarray[numpy.float64[m, 1]]
+    @property
+    def mA(self) -> typing.Annotated[numpy.typing.NDArray[numpy.float64], "[m, n]"]:
+        ...
+    @mA.setter
+    def mA(self, arg0: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[m, n]"]) -> None:
+        ...
+    @property
+    def mB(self) -> typing.Annotated[numpy.typing.NDArray[numpy.float64], "[m, 1]"]:
+        ...
+    @mB.setter
+    def mB(self, arg0: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[m, 1]"]) -> None:
+        ...
+    @property
+    def mFIndex(self) -> typing.Annotated[numpy.typing.NDArray[numpy.int32], "[m, 1]"]:
+        ...
+    @mFIndex.setter
+    def mFIndex(self, arg0: typing.Annotated[numpy.typing.ArrayLike, numpy.int32, "[m, 1]"]) -> None:
+        ...
+    @property
+    def mHi(self) -> typing.Annotated[numpy.typing.NDArray[numpy.float64], "[m, 1]"]:
+        ...
+    @mHi.setter
+    def mHi(self, arg0: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[m, 1]"]) -> None:
+        ...
+    @property
+    def mLo(self) -> typing.Annotated[numpy.typing.NDArray[numpy.float64], "[m, 1]"]:
+        ...
+    @mLo.setter
+    def mLo(self, arg0: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[m, 1]"]) -> None:
+        ...
+    @property
+    def mOffset(self) -> typing.Annotated[numpy.typing.NDArray[numpy.int32], "[m, 1]"]:
+        ...
+    @mOffset.setter
+    def mOffset(self, arg0: typing.Annotated[numpy.typing.ArrayLike, numpy.int32, "[m, 1]"]) -> None:
+        ...
+    @property
+    def mW(self) -> typing.Annotated[numpy.typing.NDArray[numpy.float64], "[m, 1]"]:
+        ...
+    @mW.setter
+    def mW(self, arg0: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[m, 1]"]) -> None:
+        ...
+    @property
+    def mX(self) -> typing.Annotated[numpy.typing.NDArray[numpy.float64], "[m, 1]"]:
+        ...
+    @mX.setter
+    def mX(self, arg0: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[m, 1]"]) -> None:
+        ...
 class PgsBoxedLcpSolver(BoxedLcpSolver):
     @staticmethod
     def getStaticType() -> str:
@@ -227,31 +269,51 @@ class PgsBoxedLcpSolver(BoxedLcpSolver):
         ...
     def setOption(self, option: PgsBoxedLcpSolverOption) -> None:
         ...
-    def solve(self, n: int, A: float, x: float, b: float, nub: int, lo: float, hi: float, findex: int, earlyTermination: bool) -> bool:
+    def solve(self, n: typing.SupportsInt | typing.SupportsIndex, A: typing.SupportsFloat | typing.SupportsIndex, x: typing.SupportsFloat | typing.SupportsIndex, b: typing.SupportsFloat | typing.SupportsIndex, nub: typing.SupportsInt | typing.SupportsIndex, lo: typing.SupportsFloat | typing.SupportsIndex, hi: typing.SupportsFloat | typing.SupportsIndex, findex: typing.SupportsInt | typing.SupportsIndex, earlyTermination: bool) -> bool:
         ...
 class PgsBoxedLcpSolverOption:
-    mDeltaXThreshold: float
-    mEpsilonForDivision: float
-    mMaxIteration: int
     mRandomizeConstraintOrder: bool
-    mRelativeDeltaXTolerance: float
     @typing.overload
     def __init__(self) -> None:
         ...
     @typing.overload
-    def __init__(self, maxIteration: int) -> None:
+    def __init__(self, maxIteration: typing.SupportsInt | typing.SupportsIndex) -> None:
         ...
     @typing.overload
-    def __init__(self, maxIteration: int, deltaXTolerance: float) -> None:
+    def __init__(self, maxIteration: typing.SupportsInt | typing.SupportsIndex, deltaXTolerance: typing.SupportsFloat | typing.SupportsIndex) -> None:
         ...
     @typing.overload
-    def __init__(self, maxIteration: int, deltaXTolerance: float, relativeDeltaXTolerance: float) -> None:
+    def __init__(self, maxIteration: typing.SupportsInt | typing.SupportsIndex, deltaXTolerance: typing.SupportsFloat | typing.SupportsIndex, relativeDeltaXTolerance: typing.SupportsFloat | typing.SupportsIndex) -> None:
         ...
     @typing.overload
-    def __init__(self, maxIteration: int, deltaXTolerance: float, relativeDeltaXTolerance: float, epsilonForDivision: float) -> None:
+    def __init__(self, maxIteration: typing.SupportsInt | typing.SupportsIndex, deltaXTolerance: typing.SupportsFloat | typing.SupportsIndex, relativeDeltaXTolerance: typing.SupportsFloat | typing.SupportsIndex, epsilonForDivision: typing.SupportsFloat | typing.SupportsIndex) -> None:
         ...
     @typing.overload
-    def __init__(self, maxIteration: int, deltaXTolerance: float, relativeDeltaXTolerance: float, epsilonForDivision: float, randomizeConstraintOrder: bool) -> None:
+    def __init__(self, maxIteration: typing.SupportsInt | typing.SupportsIndex, deltaXTolerance: typing.SupportsFloat | typing.SupportsIndex, relativeDeltaXTolerance: typing.SupportsFloat | typing.SupportsIndex, epsilonForDivision: typing.SupportsFloat | typing.SupportsIndex, randomizeConstraintOrder: bool) -> None:
+        ...
+    @property
+    def mDeltaXThreshold(self) -> float:
+        ...
+    @mDeltaXThreshold.setter
+    def mDeltaXThreshold(self, arg0: typing.SupportsFloat | typing.SupportsIndex) -> None:
+        ...
+    @property
+    def mEpsilonForDivision(self) -> float:
+        ...
+    @mEpsilonForDivision.setter
+    def mEpsilonForDivision(self, arg0: typing.SupportsFloat | typing.SupportsIndex) -> None:
+        ...
+    @property
+    def mMaxIteration(self) -> int:
+        ...
+    @mMaxIteration.setter
+    def mMaxIteration(self, arg0: typing.SupportsInt | typing.SupportsIndex) -> None:
+        ...
+    @property
+    def mRelativeDeltaXTolerance(self) -> float:
+        ...
+    @mRelativeDeltaXTolerance.setter
+    def mRelativeDeltaXTolerance(self, arg0: typing.SupportsFloat | typing.SupportsIndex) -> None:
         ...
 class WeldJointConstraint(JointConstraint):
     @typing.overload

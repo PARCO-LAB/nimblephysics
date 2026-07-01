@@ -1,4 +1,8 @@
-find_package(benchmark REQUIRED)
+find_package(benchmark QUIET)
+if(NOT benchmark_FOUND)
+  message(STATUS "benchmark not found, skipping benchmark tests")
+  return()
+endif()
 
 dart_add_test("benchmarks" bench_Basic)
 dart_add_test("benchmarks" bench_Featherstone)

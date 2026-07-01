@@ -117,7 +117,7 @@ void ZeroDofJoint(py::module& m)
       .def(
           "setCommands",
           +[](dart::dynamics::ZeroDofJoint* self,
-              const Eigen::VectorXs& _commands) {
+              const Eigen::Ref<const Eigen::VectorXs>& _commands) {
             self->setCommands(_commands);
           },
           ::py::arg("commands"))
@@ -144,7 +144,7 @@ void ZeroDofJoint(py::module& m)
       .def(
           "setPositions",
           +[](dart::dynamics::ZeroDofJoint* self,
-              const Eigen::VectorXs& _positions) {
+              const Eigen::Ref<const Eigen::VectorXs>& _positions) {
             self->setPositions(_positions);
           },
           ::py::arg("positions"))
@@ -170,7 +170,7 @@ void ZeroDofJoint(py::module& m)
       .def(
           "setPositionLowerLimits",
           +[](dart::dynamics::ZeroDofJoint* self,
-              const Eigen::VectorXs& lowerLimits) {
+              const Eigen::Ref<const Eigen::VectorXs>& lowerLimits) {
             self->setPositionLowerLimits(lowerLimits);
           },
           ::py::arg("lowerLimits"))
@@ -194,7 +194,7 @@ void ZeroDofJoint(py::module& m)
       .def(
           "setPositionUpperLimits",
           +[](dart::dynamics::ZeroDofJoint* self,
-              const Eigen::VectorXs& upperLimits) {
+              const Eigen::Ref<const Eigen::VectorXs>& upperLimits) {
             self->setPositionUpperLimits(upperLimits);
           },
           ::py::arg("upperLimits"))
@@ -232,7 +232,7 @@ void ZeroDofJoint(py::module& m)
       .def(
           "setInitialPositions",
           +[](dart::dynamics::ZeroDofJoint* self,
-              const Eigen::VectorXs& _initial) {
+              const Eigen::Ref<const Eigen::VectorXs>& _initial) {
             self->setInitialPositions(_initial);
           },
           ::py::arg("initial"))
@@ -256,7 +256,7 @@ void ZeroDofJoint(py::module& m)
       .def(
           "setVelocities",
           +[](dart::dynamics::ZeroDofJoint* self,
-              const Eigen::VectorXs& _velocities) {
+              const Eigen::Ref<const Eigen::VectorXs>& _velocities) {
             self->setVelocities(_velocities);
           },
           ::py::arg("velocities"))
@@ -282,7 +282,7 @@ void ZeroDofJoint(py::module& m)
       .def(
           "setVelocityLowerLimits",
           +[](dart::dynamics::ZeroDofJoint* self,
-              const Eigen::VectorXs& lowerLimits) {
+              const Eigen::Ref<const Eigen::VectorXs>& lowerLimits) {
             self->setVelocityLowerLimits(lowerLimits);
           },
           ::py::arg("lowerLimits"))
@@ -308,7 +308,7 @@ void ZeroDofJoint(py::module& m)
       .def(
           "setVelocityUpperLimits",
           +[](dart::dynamics::ZeroDofJoint* self,
-              const Eigen::VectorXs& upperLimits) {
+              const Eigen::Ref<const Eigen::VectorXs>& upperLimits) {
             self->setVelocityUpperLimits(upperLimits);
           },
           ::py::arg("upperLimits"))
@@ -341,7 +341,7 @@ void ZeroDofJoint(py::module& m)
       .def(
           "setInitialVelocities",
           +[](dart::dynamics::ZeroDofJoint* self,
-              const Eigen::VectorXs& _initial) {
+              const Eigen::Ref<const Eigen::VectorXs>& _initial) {
             self->setInitialVelocities(_initial);
           },
           ::py::arg("initial"))
@@ -367,7 +367,7 @@ void ZeroDofJoint(py::module& m)
       .def(
           "setAccelerations",
           +[](dart::dynamics::ZeroDofJoint* self,
-              const Eigen::VectorXs& _accelerations) {
+              const Eigen::Ref<const Eigen::VectorXs>& _accelerations) {
             self->setAccelerations(_accelerations);
           },
           ::py::arg("accelerations"))
@@ -398,7 +398,7 @@ void ZeroDofJoint(py::module& m)
       .def(
           "setAccelerationLowerLimits",
           +[](dart::dynamics::ZeroDofJoint* self,
-              const Eigen::VectorXs& lowerLimits) {
+              const Eigen::Ref<const Eigen::VectorXs>& lowerLimits) {
             self->setAccelerationLowerLimits(lowerLimits);
           },
           ::py::arg("lowerLimits"))
@@ -424,7 +424,7 @@ void ZeroDofJoint(py::module& m)
       .def(
           "setAccelerationUpperLimits",
           +[](dart::dynamics::ZeroDofJoint* self,
-              const Eigen::VectorXs& upperLimits) {
+              const Eigen::Ref<const Eigen::VectorXs>& upperLimits) {
             self->setAccelerationUpperLimits(upperLimits);
           },
           ::py::arg("upperLimits"))
@@ -448,7 +448,7 @@ void ZeroDofJoint(py::module& m)
       .def(
           "setControlForces",
           +[](dart::dynamics::ZeroDofJoint* self,
-              const Eigen::VectorXs& _forces) {
+              const Eigen::Ref<const Eigen::VectorXs>& _forces) {
             self->setControlForces(_forces);
           },
           ::py::arg("forces"))
@@ -477,7 +477,7 @@ void ZeroDofJoint(py::module& m)
       .def(
           "setControlForceLowerLimits",
           +[](dart::dynamics::ZeroDofJoint* self,
-              const Eigen::VectorXs& lowerLimits) {
+              const Eigen::Ref<const Eigen::VectorXs>& lowerLimits) {
             self->setControlForceLowerLimits(lowerLimits);
           },
           ::py::arg("lowerLimits"))
@@ -501,7 +501,7 @@ void ZeroDofJoint(py::module& m)
       .def(
           "setControlForceUpperLimits",
           +[](dart::dynamics::ZeroDofJoint* self,
-              const Eigen::VectorXs& upperLimits) {
+              const Eigen::Ref<const Eigen::VectorXs>& upperLimits) {
             self->setControlForceUpperLimits(upperLimits);
           },
           ::py::arg("upperLimits"))
@@ -559,8 +559,8 @@ void ZeroDofJoint(py::module& m)
       .def(
           "getPositionDifferences",
           +[](const dart::dynamics::ZeroDofJoint* self,
-              const Eigen::VectorXs& _q2,
-              const Eigen::VectorXs& _q1) -> Eigen::VectorXs {
+              const Eigen::Ref<const Eigen::VectorXs>& _q2,
+              const Eigen::Ref<const Eigen::VectorXs>& _q1) -> Eigen::VectorXs {
             return self->getPositionDifferences(_q2, _q1);
           },
           ::py::arg("q2"),

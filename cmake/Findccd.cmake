@@ -20,7 +20,20 @@
 find_package(ccd QUIET CONFIG)
 # Upstream provide ccd-config.cmake since 2.1.
 
-if(NOT CCD_FOUND AND NOT ccd_FOUND)
+if((TARGET ccd OR TARGET ccd::ccd) AND (NOT CCD_INCLUDE_DIRS OR NOT CCD_LIBRARIES))
+  if(TARGET ccd)
+    set(_ccd_target ccd)
+  else()
+    set(_ccd_target ccd::ccd)
+  endif()
+  get_target_property(CCD_INCLUDE_DIRS ${_ccd_target} INTERFACE_INCLUDE_DIRECTORIES)
+  get_target_property(CCD_LIBRARIES ${_ccd_target} IMPORTED_LOCATION)
+  if(NOT CCD_LIBRARIES)
+    get_target_property(CCD_LIBRARIES ${_ccd_target} IMPORTED_LOCATION_RELEASE)
+  endif()
+endif()
+
+if(NOT CCD_INCLUDE_DIRS OR NOT CCD_LIBRARIES)
 
   find_package(PkgConfig QUIET)
 

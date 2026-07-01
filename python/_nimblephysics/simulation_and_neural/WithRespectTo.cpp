@@ -63,14 +63,18 @@ void WithRespectTo(
           "set",
           +[](dart::neural::WithRespectTo* self,
               simulation::World* world,
-              Eigen::VectorXs value) { self->set(world, value); },
+              const Eigen::Ref<const Eigen::VectorXs>& value) {
+            self->set(world, value);
+          },
           ::py::arg("world"),
           ::py::arg("value"))
       .def(
           "set",
           +[](dart::neural::WithRespectTo* self,
               dynamics::Skeleton* skel,
-              Eigen::VectorXs value) { self->set(skel, value); },
+              const Eigen::Ref<const Eigen::VectorXs>& value) {
+            self->set(skel, value);
+          },
           ::py::arg("skel"),
           ::py::arg("value"))
       .def(

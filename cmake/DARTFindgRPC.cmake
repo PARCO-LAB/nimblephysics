@@ -45,7 +45,12 @@ if(APPLE)
   endif()
 endif()
 
-find_package(gRPC CONFIG REQUIRED)
+find_package(gRPC CONFIG QUIET)
+if(NOT gRPC_FOUND)
+  message(STATUS "gRPC not found, skipping realtime/server support")
+  return()
+endif()
+
 find_package(absl REQUIRED)
 find_package(utf8_range REQUIRED)
 

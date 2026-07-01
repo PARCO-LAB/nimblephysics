@@ -285,7 +285,8 @@ void Joint(
           ::py::arg("index"))
       .def(
           "setCommands",
-          +[](dart::dynamics::Joint* self, const Eigen::VectorXs& commands)
+          +[](dart::dynamics::Joint* self,
+              const Eigen::Ref<const Eigen::VectorXs>& commands)
               -> void { return self->setCommands(commands); },
           ::py::arg("commands"))
       .def(
@@ -312,7 +313,8 @@ void Joint(
           ::py::arg("index"))
       .def(
           "setPositions",
-          +[](dart::dynamics::Joint* self, const Eigen::VectorXs& positions)
+          +[](dart::dynamics::Joint* self,
+              const Eigen::Ref<const Eigen::VectorXs>& positions)
               -> void { return self->setPositions(positions); },
           ::py::arg("positions"))
       .def(
@@ -334,7 +336,8 @@ void Joint(
           ::py::arg("index"))
       .def(
           "setPositionLowerLimits",
-          +[](dart::dynamics::Joint* self, const Eigen::VectorXs& lowerLimits)
+          +[](dart::dynamics::Joint* self,
+              const Eigen::Ref<const Eigen::VectorXs>& lowerLimits)
               -> void { return self->setPositionLowerLimits(lowerLimits); },
           ::py::arg("lowerLimits"))
       .def(
@@ -356,7 +359,8 @@ void Joint(
           ::py::arg("index"))
       .def(
           "setPositionUpperLimits",
-          +[](dart::dynamics::Joint* self, const Eigen::VectorXs& upperLimits)
+          +[](dart::dynamics::Joint* self,
+              const Eigen::Ref<const Eigen::VectorXs>& upperLimits)
               -> void { return self->setPositionUpperLimits(upperLimits); },
           ::py::arg("upperLimits"))
       .def(
@@ -401,7 +405,8 @@ void Joint(
           ::py::arg("index"))
       .def(
           "setInitialPositions",
-          +[](dart::dynamics::Joint* self, const Eigen::VectorXs& initial)
+          +[](dart::dynamics::Joint* self,
+              const Eigen::Ref<const Eigen::VectorXs>& initial)
               -> void { return self->setInitialPositions(initial); },
           ::py::arg("initial"))
       .def(
@@ -423,7 +428,8 @@ void Joint(
           ::py::arg("index"))
       .def(
           "setVelocities",
-          +[](dart::dynamics::Joint* self, const Eigen::VectorXs& velocities)
+          +[](dart::dynamics::Joint* self,
+              const Eigen::Ref<const Eigen::VectorXs>& velocities)
               -> void { return self->setVelocities(velocities); },
           ::py::arg("velocities"))
       .def(
@@ -445,7 +451,8 @@ void Joint(
           ::py::arg("index"))
       .def(
           "setVelocityLowerLimits",
-          +[](dart::dynamics::Joint* self, const Eigen::VectorXs& lowerLimits)
+          +[](dart::dynamics::Joint* self,
+              const Eigen::Ref<const Eigen::VectorXs>& lowerLimits)
               -> void { return self->setVelocityLowerLimits(lowerLimits); },
           ::py::arg("lowerLimits"))
       .def(
@@ -467,7 +474,8 @@ void Joint(
           ::py::arg("index"))
       .def(
           "setVelocityUpperLimits",
-          +[](dart::dynamics::Joint* self, const Eigen::VectorXs& upperLimits)
+          +[](dart::dynamics::Joint* self,
+              const Eigen::Ref<const Eigen::VectorXs>& upperLimits)
               -> void { return self->setVelocityUpperLimits(upperLimits); },
           ::py::arg("upperLimits"))
       .def(
@@ -500,7 +508,8 @@ void Joint(
           ::py::arg("index"))
       .def(
           "setInitialVelocities",
-          +[](dart::dynamics::Joint* self, const Eigen::VectorXs& initial)
+          +[](dart::dynamics::Joint* self,
+              const Eigen::Ref<const Eigen::VectorXs>& initial)
               -> void { return self->setInitialVelocities(initial); },
           ::py::arg("initial"))
       .def(
@@ -522,7 +531,8 @@ void Joint(
           ::py::arg("index"))
       .def(
           "setAccelerations",
-          +[](dart::dynamics::Joint* self, const Eigen::VectorXs& accelerations)
+          +[](dart::dynamics::Joint* self,
+              const Eigen::Ref<const Eigen::VectorXs>& accelerations)
               -> void { return self->setAccelerations(accelerations); },
           ::py::arg("accelerations"))
       .def(
@@ -552,7 +562,8 @@ void Joint(
           ::py::arg("index"))
       .def(
           "setAccelerationLowerLimits",
-          +[](dart::dynamics::Joint* self, const Eigen::VectorXs& lowerLimits)
+          +[](dart::dynamics::Joint* self,
+              const Eigen::Ref<const Eigen::VectorXs>& lowerLimits)
               -> void { return self->setAccelerationLowerLimits(lowerLimits); },
           ::py::arg("lowerLimits"))
       .def(
@@ -577,7 +588,8 @@ void Joint(
           ::py::arg("index"))
       .def(
           "setAccelerationUpperLimits",
-          +[](dart::dynamics::Joint* self, const Eigen::VectorXs& upperLimits)
+          +[](dart::dynamics::Joint* self,
+              const Eigen::Ref<const Eigen::VectorXs>& upperLimits)
               -> void { return self->setAccelerationUpperLimits(upperLimits); },
           ::py::arg("upperLimits"))
       .def(
@@ -599,7 +611,8 @@ void Joint(
           ::py::arg("index"))
       .def(
           "setControlForces",
-          +[](dart::dynamics::Joint* self, const Eigen::VectorXs& forces)
+          +[](dart::dynamics::Joint* self,
+              const Eigen::Ref<const Eigen::VectorXs>& forces)
               -> void { return self->setControlForces(forces); },
           ::py::arg("forces"))
       .def(
@@ -626,7 +639,8 @@ void Joint(
           ::py::arg("index"))
       .def(
           "setControlForceLowerLimits",
-          +[](dart::dynamics::Joint* self, const Eigen::VectorXs& lowerLimits)
+          +[](dart::dynamics::Joint* self,
+              const Eigen::Ref<const Eigen::VectorXs>& lowerLimits)
               -> void { return self->setControlForceLowerLimits(lowerLimits); },
           ::py::arg("lowerLimits"))
       .def(
@@ -648,7 +662,8 @@ void Joint(
           ::py::arg("index"))
       .def(
           "setControlForceUpperLimits",
-          +[](dart::dynamics::Joint* self, const Eigen::VectorXs& upperLimits)
+          +[](dart::dynamics::Joint* self,
+              const Eigen::Ref<const Eigen::VectorXs>& upperLimits)
               -> void { return self->setControlForceUpperLimits(upperLimits); },
           ::py::arg("upperLimits"))
       .def(
@@ -719,8 +734,8 @@ void Joint(
       .def(
           "getPositionDifferences",
           +[](const dart::dynamics::Joint* self,
-              const Eigen::VectorXs& q2,
-              const Eigen::VectorXs& q1) -> Eigen::VectorXs {
+              const Eigen::Ref<const Eigen::VectorXs>& q2,
+              const Eigen::Ref<const Eigen::VectorXs>& q1) -> Eigen::VectorXs {
             return self->getPositionDifferences(q2, q1);
           },
           ::py::arg("q2"),
@@ -826,7 +841,8 @@ void Joint(
       .def(
           "getRelativeJacobian",
           +[](const dart::dynamics::Joint* self,
-              const Eigen::VectorXs& positions) -> dart::math::Jacobian {
+              const Eigen::Ref<const Eigen::VectorXs>& positions)
+              -> dart::math::Jacobian {
             return self->getRelativeJacobian(positions);
           },
           ::py::arg("positions"))
@@ -858,7 +874,8 @@ void Joint(
       .def(
           "getNearestPositionToDesiredRotation",
           +[](dart::dynamics::Joint* self,
-              const Eigen::Matrix3s& relativeRotation) -> Eigen::VectorXs {
+              const Eigen::Ref<const Eigen::Matrix3s>& relativeRotation)
+              -> Eigen::VectorXs {
             return self->getNearestPositionToDesiredRotation(relativeRotation);
           })
       .def_readonly_static("FORCE", &dart::dynamics::Joint::FORCE)

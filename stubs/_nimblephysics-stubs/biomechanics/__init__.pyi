@@ -1,11 +1,11 @@
 """This provides biomechanics utilities in Nimble, including inverse dynamics and (eventually) mocap support and muscle estimation."""
 from __future__ import annotations
-import nimblephysics_libs._nimblephysics.biomechanics
+import nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.biomechanics
 import typing
-import nimblephysics_libs._nimblephysics.dynamics
-import nimblephysics_libs._nimblephysics.math
-import nimblephysics_libs._nimblephysics.neural
-import nimblephysics_libs._nimblephysics.server
+import nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics
+import nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.math
+import nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.neural
+import nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.server
 import numpy
 _Shape = typing.Tuple[int, ...]
 
@@ -96,17 +96,17 @@ __all__ = [
 class Anthropometrics():
     def addMetric(self, name: str, bodyPose: numpy.ndarray[numpy.float64, _Shape[m, 1]], bodyA: str, offsetA: numpy.ndarray[numpy.float64, _Shape[3, 1]], bodyB: str, offsetB: numpy.ndarray[numpy.float64, _Shape[3, 1]], axis: numpy.ndarray[numpy.float64, _Shape[3, 1]] = array([0., 0., 0.])) -> None: ...
     def condition(self, observedValues: typing.Dict[str, float]) -> Anthropometrics: ...
-    def debugToGUI(self, server: nimblephysics_libs._nimblephysics.server.GUIWebsocketServer, skel: nimblephysics_libs._nimblephysics.dynamics.Skeleton) -> None: ...
-    def getDistribution(self) -> nimblephysics_libs._nimblephysics.math.MultivariateGaussian: ...
-    def getGradientOfLogPDFWrtBodyScales(self, skel: nimblephysics_libs._nimblephysics.dynamics.Skeleton) -> numpy.ndarray[numpy.float64, _Shape[m, 1]]: ...
-    def getGradientOfLogPDFWrtGroupScales(self, skel: nimblephysics_libs._nimblephysics.dynamics.Skeleton) -> numpy.ndarray[numpy.float64, _Shape[m, 1]]: ...
-    def getLogPDF(self, skel: nimblephysics_libs._nimblephysics.dynamics.Skeleton, normalized: bool = True) -> float: ...
+    def debugToGUI(self, server: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.server.GUIWebsocketServer, skel: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.Skeleton) -> None: ...
+    def getDistribution(self) -> nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.math.MultivariateGaussian: ...
+    def getGradientOfLogPDFWrtBodyScales(self, skel: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.Skeleton) -> numpy.ndarray[numpy.float64, _Shape[m, 1]]: ...
+    def getGradientOfLogPDFWrtGroupScales(self, skel: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.Skeleton) -> numpy.ndarray[numpy.float64, _Shape[m, 1]]: ...
+    def getLogPDF(self, skel: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.Skeleton, normalized: bool = True) -> float: ...
     def getMetricNames(self) -> typing.List[str]: ...
-    def getPDF(self, skel: nimblephysics_libs._nimblephysics.dynamics.Skeleton) -> float: ...
+    def getPDF(self, skel: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.Skeleton) -> float: ...
     @staticmethod
     def loadFromFile(uri: str) -> Anthropometrics: ...
-    def measure(self, skel: nimblephysics_libs._nimblephysics.dynamics.Skeleton) -> typing.Dict[str, float]: ...
-    def setDistribution(self, dist: nimblephysics_libs._nimblephysics.math.MultivariateGaussian) -> None: ...
+    def measure(self, skel: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.Skeleton) -> typing.Dict[str, float]: ...
+    def setDistribution(self, dist: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.math.MultivariateGaussian) -> None: ...
     pass
 class BasicTrialType():
     """
@@ -139,17 +139,17 @@ class BasicTrialType():
         """
         :type: int
         """
-    OTHER: nimblephysics_libs._nimblephysics.biomechanics.BasicTrialType # value = <BasicTrialType.OTHER: 3>
-    OVERGROUND: nimblephysics_libs._nimblephysics.biomechanics.BasicTrialType # value = <BasicTrialType.OVERGROUND: 1>
-    STATIC_TRIAL: nimblephysics_libs._nimblephysics.biomechanics.BasicTrialType # value = <BasicTrialType.STATIC_TRIAL: 2>
-    TREADMILL: nimblephysics_libs._nimblephysics.biomechanics.BasicTrialType # value = <BasicTrialType.TREADMILL: 0>
+    OTHER: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.biomechanics.BasicTrialType # value = <BasicTrialType.OTHER: 3>
+    OVERGROUND: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.biomechanics.BasicTrialType # value = <BasicTrialType.OVERGROUND: 1>
+    STATIC_TRIAL: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.biomechanics.BasicTrialType # value = <BasicTrialType.STATIC_TRIAL: 2>
+    TREADMILL: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.biomechanics.BasicTrialType # value = <BasicTrialType.TREADMILL: 0>
     __members__: dict # value = {'TREADMILL': <BasicTrialType.TREADMILL: 0>, 'OVERGROUND': <BasicTrialType.OVERGROUND: 1>, 'STATIC_TRIAL': <BasicTrialType.STATIC_TRIAL: 2>, 'OTHER': <BasicTrialType.OTHER: 3>}
     pass
 class BatchGaitInverseDynamics():
-    def __init__(self, skeleton: nimblephysics_libs._nimblephysics.dynamics.Skeleton, poses: numpy.ndarray[numpy.float64, _Shape[m, n]], groundContactBodies: typing.List[nimblephysics_libs._nimblephysics.dynamics.BodyNode], groundNormal: numpy.ndarray[numpy.float64, _Shape[3, 1]], tileSize: float, maxSectionLength: int = 100, smoothingWeight: float = 1.0, minTorqueWeight: float = 1.0, prevContactWeight: float = 0.1, blendWeight: float = 1.0, blendSteepness: float = 10.0) -> None: ...
-    def debugLilypadToGUI(self, gui: nimblephysics_libs._nimblephysics.server.GUIWebsocketServer) -> None: ...
-    def debugTimestepToGUI(self, gui: nimblephysics_libs._nimblephysics.server.GUIWebsocketServer, timesteps: int) -> None: ...
-    def getContactBodiesAtTimestep(self, timestep: int) -> typing.List[nimblephysics_libs._nimblephysics.dynamics.BodyNode]: ...
+    def __init__(self, skeleton: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.Skeleton, poses: numpy.ndarray[numpy.float64, _Shape[m, n]], groundContactBodies: typing.List[nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.BodyNode], groundNormal: numpy.ndarray[numpy.float64, _Shape[3, 1]], tileSize: float, maxSectionLength: int = 100, smoothingWeight: float = 1.0, minTorqueWeight: float = 1.0, prevContactWeight: float = 0.1, blendWeight: float = 1.0, blendSteepness: float = 10.0) -> None: ...
+    def debugLilypadToGUI(self, gui: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.server.GUIWebsocketServer) -> None: ...
+    def debugTimestepToGUI(self, gui: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.server.GUIWebsocketServer, timesteps: int) -> None: ...
+    def getContactBodiesAtTimestep(self, timestep: int) -> typing.List[nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.BodyNode]: ...
     def getContactWrenchesAtTimestep(self, timestep: int) -> typing.List[numpy.ndarray[numpy.float64, _Shape[6, 1]]]: ...
     def getSectionForTimestep(self, timestep: int) -> ContactRegimeSection: ...
     def numTimesteps(self) -> int: ...
@@ -310,7 +310,7 @@ class C3D():
     pass
 class C3DLoader():
     @staticmethod
-    def debugToGUI(file: C3D, server: nimblephysics_libs._nimblephysics.server.GUIWebsocketServer) -> None: ...
+    def debugToGUI(file: C3D, server: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.server.GUIWebsocketServer) -> None: ...
     @staticmethod
     def fixupMarkerFlips(c3d: C3D) -> typing.List[typing.List[typing.Tuple[str, str]]]: ...
     @staticmethod
@@ -326,12 +326,12 @@ class ContactRegimeSection():
     def endTime(self, arg0: int) -> None:
         pass
     @property
-    def groundContactBodies(self) -> typing.List[nimblephysics_libs._nimblephysics.dynamics.BodyNode]:
+    def groundContactBodies(self) -> typing.List[nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.BodyNode]:
         """
-        :type: typing.List[nimblephysics_libs._nimblephysics.dynamics.BodyNode]
+        :type: typing.List[nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.BodyNode]
         """
     @groundContactBodies.setter
-    def groundContactBodies(self, arg0: typing.List[nimblephysics_libs._nimblephysics.dynamics.BodyNode]) -> None:
+    def groundContactBodies(self, arg0: typing.List[nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.BodyNode]) -> None:
         pass
     @property
     def startTime(self) -> int:
@@ -410,9 +410,9 @@ class DataQuality():
         """
         :type: int
         """
-    EXPERIMENTAL_DATA: nimblephysics_libs._nimblephysics.biomechanics.DataQuality # value = <DataQuality.EXPERIMENTAL_DATA: 1>
-    INTERNET_DATA: nimblephysics_libs._nimblephysics.biomechanics.DataQuality # value = <DataQuality.INTERNET_DATA: 2>
-    PILOT_DATA: nimblephysics_libs._nimblephysics.biomechanics.DataQuality # value = <DataQuality.PILOT_DATA: 0>
+    EXPERIMENTAL_DATA: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.biomechanics.DataQuality # value = <DataQuality.EXPERIMENTAL_DATA: 1>
+    INTERNET_DATA: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.biomechanics.DataQuality # value = <DataQuality.INTERNET_DATA: 2>
+    PILOT_DATA: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.biomechanics.DataQuality # value = <DataQuality.PILOT_DATA: 0>
     __members__: dict # value = {'PILOT_DATA': <DataQuality.PILOT_DATA: 0>, 'EXPERIMENTAL_DATA': <DataQuality.EXPERIMENTAL_DATA: 1>, 'INTERNET_DATA': <DataQuality.INTERNET_DATA: 2>}
     pass
 class DetectedTrialFeature():
@@ -446,14 +446,14 @@ class DetectedTrialFeature():
         """
         :type: int
         """
-    FLAT_TERRAIN: nimblephysics_libs._nimblephysics.biomechanics.DetectedTrialFeature # value = <DetectedTrialFeature.FLAT_TERRAIN: 3>
-    RUNNING: nimblephysics_libs._nimblephysics.biomechanics.DetectedTrialFeature # value = <DetectedTrialFeature.RUNNING: 1>
-    UNEVEN_TERRAIN: nimblephysics_libs._nimblephysics.biomechanics.DetectedTrialFeature # value = <DetectedTrialFeature.UNEVEN_TERRAIN: 2>
-    WALKING: nimblephysics_libs._nimblephysics.biomechanics.DetectedTrialFeature # value = <DetectedTrialFeature.WALKING: 0>
+    FLAT_TERRAIN: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.biomechanics.DetectedTrialFeature # value = <DetectedTrialFeature.FLAT_TERRAIN: 3>
+    RUNNING: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.biomechanics.DetectedTrialFeature # value = <DetectedTrialFeature.RUNNING: 1>
+    UNEVEN_TERRAIN: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.biomechanics.DetectedTrialFeature # value = <DetectedTrialFeature.UNEVEN_TERRAIN: 2>
+    WALKING: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.biomechanics.DetectedTrialFeature # value = <DetectedTrialFeature.WALKING: 0>
     __members__: dict # value = {'WALKING': <DetectedTrialFeature.WALKING: 0>, 'RUNNING': <DetectedTrialFeature.RUNNING: 1>, 'UNEVEN_TERRAIN': <DetectedTrialFeature.UNEVEN_TERRAIN: 2>, 'FLAT_TERRAIN': <DetectedTrialFeature.FLAT_TERRAIN: 3>}
     pass
 class DynamicsFitProblemConfig():
-    def __init__(self, skeleton: nimblephysics_libs._nimblephysics.dynamics.Skeleton) -> None: ...
+    def __init__(self, skeleton: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.Skeleton) -> None: ...
     def setBoundMoveDistance(self, distance: float) -> DynamicsFitProblemConfig: ...
     def setConstrainAngularResiduals(self, value: float) -> DynamicsFitProblemConfig: ...
     def setConstrainLinearResiduals(self, value: float) -> DynamicsFitProblemConfig: ...
@@ -496,9 +496,9 @@ class DynamicsFitProblemConfig():
     def setResidualWeight(self, value: float) -> DynamicsFitProblemConfig: ...
     pass
 class DynamicsFitter():
-    def __init__(self, skeleton: nimblephysics_libs._nimblephysics.dynamics.Skeleton, footNodes: typing.List[nimblephysics_libs._nimblephysics.dynamics.BodyNode], trackingMarkers: typing.List[str]) -> None: ...
-    def addJointBoundSlack(self, init: nimblephysics_libs._nimblephysics.dynamics.Skeleton, slack: float) -> None: ...
-    def applyInitToSkeleton(self, skel: nimblephysics_libs._nimblephysics.dynamics.Skeleton, init: DynamicsInitialization) -> None: ...
+    def __init__(self, skeleton: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.Skeleton, footNodes: typing.List[nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.BodyNode], trackingMarkers: typing.List[str]) -> None: ...
+    def addJointBoundSlack(self, init: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.Skeleton, slack: float) -> None: ...
+    def applyInitToSkeleton(self, skel: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.Skeleton, init: DynamicsInitialization) -> None: ...
     def boundPush(self, init: DynamicsInitialization, boundPush: float = 0.02) -> None: ...
     def checkPhysicalConsistency(self, init: DynamicsInitialization, maxAcceptableErrors: float = 0.001, maxTimestepsToTest: int = 50) -> bool: ...
     def comAccelerations(self, init: DynamicsInitialization, trial: int) -> typing.List[numpy.ndarray[numpy.float64, _Shape[3, 1]]]: ...
@@ -521,10 +521,10 @@ class DynamicsFitter():
     def computePerfectGRFs(self, init: DynamicsInitialization) -> None: ...
     @staticmethod
     @typing.overload
-    def createInitialization(skel: nimblephysics_libs._nimblephysics.dynamics.Skeleton, markerMap: typing.Dict[str, typing.Tuple[nimblephysics_libs._nimblephysics.dynamics.BodyNode, numpy.ndarray[numpy.float64, _Shape[3, 1]]]], trackingMarkers: typing.List[str], grfNodes: typing.List[nimblephysics_libs._nimblephysics.dynamics.BodyNode], forcePlateTrials: typing.List[typing.List[ForcePlate]], poseTrials: typing.List[numpy.ndarray[numpy.float64, _Shape[m, n]]], framesPerSecond: typing.List[int], markerObservationTrials: typing.List[typing.List[typing.Dict[str, numpy.ndarray[numpy.float64, _Shape[3, 1]]]]], overrideForcePlateToGRFNodeAssignment: typing.List[typing.List[int]] = [], initializedProbablyMissingGRF: typing.List[typing.List[MissingGRFStatus]] = []) -> DynamicsInitialization: ...
+    def createInitialization(skel: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.Skeleton, markerMap: typing.Dict[str, typing.Tuple[nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.BodyNode, numpy.ndarray[numpy.float64, _Shape[3, 1]]]], trackingMarkers: typing.List[str], grfNodes: typing.List[nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.BodyNode], forcePlateTrials: typing.List[typing.List[ForcePlate]], poseTrials: typing.List[numpy.ndarray[numpy.float64, _Shape[m, n]]], framesPerSecond: typing.List[int], markerObservationTrials: typing.List[typing.List[typing.Dict[str, numpy.ndarray[numpy.float64, _Shape[3, 1]]]]], overrideForcePlateToGRFNodeAssignment: typing.List[typing.List[int]] = [], initializedProbablyMissingGRF: typing.List[typing.List[MissingGRFStatus]] = []) -> DynamicsInitialization: ...
     @staticmethod
     @typing.overload
-    def createInitialization(skel: nimblephysics_libs._nimblephysics.dynamics.Skeleton, kinematicInits: typing.List[MarkerInitialization], trackingMarkers: typing.List[str], grfNodes: typing.List[nimblephysics_libs._nimblephysics.dynamics.BodyNode], forcePlateTrials: typing.List[typing.List[ForcePlate]], framesPerSecond: typing.List[int], markerObservationTrials: typing.List[typing.List[typing.Dict[str, numpy.ndarray[numpy.float64, _Shape[3, 1]]]]], overrideForcePlateToGRFNodeAssignment: typing.List[typing.List[int]] = [], initializedProbablyMissingGRF: typing.List[typing.List[MissingGRFStatus]] = []) -> DynamicsInitialization: ...
+    def createInitialization(skel: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.Skeleton, kinematicInits: typing.List[MarkerInitialization], trackingMarkers: typing.List[str], grfNodes: typing.List[nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.BodyNode], forcePlateTrials: typing.List[typing.List[ForcePlate]], framesPerSecond: typing.List[int], markerObservationTrials: typing.List[typing.List[typing.Dict[str, numpy.ndarray[numpy.float64, _Shape[3, 1]]]]], overrideForcePlateToGRFNodeAssignment: typing.List[typing.List[int]] = [], initializedProbablyMissingGRF: typing.List[typing.List[MissingGRFStatus]] = []) -> DynamicsInitialization: ...
     def estimateFootGroundContactsWithHeightHeuristic(self, init: DynamicsInitialization, ignoreFootNotOverForcePlate: bool = False) -> None: ...
     def estimateFootGroundContactsWithStillness(self, init: DynamicsInitialization, radius: float = 0.05, minTime: float = 0.5) -> None: ...
     def estimateLinkMassesFromAcceleration(self, init: DynamicsInitialization, regularizationWeight: float = 50.0) -> None: ...
@@ -591,12 +591,12 @@ class DynamicsInitialization():
     def bodyMasses(self, arg0: numpy.ndarray[numpy.float64, _Shape[m, 1]]) -> None:
         pass
     @property
-    def contactBodies(self) -> typing.List[typing.List[nimblephysics_libs._nimblephysics.dynamics.BodyNode]]:
+    def contactBodies(self) -> typing.List[typing.List[nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.BodyNode]]:
         """
-        :type: typing.List[typing.List[nimblephysics_libs._nimblephysics.dynamics.BodyNode]]
+        :type: typing.List[typing.List[nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.BodyNode]]
         """
     @contactBodies.setter
-    def contactBodies(self, arg0: typing.List[typing.List[nimblephysics_libs._nimblephysics.dynamics.BodyNode]]) -> None:
+    def contactBodies(self, arg0: typing.List[typing.List[nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.BodyNode]]) -> None:
         pass
     @property
     def defaultForcePlateCorners(self) -> typing.List[typing.List[numpy.ndarray[numpy.float64, _Shape[3, 1]]]]:
@@ -639,12 +639,12 @@ class DynamicsInitialization():
     def grfBodyIndices(self, arg0: typing.List[int]) -> None:
         pass
     @property
-    def grfBodyNodes(self) -> typing.List[nimblephysics_libs._nimblephysics.dynamics.BodyNode]:
+    def grfBodyNodes(self) -> typing.List[nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.BodyNode]:
         """
-        :type: typing.List[nimblephysics_libs._nimblephysics.dynamics.BodyNode]
+        :type: typing.List[nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.BodyNode]
         """
     @grfBodyNodes.setter
-    def grfBodyNodes(self, arg0: typing.List[nimblephysics_libs._nimblephysics.dynamics.BodyNode]) -> None:
+    def grfBodyNodes(self, arg0: typing.List[nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.BodyNode]) -> None:
         pass
     @property
     def grfBodyOffForcePlate(self) -> typing.List[typing.List[typing.List[bool]]]:
@@ -759,12 +759,12 @@ class DynamicsInitialization():
     def jointWeights(self, arg0: typing.List[numpy.ndarray[numpy.float64, _Shape[m, 1]]]) -> None:
         pass
     @property
-    def joints(self) -> typing.List[typing.List[nimblephysics_libs._nimblephysics.dynamics.Joint]]:
+    def joints(self) -> typing.List[typing.List[nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.Joint]]:
         """
-        :type: typing.List[typing.List[nimblephysics_libs._nimblephysics.dynamics.Joint]]
+        :type: typing.List[typing.List[nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.Joint]]
         """
     @joints.setter
-    def joints(self, arg0: typing.List[typing.List[nimblephysics_libs._nimblephysics.dynamics.Joint]]) -> None:
+    def joints(self, arg0: typing.List[typing.List[nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.Joint]]) -> None:
         pass
     @property
     def jointsAdjacentMarkers(self) -> typing.List[typing.List[typing.List[str]]]:
@@ -887,12 +887,12 @@ class DynamicsInitialization():
     def trialsOnTreadmill(self, arg0: typing.List[bool]) -> None:
         pass
     @property
-    def updatedMarkerMap(self) -> typing.Dict[str, typing.Tuple[nimblephysics_libs._nimblephysics.dynamics.BodyNode, numpy.ndarray[numpy.float64, _Shape[3, 1]]]]:
+    def updatedMarkerMap(self) -> typing.Dict[str, typing.Tuple[nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.BodyNode, numpy.ndarray[numpy.float64, _Shape[3, 1]]]]:
         """
-        :type: typing.Dict[str, typing.Tuple[nimblephysics_libs._nimblephysics.dynamics.BodyNode, numpy.ndarray[numpy.float64, _Shape[3, 1]]]]
+        :type: typing.Dict[str, typing.Tuple[nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.BodyNode, numpy.ndarray[numpy.float64, _Shape[3, 1]]]]
         """
     @updatedMarkerMap.setter
-    def updatedMarkerMap(self, arg0: typing.Dict[str, typing.Tuple[nimblephysics_libs._nimblephysics.dynamics.BodyNode, numpy.ndarray[numpy.float64, _Shape[3, 1]]]]) -> None:
+    def updatedMarkerMap(self, arg0: typing.Dict[str, typing.Tuple[nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.BodyNode, numpy.ndarray[numpy.float64, _Shape[3, 1]]]]) -> None:
         pass
     pass
 class ForcePlate():
@@ -1571,7 +1571,7 @@ class FramePassList():
     __hash__: typing.ClassVar[None] = None
     pass
 class IKErrorReport():
-    def __init__(self, skeleton: nimblephysics_libs._nimblephysics.dynamics.Skeleton, markers: typing.Dict[str, typing.Tuple[nimblephysics_libs._nimblephysics.dynamics.BodyNode, numpy.ndarray[numpy.float64, _Shape[3, 1]]]], poses: numpy.ndarray[numpy.float64, _Shape[m, n]], observations: typing.List[typing.Dict[str, numpy.ndarray[numpy.float64, _Shape[3, 1]]]]) -> None: ...
+    def __init__(self, skeleton: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.Skeleton, markers: typing.Dict[str, typing.Tuple[nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.BodyNode, numpy.ndarray[numpy.float64, _Shape[3, 1]]]], poses: numpy.ndarray[numpy.float64, _Shape[m, n]], observations: typing.List[typing.Dict[str, numpy.ndarray[numpy.float64, _Shape[3, 1]]]]) -> None: ...
     def getSortedMarkerRMSE(self) -> typing.List[typing.Tuple[str, float]]: ...
     def printReport(self, limitTimesteps: int = -1) -> None: ...
     def saveCSVMarkerErrorReport(self, path: str) -> None: ...
@@ -1644,8 +1644,8 @@ class InitialMarkerFitParams():
     def setDontRescaleBodies(self, dontRescaleBodies: bool) -> InitialMarkerFitParams: ...
     def setGroupScales(self, groupScales: numpy.ndarray[numpy.float64, _Shape[m, 1]]) -> InitialMarkerFitParams: ...
     def setInitPoses(self, initPoses: numpy.ndarray[numpy.float64, _Shape[m, n]]) -> InitialMarkerFitParams: ...
-    def setJointCenters(self, joints: typing.List[nimblephysics_libs._nimblephysics.dynamics.Joint], jointCenters: numpy.ndarray[numpy.float64, _Shape[m, n]], jointAdjacentMarkers: typing.List[typing.List[str]]) -> InitialMarkerFitParams: ...
-    def setJointCentersAndWeights(self, joints: typing.List[nimblephysics_libs._nimblephysics.dynamics.Joint], jointCenters: numpy.ndarray[numpy.float64, _Shape[m, n]], jointAdjacentMarkers: typing.List[typing.List[str]], jointWeights: numpy.ndarray[numpy.float64, _Shape[m, 1]]) -> InitialMarkerFitParams: ...
+    def setJointCenters(self, joints: typing.List[nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.Joint], jointCenters: numpy.ndarray[numpy.float64, _Shape[m, n]], jointAdjacentMarkers: typing.List[typing.List[str]]) -> InitialMarkerFitParams: ...
+    def setJointCentersAndWeights(self, joints: typing.List[nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.Joint], jointCenters: numpy.ndarray[numpy.float64, _Shape[m, n]], jointAdjacentMarkers: typing.List[typing.List[str]], jointWeights: numpy.ndarray[numpy.float64, _Shape[m, 1]]) -> InitialMarkerFitParams: ...
     def setMarkerOffsets(self, markerOffsets: typing.Dict[str, numpy.ndarray[numpy.float64, _Shape[3, 1]]]) -> InitialMarkerFitParams: ...
     def setMarkerWeights(self, markerWeights: typing.Dict[str, float]) -> InitialMarkerFitParams: ...
     def setMaxTimestepsToUseForMultiTrialScaling(self, numTimesteps: int) -> InitialMarkerFitParams: ...
@@ -1695,12 +1695,12 @@ class InitialMarkerFitParams():
     def jointWeights(self, arg0: numpy.ndarray[numpy.float64, _Shape[m, 1]]) -> None:
         pass
     @property
-    def joints(self) -> typing.List[nimblephysics_libs._nimblephysics.dynamics.Joint]:
+    def joints(self) -> typing.List[nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.Joint]:
         """
-        :type: typing.List[nimblephysics_libs._nimblephysics.dynamics.Joint]
+        :type: typing.List[nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.Joint]
         """
     @joints.setter
-    def joints(self, arg0: typing.List[nimblephysics_libs._nimblephysics.dynamics.Joint]) -> None:
+    def joints(self, arg0: typing.List[nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.Joint]) -> None:
         pass
     @property
     def markerOffsets(self) -> typing.Dict[str, numpy.ndarray[numpy.float64, _Shape[3, 1]]]:
@@ -1778,10 +1778,10 @@ class LabelledMarkers():
         pass
     pass
 class LilypadSolver():
-    def __init__(self, skeleton: nimblephysics_libs._nimblephysics.dynamics.Skeleton, groundContactBodies: typing.List[nimblephysics_libs._nimblephysics.dynamics.BodyNode], groundNormal: numpy.ndarray[numpy.float64, _Shape[3, 1]], tileSize: float) -> None: ...
+    def __init__(self, skeleton: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.Skeleton, groundContactBodies: typing.List[nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.BodyNode], groundNormal: numpy.ndarray[numpy.float64, _Shape[3, 1]], tileSize: float) -> None: ...
     def clear(self) -> None: ...
-    def debugToGUI(self, gui: nimblephysics_libs._nimblephysics.server.GUIWebsocketServer) -> None: ...
-    def getContactBodies(self) -> typing.List[nimblephysics_libs._nimblephysics.dynamics.BodyNode]: ...
+    def debugToGUI(self, gui: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.server.GUIWebsocketServer) -> None: ...
+    def getContactBodies(self) -> typing.List[nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.BodyNode]: ...
     def process(self, poses: numpy.ndarray[numpy.float64, _Shape[m, n]], startTime: int = 0) -> None: ...
     def setLateralVelThreshold(self, threshold: float) -> None: ...
     def setVerticalAccelerationThreshold(self, threshold: float) -> None: ...
@@ -1881,23 +1881,23 @@ class MarkerBeamSearch():
         """
     pass
 class MarkerFitter():
-    def __init__(self, skeleton: nimblephysics_libs._nimblephysics.dynamics.Skeleton, markers: typing.Dict[str, typing.Tuple[nimblephysics_libs._nimblephysics.dynamics.BodyNode, numpy.ndarray[numpy.float64, _Shape[3, 1]]]], ignoreVirtualJointCenterMarkers: bool = False) -> None: ...
+    def __init__(self, skeleton: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.Skeleton, markers: typing.Dict[str, typing.Tuple[nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.BodyNode, numpy.ndarray[numpy.float64, _Shape[3, 1]]]], ignoreVirtualJointCenterMarkers: bool = False) -> None: ...
     def addZeroConstraint(self, name: str, loss: typing.Callable[[MarkerFitterState], float]) -> None: ...
     def autorotateC3D(self, c3d: C3D) -> None: ...
     def checkForEnoughMarkers(self, markerObservations: typing.List[typing.Dict[str, numpy.ndarray[numpy.float64, _Shape[3, 1]]]]) -> bool: ...
     def checkForFlippedMarkers(self, markerObservations: typing.List[typing.Dict[str, numpy.ndarray[numpy.float64, _Shape[3, 1]]]], init: MarkerInitialization, report: MarkersErrorReport) -> bool: ...
-    def debugTrajectoryAndMarkersToGUI(self, server: nimblephysics_libs._nimblephysics.server.GUIWebsocketServer, init: MarkerInitialization, markerObservations: typing.List[typing.Dict[str, numpy.ndarray[numpy.float64, _Shape[3, 1]]]], forcePlates: typing.List[ForcePlate] = None, goldOsim: OpenSimFile = None, goldPoses: numpy.ndarray[numpy.float64, _Shape[m, n]] = array([], shape=(0, 0), dtype=float64)) -> None: ...
+    def debugTrajectoryAndMarkersToGUI(self, server: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.server.GUIWebsocketServer, init: MarkerInitialization, markerObservations: typing.List[typing.Dict[str, numpy.ndarray[numpy.float64, _Shape[3, 1]]]], forcePlates: typing.List[ForcePlate] = None, goldOsim: OpenSimFile = None, goldPoses: numpy.ndarray[numpy.float64, _Shape[m, n]] = array([], shape=(0, 0), dtype=float64)) -> None: ...
     def findJointCenters(self, initializations: MarkerInitialization, newClip: typing.List[bool], markerObservations: typing.List[typing.Dict[str, numpy.ndarray[numpy.float64, _Shape[3, 1]]]]) -> None: ...
     def fineTuneWithIMU(self, accObservations: typing.List[typing.Dict[str, numpy.ndarray[numpy.float64, _Shape[3, 1]]]], gyroObservations: typing.List[typing.Dict[str, numpy.ndarray[numpy.float64, _Shape[3, 1]]]], markerObservations: typing.List[typing.Dict[str, numpy.ndarray[numpy.float64, _Shape[3, 1]]]], newClip: typing.List[bool], init: MarkerInitialization, dt: float, weightAccs: float = 1.0, weightGyros: float = 1.0, weightMarkers: float = 100.0, regularizePoses: float = 1.0, useIPOPT: bool = True, iterations: int = 300, lbfgsMemory: int = 100) -> MarkerInitialization: ...
     def generateDataErrorsReport(self, markerObservations: typing.List[typing.Dict[str, numpy.ndarray[numpy.float64, _Shape[3, 1]]]], dt: float, rippleReduce: bool = True, rippleReduceUseSparse: bool = True, rippleReduceUseIterativeSolver: bool = True, rippleReduceSolverIterations: int = 100000.0) -> MarkersErrorReport: ...
     def getIMUFineTuneProblem(self, accObservations: typing.List[typing.Dict[str, numpy.ndarray[numpy.float64, _Shape[3, 1]]]], gyroObservations: typing.List[typing.Dict[str, numpy.ndarray[numpy.float64, _Shape[3, 1]]]], markerObservations: typing.List[typing.Dict[str, numpy.ndarray[numpy.float64, _Shape[3, 1]]]], init: MarkerInitialization, dt: float, start: int, end: int) -> IMUFineTuneProblem: ...
-    def getImuList(self) -> typing.List[typing.Tuple[nimblephysics_libs._nimblephysics.dynamics.BodyNode, nimblephysics_libs._nimblephysics.math.Isometry3]]: ...
-    def getImuMap(self) -> typing.Dict[str, typing.Tuple[nimblephysics_libs._nimblephysics.dynamics.BodyNode, nimblephysics_libs._nimblephysics.math.Isometry3]]: ...
+    def getImuList(self) -> typing.List[typing.Tuple[nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.BodyNode, nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.math.Isometry3]]: ...
+    def getImuMap(self) -> typing.Dict[str, typing.Tuple[nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.BodyNode, nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.math.Isometry3]]: ...
     def getImuNames(self) -> typing.List[str]: ...
     def getInitialization(self, markerObservations: typing.List[typing.Dict[str, numpy.ndarray[numpy.float64, _Shape[3, 1]]]], newClip: typing.List[bool], params: InitialMarkerFitParams = InitialMarkerFitParams(numBlocks=12)) -> MarkerInitialization: ...
     def getMarkerIsTracking(self, marker: str) -> bool: ...
     @staticmethod
-    def getMarkerLossGradientWrtJoints(skeleton: nimblephysics_libs._nimblephysics.dynamics.Skeleton, markers: typing.List[typing.Tuple[nimblephysics_libs._nimblephysics.dynamics.BodyNode, numpy.ndarray[numpy.float64, _Shape[3, 1]]]], lossGradWrtMarkerError: numpy.ndarray[numpy.float64, _Shape[m, 1]]) -> numpy.ndarray[numpy.float64, _Shape[m, 1]]: ...
+    def getMarkerLossGradientWrtJoints(skeleton: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.Skeleton, markers: typing.List[typing.Tuple[nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.BodyNode, numpy.ndarray[numpy.float64, _Shape[3, 1]]]], lossGradWrtMarkerError: numpy.ndarray[numpy.float64, _Shape[m, 1]]) -> numpy.ndarray[numpy.float64, _Shape[m, 1]]: ...
     def getNumMarkers(self) -> int: ...
     def measureAccelerometerRMS(self, accObservations: typing.List[typing.Dict[str, numpy.ndarray[numpy.float64, _Shape[3, 1]]]], newClip: typing.List[bool], init: MarkerInitialization, dt: float) -> float: ...
     def measureGyroRMS(self, gyroObservations: typing.List[typing.Dict[str, numpy.ndarray[numpy.float64, _Shape[3, 1]]]], newClip: typing.List[bool], init: MarkerInitialization, dt: float) -> float: ...
@@ -1917,7 +1917,7 @@ class MarkerFitter():
     def setDebugLoss(self, debug: bool) -> None: ...
     def setExplicitHeightPrior(self, prior: float, weight: float = 1000.0) -> None: ...
     def setIgnoreJointLimits(self, ignore: bool) -> None: ...
-    def setImuMap(self, imuMap: typing.Dict[str, typing.Tuple[nimblephysics_libs._nimblephysics.dynamics.BodyNode, nimblephysics_libs._nimblephysics.math.Isometry3]]) -> None: ...
+    def setImuMap(self, imuMap: typing.Dict[str, typing.Tuple[nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.BodyNode, nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.math.Isometry3]]) -> None: ...
     def setInitialIKMaxRestarts(self, starts: int) -> None: ...
     def setInitialIKSatisfactoryLoss(self, loss: float) -> None: ...
     def setIterationLimit(self, iters: int) -> None: ...
@@ -2153,12 +2153,12 @@ class MarkerInitialization():
     def jointWeights(self, arg0: numpy.ndarray[numpy.float64, _Shape[m, 1]]) -> None:
         pass
     @property
-    def joints(self) -> typing.List[nimblephysics_libs._nimblephysics.dynamics.Joint]:
+    def joints(self) -> typing.List[nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.Joint]:
         """
-        :type: typing.List[nimblephysics_libs._nimblephysics.dynamics.Joint]
+        :type: typing.List[nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.Joint]
         """
     @joints.setter
-    def joints(self, arg0: typing.List[nimblephysics_libs._nimblephysics.dynamics.Joint]) -> None:
+    def joints(self, arg0: typing.List[nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.Joint]) -> None:
         pass
     @property
     def jointsAdjacentMarkers(self) -> typing.List[typing.List[str]]:
@@ -2185,12 +2185,12 @@ class MarkerInitialization():
     def poses(self, arg0: numpy.ndarray[numpy.float64, _Shape[m, n]]) -> None:
         pass
     @property
-    def updatedMarkerMap(self) -> typing.Dict[str, typing.Tuple[nimblephysics_libs._nimblephysics.dynamics.BodyNode, numpy.ndarray[numpy.float64, _Shape[3, 1]]]]:
+    def updatedMarkerMap(self) -> typing.Dict[str, typing.Tuple[nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.BodyNode, numpy.ndarray[numpy.float64, _Shape[3, 1]]]]:
         """
-        :type: typing.Dict[str, typing.Tuple[nimblephysics_libs._nimblephysics.dynamics.BodyNode, numpy.ndarray[numpy.float64, _Shape[3, 1]]]]
+        :type: typing.Dict[str, typing.Tuple[nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.BodyNode, numpy.ndarray[numpy.float64, _Shape[3, 1]]]]
         """
     @updatedMarkerMap.setter
-    def updatedMarkerMap(self, arg0: typing.Dict[str, typing.Tuple[nimblephysics_libs._nimblephysics.dynamics.BodyNode, numpy.ndarray[numpy.float64, _Shape[3, 1]]]]) -> None:
+    def updatedMarkerMap(self, arg0: typing.Dict[str, typing.Tuple[nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.BodyNode, numpy.ndarray[numpy.float64, _Shape[3, 1]]]]) -> None:
         pass
     pass
 class MarkerLabeller():
@@ -2198,7 +2198,7 @@ class MarkerLabeller():
     def guessJointLocations(self, pointClouds: typing.List[typing.List[numpy.ndarray[numpy.float64, _Shape[3, 1]]]]) -> typing.List[typing.Dict[str, numpy.ndarray[numpy.float64, _Shape[3, 1]]]]: ...
     def labelPointClouds(self, pointClouds: typing.List[typing.List[numpy.ndarray[numpy.float64, _Shape[3, 1]]]], mergeMarkersThreshold: float = 0.01) -> LabelledMarkers: ...
     def matchUpJointToSkeletonJoint(self, jointName: str, skeletonJointName: str) -> None: ...
-    def setSkeleton(self, skeleton: nimblephysics_libs._nimblephysics.dynamics.Skeleton) -> None: ...
+    def setSkeleton(self, skeleton: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.Skeleton) -> None: ...
     pass
 class MarkerLabellerMock(MarkerLabeller):
     def __init__(self) -> None: ...
@@ -2247,7 +2247,7 @@ class MarkerTrace():
         """
         Each possible combination of (trace, body) can create a marker. This returns a score for a given body, for how "good" of a marker that body would create when combined with this trace. Lower is better.
         """
-    def computeBodyMarkerStats(self, skel: nimblephysics_libs._nimblephysics.dynamics.Skeleton, posesOverTime: typing.List[numpy.ndarray[numpy.float64, _Shape[m, 1]]], scalesOverTime: typing.List[numpy.ndarray[numpy.float64, _Shape[m, 1]]]) -> None: 
+    def computeBodyMarkerStats(self, skel: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.Skeleton, posesOverTime: typing.List[numpy.ndarray[numpy.float64, _Shape[m, 1]]], scalesOverTime: typing.List[numpy.ndarray[numpy.float64, _Shape[m, 1]]]) -> None: 
         """
         Each possible combination of (trace, body) can create a marker. So we can compute some summary statistics for each body we could assign this trace to.
         """
@@ -2431,25 +2431,25 @@ class MissingGRFReason():
         :type: int
         """
     __members__: dict # value = {'notMissingGRF': <MissingGRFReason.notMissingGRF: 0>, 'measuredGrfZeroWhenAccelerationNonZero': <MissingGRFReason.measuredGrfZeroWhenAccelerationNonZero: 1>, 'unmeasuredExternalForceDetected': <MissingGRFReason.unmeasuredExternalForceDetected: 2>, 'torqueDiscrepancy': <MissingGRFReason.torqueDiscrepancy: 4>, 'forceDiscrepancy': <MissingGRFReason.forceDiscrepancy: 5>, 'notOverForcePlate': <MissingGRFReason.notOverForcePlate: 6>, 'missingImpact': <MissingGRFReason.missingImpact: 7>, 'missingBlip': <MissingGRFReason.missingBlip: 8>, 'shiftGRF': <MissingGRFReason.shiftGRF: 9>, 'interpolatedClippedGRF': <MissingGRFReason.interpolatedClippedGRF: 11>, 'manualReview': <MissingGRFReason.manualReview: 10>, 'footContactDetectedButNoForce': <MissingGRFReason.footContactDetectedButNoForce: 3>, 'tooHighMarkerRMS': <MissingGRFReason.tooHighMarkerRMS: 12>, 'hasInputOutliers': <MissingGRFReason.hasInputOutliers: 13>, 'hasNoForcePlateData': <MissingGRFReason.hasNoForcePlateData: 14>, 'velocitiesStillTooHighAfterFiltering': <MissingGRFReason.velocitiesStillTooHighAfterFiltering: 15>, 'copOutsideConvexFootError': <MissingGRFReason.copOutsideConvexFootError: 16>, 'zeroForceFrame': <MissingGRFReason.zeroForceFrame: 17>, 'extendedToNearestPeakForce': <MissingGRFReason.extendedToNearestPeakForce: 18>}
-    copOutsideConvexFootError: nimblephysics_libs._nimblephysics.biomechanics.MissingGRFReason # value = <MissingGRFReason.copOutsideConvexFootError: 16>
-    extendedToNearestPeakForce: nimblephysics_libs._nimblephysics.biomechanics.MissingGRFReason # value = <MissingGRFReason.extendedToNearestPeakForce: 18>
-    footContactDetectedButNoForce: nimblephysics_libs._nimblephysics.biomechanics.MissingGRFReason # value = <MissingGRFReason.footContactDetectedButNoForce: 3>
-    forceDiscrepancy: nimblephysics_libs._nimblephysics.biomechanics.MissingGRFReason # value = <MissingGRFReason.forceDiscrepancy: 5>
-    hasInputOutliers: nimblephysics_libs._nimblephysics.biomechanics.MissingGRFReason # value = <MissingGRFReason.hasInputOutliers: 13>
-    hasNoForcePlateData: nimblephysics_libs._nimblephysics.biomechanics.MissingGRFReason # value = <MissingGRFReason.hasNoForcePlateData: 14>
-    interpolatedClippedGRF: nimblephysics_libs._nimblephysics.biomechanics.MissingGRFReason # value = <MissingGRFReason.interpolatedClippedGRF: 11>
-    manualReview: nimblephysics_libs._nimblephysics.biomechanics.MissingGRFReason # value = <MissingGRFReason.manualReview: 10>
-    measuredGrfZeroWhenAccelerationNonZero: nimblephysics_libs._nimblephysics.biomechanics.MissingGRFReason # value = <MissingGRFReason.measuredGrfZeroWhenAccelerationNonZero: 1>
-    missingBlip: nimblephysics_libs._nimblephysics.biomechanics.MissingGRFReason # value = <MissingGRFReason.missingBlip: 8>
-    missingImpact: nimblephysics_libs._nimblephysics.biomechanics.MissingGRFReason # value = <MissingGRFReason.missingImpact: 7>
-    notMissingGRF: nimblephysics_libs._nimblephysics.biomechanics.MissingGRFReason # value = <MissingGRFReason.notMissingGRF: 0>
-    notOverForcePlate: nimblephysics_libs._nimblephysics.biomechanics.MissingGRFReason # value = <MissingGRFReason.notOverForcePlate: 6>
-    shiftGRF: nimblephysics_libs._nimblephysics.biomechanics.MissingGRFReason # value = <MissingGRFReason.shiftGRF: 9>
-    tooHighMarkerRMS: nimblephysics_libs._nimblephysics.biomechanics.MissingGRFReason # value = <MissingGRFReason.tooHighMarkerRMS: 12>
-    torqueDiscrepancy: nimblephysics_libs._nimblephysics.biomechanics.MissingGRFReason # value = <MissingGRFReason.torqueDiscrepancy: 4>
-    unmeasuredExternalForceDetected: nimblephysics_libs._nimblephysics.biomechanics.MissingGRFReason # value = <MissingGRFReason.unmeasuredExternalForceDetected: 2>
-    velocitiesStillTooHighAfterFiltering: nimblephysics_libs._nimblephysics.biomechanics.MissingGRFReason # value = <MissingGRFReason.velocitiesStillTooHighAfterFiltering: 15>
-    zeroForceFrame: nimblephysics_libs._nimblephysics.biomechanics.MissingGRFReason # value = <MissingGRFReason.zeroForceFrame: 17>
+    copOutsideConvexFootError: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.biomechanics.MissingGRFReason # value = <MissingGRFReason.copOutsideConvexFootError: 16>
+    extendedToNearestPeakForce: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.biomechanics.MissingGRFReason # value = <MissingGRFReason.extendedToNearestPeakForce: 18>
+    footContactDetectedButNoForce: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.biomechanics.MissingGRFReason # value = <MissingGRFReason.footContactDetectedButNoForce: 3>
+    forceDiscrepancy: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.biomechanics.MissingGRFReason # value = <MissingGRFReason.forceDiscrepancy: 5>
+    hasInputOutliers: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.biomechanics.MissingGRFReason # value = <MissingGRFReason.hasInputOutliers: 13>
+    hasNoForcePlateData: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.biomechanics.MissingGRFReason # value = <MissingGRFReason.hasNoForcePlateData: 14>
+    interpolatedClippedGRF: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.biomechanics.MissingGRFReason # value = <MissingGRFReason.interpolatedClippedGRF: 11>
+    manualReview: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.biomechanics.MissingGRFReason # value = <MissingGRFReason.manualReview: 10>
+    measuredGrfZeroWhenAccelerationNonZero: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.biomechanics.MissingGRFReason # value = <MissingGRFReason.measuredGrfZeroWhenAccelerationNonZero: 1>
+    missingBlip: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.biomechanics.MissingGRFReason # value = <MissingGRFReason.missingBlip: 8>
+    missingImpact: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.biomechanics.MissingGRFReason # value = <MissingGRFReason.missingImpact: 7>
+    notMissingGRF: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.biomechanics.MissingGRFReason # value = <MissingGRFReason.notMissingGRF: 0>
+    notOverForcePlate: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.biomechanics.MissingGRFReason # value = <MissingGRFReason.notOverForcePlate: 6>
+    shiftGRF: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.biomechanics.MissingGRFReason # value = <MissingGRFReason.shiftGRF: 9>
+    tooHighMarkerRMS: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.biomechanics.MissingGRFReason # value = <MissingGRFReason.tooHighMarkerRMS: 12>
+    torqueDiscrepancy: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.biomechanics.MissingGRFReason # value = <MissingGRFReason.torqueDiscrepancy: 4>
+    unmeasuredExternalForceDetected: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.biomechanics.MissingGRFReason # value = <MissingGRFReason.unmeasuredExternalForceDetected: 2>
+    velocitiesStillTooHighAfterFiltering: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.biomechanics.MissingGRFReason # value = <MissingGRFReason.velocitiesStillTooHighAfterFiltering: 15>
+    zeroForceFrame: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.biomechanics.MissingGRFReason # value = <MissingGRFReason.zeroForceFrame: 17>
     pass
 class MissingGRFStatus():
     """
@@ -2481,9 +2481,9 @@ class MissingGRFStatus():
         :type: int
         """
     __members__: dict # value = {'no': <MissingGRFStatus.no: 0>, 'unknown': <MissingGRFStatus.unknown: 1>, 'yes': <MissingGRFStatus.yes: 2>}
-    no: nimblephysics_libs._nimblephysics.biomechanics.MissingGRFStatus # value = <MissingGRFStatus.no: 0>
-    unknown: nimblephysics_libs._nimblephysics.biomechanics.MissingGRFStatus # value = <MissingGRFStatus.unknown: 1>
-    yes: nimblephysics_libs._nimblephysics.biomechanics.MissingGRFStatus # value = <MissingGRFStatus.yes: 2>
+    no: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.biomechanics.MissingGRFStatus # value = <MissingGRFStatus.no: 0>
+    unknown: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.biomechanics.MissingGRFStatus # value = <MissingGRFStatus.unknown: 1>
+    yes: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.biomechanics.MissingGRFStatus # value = <MissingGRFStatus.yes: 2>
     pass
 class MultiBeam():
     def __init__(self, cost: float, trace_heads: typing.List[TraceHead], timestep_used_markers: typing.Set[str]) -> None: ...
@@ -2508,7 +2508,7 @@ class NeuralMarkerLabeller(MarkerLabeller):
     def __init__(self, jointCenterPredictor: typing.Callable[[typing.List[typing.List[numpy.ndarray[numpy.float64, _Shape[3, 1]]]]], typing.List[typing.Dict[str, numpy.ndarray[numpy.float64, _Shape[3, 1]]]]]) -> None: ...
     pass
 class OpenSimFile():
-    def __init__(self, skeleton: nimblephysics_libs._nimblephysics.dynamics.Skeleton, markers: typing.Dict[str, typing.Tuple[nimblephysics_libs._nimblephysics.dynamics.BodyNode, numpy.ndarray[numpy.float64, _Shape[3, 1]]]]) -> None: ...
+    def __init__(self, skeleton: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.Skeleton, markers: typing.Dict[str, typing.Tuple[nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.BodyNode, numpy.ndarray[numpy.float64, _Shape[3, 1]]]]) -> None: ...
     @property
     def anatomicalMarkers(self) -> typing.List[str]:
         """
@@ -2542,20 +2542,20 @@ class OpenSimFile():
     def jointsDrivenBy(self, arg0: typing.List[typing.Tuple[str, str]]) -> None:
         pass
     @property
-    def markersMap(self) -> typing.Dict[str, typing.Tuple[nimblephysics_libs._nimblephysics.dynamics.BodyNode, numpy.ndarray[numpy.float64, _Shape[3, 1]]]]:
+    def markersMap(self) -> typing.Dict[str, typing.Tuple[nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.BodyNode, numpy.ndarray[numpy.float64, _Shape[3, 1]]]]:
         """
-        :type: typing.Dict[str, typing.Tuple[nimblephysics_libs._nimblephysics.dynamics.BodyNode, numpy.ndarray[numpy.float64, _Shape[3, 1]]]]
+        :type: typing.Dict[str, typing.Tuple[nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.BodyNode, numpy.ndarray[numpy.float64, _Shape[3, 1]]]]
         """
     @markersMap.setter
-    def markersMap(self, arg0: typing.Dict[str, typing.Tuple[nimblephysics_libs._nimblephysics.dynamics.BodyNode, numpy.ndarray[numpy.float64, _Shape[3, 1]]]]) -> None:
+    def markersMap(self, arg0: typing.Dict[str, typing.Tuple[nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.BodyNode, numpy.ndarray[numpy.float64, _Shape[3, 1]]]]) -> None:
         pass
     @property
-    def meshMap(self) -> typing.Dict[str, typing.Tuple[str, nimblephysics_libs._nimblephysics.math.Isometry3]]:
+    def meshMap(self) -> typing.Dict[str, typing.Tuple[str, nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.math.Isometry3]]:
         """
-        :type: typing.Dict[str, typing.Tuple[str, nimblephysics_libs._nimblephysics.math.Isometry3]]
+        :type: typing.Dict[str, typing.Tuple[str, nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.math.Isometry3]]
         """
     @meshMap.setter
-    def meshMap(self, arg0: typing.Dict[str, typing.Tuple[str, nimblephysics_libs._nimblephysics.math.Isometry3]]) -> None:
+    def meshMap(self, arg0: typing.Dict[str, typing.Tuple[str, nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.math.Isometry3]]) -> None:
         pass
     @property
     def meshScaleMap(self) -> typing.Dict[str, numpy.ndarray[numpy.float64, _Shape[3, 1]]]:
@@ -2566,12 +2566,12 @@ class OpenSimFile():
     def meshScaleMap(self, arg0: typing.Dict[str, numpy.ndarray[numpy.float64, _Shape[3, 1]]]) -> None:
         pass
     @property
-    def skeleton(self) -> nimblephysics_libs._nimblephysics.dynamics.Skeleton:
+    def skeleton(self) -> nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.Skeleton:
         """
-        :type: nimblephysics_libs._nimblephysics.dynamics.Skeleton
+        :type: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.Skeleton
         """
     @skeleton.setter
-    def skeleton(self, arg0: nimblephysics_libs._nimblephysics.dynamics.Skeleton) -> None:
+    def skeleton(self, arg0: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.Skeleton) -> None:
         pass
     @property
     def trackingMarkers(self) -> typing.List[str]:
@@ -2668,12 +2668,12 @@ class OpenSimScaleAndMarkerOffsets():
     def markerOffsets(self, arg0: typing.Dict[str, numpy.ndarray[numpy.float64, _Shape[3, 1]]]) -> None:
         pass
     @property
-    def markers(self) -> typing.Dict[str, typing.Tuple[nimblephysics_libs._nimblephysics.dynamics.BodyNode, numpy.ndarray[numpy.float64, _Shape[3, 1]]]]:
+    def markers(self) -> typing.Dict[str, typing.Tuple[nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.BodyNode, numpy.ndarray[numpy.float64, _Shape[3, 1]]]]:
         """
-        :type: typing.Dict[str, typing.Tuple[nimblephysics_libs._nimblephysics.dynamics.BodyNode, numpy.ndarray[numpy.float64, _Shape[3, 1]]]]
+        :type: typing.Dict[str, typing.Tuple[nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.BodyNode, numpy.ndarray[numpy.float64, _Shape[3, 1]]]]
         """
     @markers.setter
-    def markers(self, arg0: typing.Dict[str, typing.Tuple[nimblephysics_libs._nimblephysics.dynamics.BodyNode, numpy.ndarray[numpy.float64, _Shape[3, 1]]]]) -> None:
+    def markers(self, arg0: typing.Dict[str, typing.Tuple[nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.BodyNode, numpy.ndarray[numpy.float64, _Shape[3, 1]]]]) -> None:
         pass
     @property
     def success(self) -> bool:
@@ -2749,14 +2749,14 @@ class ProcessingPassType():
         """
         :type: int
         """
-    ACC_MINIMIZING_FILTER: nimblephysics_libs._nimblephysics.biomechanics.ProcessingPassType # value = <ProcessingPassType.ACC_MINIMIZING_FILTER: 3>
-    DYNAMICS: nimblephysics_libs._nimblephysics.biomechanics.ProcessingPassType # value = <ProcessingPassType.DYNAMICS: 1>
-    KINEMATICS: nimblephysics_libs._nimblephysics.biomechanics.ProcessingPassType # value = <ProcessingPassType.KINEMATICS: 0>
-    LOW_PASS_FILTER: nimblephysics_libs._nimblephysics.biomechanics.ProcessingPassType # value = <ProcessingPassType.LOW_PASS_FILTER: 2>
+    ACC_MINIMIZING_FILTER: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.biomechanics.ProcessingPassType # value = <ProcessingPassType.ACC_MINIMIZING_FILTER: 3>
+    DYNAMICS: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.biomechanics.ProcessingPassType # value = <ProcessingPassType.DYNAMICS: 1>
+    KINEMATICS: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.biomechanics.ProcessingPassType # value = <ProcessingPassType.KINEMATICS: 0>
+    LOW_PASS_FILTER: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.biomechanics.ProcessingPassType # value = <ProcessingPassType.LOW_PASS_FILTER: 2>
     __members__: dict # value = {'KINEMATICS': <ProcessingPassType.KINEMATICS: 0>, 'DYNAMICS': <ProcessingPassType.DYNAMICS: 1>, 'LOW_PASS_FILTER': <ProcessingPassType.LOW_PASS_FILTER: 2>, 'ACC_MINIMIZING_FILTER': <ProcessingPassType.ACC_MINIMIZING_FILTER: 3>}
     pass
 class ResidualForceHelper():
-    def __init__(self, skeleton: nimblephysics_libs._nimblephysics.dynamics.Skeleton, forceBodies: typing.List[int]) -> None: ...
+    def __init__(self, skeleton: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.Skeleton, forceBodies: typing.List[int]) -> None: ...
     def calculateCOMAngularResidual(self, q: numpy.ndarray[numpy.float64, _Shape[m, 1]], dq: numpy.ndarray[numpy.float64, _Shape[m, 1]], ddq: numpy.ndarray[numpy.float64, _Shape[m, 1]], forcesConcat: numpy.ndarray[numpy.float64, _Shape[m, 1]]) -> numpy.ndarray[numpy.float64, _Shape[3, 1]]: 
         """
         This computes the residual at the root, then transforms that to the COM and expresses the torque as a spatial vector (even if the root joint uses euler coordinates for rotation).
@@ -2771,32 +2771,32 @@ class ResidualForceHelper():
         """
         This computes the acceleration we would need at the root in order to remove all residual forces.
         """
-    def calculateResidualJacobianWrt(self, q: numpy.ndarray[numpy.float64, _Shape[m, 1]], dq: numpy.ndarray[numpy.float64, _Shape[m, 1]], ddq: numpy.ndarray[numpy.float64, _Shape[m, 1]], forcesConcat: numpy.ndarray[numpy.float64, _Shape[m, 1]], wrt: nimblephysics_libs._nimblephysics.neural.WithRespectTo) -> numpy.ndarray[numpy.float64, _Shape[m, n]]: ...
+    def calculateResidualJacobianWrt(self, q: numpy.ndarray[numpy.float64, _Shape[m, 1]], dq: numpy.ndarray[numpy.float64, _Shape[m, 1]], ddq: numpy.ndarray[numpy.float64, _Shape[m, 1]], forcesConcat: numpy.ndarray[numpy.float64, _Shape[m, 1]], wrt: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.neural.WithRespectTo) -> numpy.ndarray[numpy.float64, _Shape[m, n]]: ...
     def calculateResidualNorm(self, q: numpy.ndarray[numpy.float64, _Shape[m, 1]], dq: numpy.ndarray[numpy.float64, _Shape[m, 1]], ddq: numpy.ndarray[numpy.float64, _Shape[m, 1]], forcesConcat: numpy.ndarray[numpy.float64, _Shape[m, 1]], torquesMultiple: float, useL1: bool = False) -> float: ...
-    def calculateResidualNormGradientWrt(self, q: numpy.ndarray[numpy.float64, _Shape[m, 1]], dq: numpy.ndarray[numpy.float64, _Shape[m, 1]], ddq: numpy.ndarray[numpy.float64, _Shape[m, 1]], forcesConcat: numpy.ndarray[numpy.float64, _Shape[m, 1]], wrt: nimblephysics_libs._nimblephysics.neural.WithRespectTo, torquesMultiple: float, useL1: bool = False) -> numpy.ndarray[numpy.float64, _Shape[m, 1]]: ...
+    def calculateResidualNormGradientWrt(self, q: numpy.ndarray[numpy.float64, _Shape[m, 1]], dq: numpy.ndarray[numpy.float64, _Shape[m, 1]], ddq: numpy.ndarray[numpy.float64, _Shape[m, 1]], forcesConcat: numpy.ndarray[numpy.float64, _Shape[m, 1]], wrt: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.neural.WithRespectTo, torquesMultiple: float, useL1: bool = False) -> numpy.ndarray[numpy.float64, _Shape[m, 1]]: ...
     pass
 class SkeletonConverter():
-    def __init__(self, source: nimblephysics_libs._nimblephysics.dynamics.Skeleton, target: nimblephysics_libs._nimblephysics.dynamics.Skeleton) -> None: ...
+    def __init__(self, source: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.Skeleton, target: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.Skeleton) -> None: ...
     def convertMotion(self, targetMotion: numpy.ndarray[numpy.float64, _Shape[m, n]], logProgress: bool = True, convergenceThreshold: float = 1e-07, maxStepCount: int = 100, leastSquaresDamping: float = 0.01, lineSearch: bool = True, logIKOutput: bool = False) -> numpy.ndarray[numpy.float64, _Shape[m, n]]: ...
     def createVirtualMarkers(self, addFakeMarkers: int = 3, weightFakeMarkers: float = 0.1) -> None: ...
-    def debugToGUI(self, gui: nimblephysics_libs._nimblephysics.server.GUIWebsocketServer) -> None: ...
+    def debugToGUI(self, gui: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.server.GUIWebsocketServer) -> None: ...
     def fitSourceToTarget(self, convergenceThreshold: float = 1e-07, maxStepCount: int = 100, leastSquaresDamping: float = 0.01, lineSearch: bool = True, logOutput: bool = False) -> float: ...
     def fitTargetToSource(self, convergenceThreshold: float = 1e-07, maxStepCount: int = 100, leastSquaresDamping: float = 0.01, lineSearch: bool = True, logOutput: bool = False) -> float: ...
     def getSourceJointWorldPositions(self) -> numpy.ndarray[numpy.float64, _Shape[m, 1]]: ...
-    def getSourceJoints(self) -> typing.List[nimblephysics_libs._nimblephysics.dynamics.Joint]: ...
+    def getSourceJoints(self) -> typing.List[nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.Joint]: ...
     def getTargetJointWorldPositions(self) -> numpy.ndarray[numpy.float64, _Shape[m, 1]]: ...
-    def getTargetJoints(self) -> typing.List[nimblephysics_libs._nimblephysics.dynamics.Joint]: ...
-    def linkJoints(self, sourceJoint: nimblephysics_libs._nimblephysics.dynamics.Joint, targetJoint: nimblephysics_libs._nimblephysics.dynamics.Joint) -> None: ...
+    def getTargetJoints(self) -> typing.List[nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.Joint]: ...
+    def linkJoints(self, sourceJoint: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.Joint, targetJoint: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.Joint) -> None: ...
     def rescaleAndPrepTarget(self, addFakeMarkers: int = 3, weightFakeMarkers: float = 0.1, convergenceThreshold: float = 1e-15, maxStepCount: int = 1000, leastSquaresDamping: float = 0.01, lineSearch: bool = True, logOutput: bool = False) -> None: ...
     pass
 class StreamingIK():
-    def __init__(self, skeleton: nimblephysics_libs._nimblephysics.dynamics.Skeleton, markers: typing.List[typing.Tuple[nimblephysics_libs._nimblephysics.dynamics.BodyNode, numpy.ndarray[numpy.float64, _Shape[3, 1]]]]) -> None: ...
+    def __init__(self, skeleton: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.Skeleton, markers: typing.List[typing.Tuple[nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.BodyNode, numpy.ndarray[numpy.float64, _Shape[3, 1]]]]) -> None: ...
     def estimateState(self, now: int, numHistory: int = 20, polynomialDegree: int = 3) -> None: ...
     def observeMarkers(self, markers: typing.List[numpy.ndarray[numpy.float64, _Shape[3, 1]]], classes: typing.List[int], timestamp: int, copTorqueForces: typing.List[numpy.ndarray[numpy.float64, _Shape[9, 1]]] = []) -> None: 
         """
         This method takes in a set of markers, along with their assigned classes, and updates the targets for the IK to match the observed markers.
         """
-    def reset(self, arg0: nimblephysics_libs._nimblephysics.server.GUIStateMachine) -> None: 
+    def reset(self, arg0: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.server.GUIStateMachine) -> None: 
         """
         This method allows tests to manually input a set of markers, rather than waiting for Cortex to send them.
         """
@@ -2804,7 +2804,7 @@ class StreamingIK():
         """
         This sets an anthropometric prior used to help condition the body to keep reasonable scalings.
         """
-    def startGUIThread(self, gui: nimblephysics_libs._nimblephysics.server.GUIStateMachine) -> None: 
+    def startGUIThread(self, gui: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.server.GUIStateMachine) -> None: 
         """
         This method starts a thread that periodically updates a GUI server state, though at a much lower framerate than the IK solver.
         """
@@ -2827,7 +2827,7 @@ class StreamingMarkerTraces():
         """
         This method takes in the logits for each point, and the trace IDs for each point, and updates the internal state of the trace classifier to reflect the new information.
         """
-    def renderTracesToGUI(self, gui: nimblephysics_libs._nimblephysics.server.GUIStateMachine) -> None: ...
+    def renderTracesToGUI(self, gui: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.server.GUIStateMachine) -> None: ...
     def reset(self) -> None: 
         """
         This resets all traces to empty
@@ -2846,7 +2846,7 @@ class StreamingMarkerTraces():
         """
     pass
 class StreamingMocapLab():
-    def __init__(self, skeleton: nimblephysics_libs._nimblephysics.dynamics.Skeleton, markers: typing.List[typing.Tuple[nimblephysics_libs._nimblephysics.dynamics.BodyNode, numpy.ndarray[numpy.float64, _Shape[3, 1]]]]) -> None: ...
+    def __init__(self, skeleton: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.Skeleton, markers: typing.List[typing.Tuple[nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.BodyNode, numpy.ndarray[numpy.float64, _Shape[3, 1]]]]) -> None: ...
     def estimateState(self, now: int, numHistory: int = 20, polynomialDegree: int = 3) -> None: ...
     def getIK(self) -> StreamingMarkerTraces: ...
     def getMarkerTraces(self) -> StreamingMarkerTraces: ...
@@ -2866,7 +2866,7 @@ class StreamingMocapLab():
         """
         This method takes in the logits for each point, and the trace IDs for each point, and updates the internal state of the trace classifier to reflect the new information.
         """
-    def reset(self, gui: nimblephysics_libs._nimblephysics.server.GUIStateMachine = None) -> None: 
+    def reset(self, gui: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.server.GUIStateMachine = None) -> None: 
         """
         This method resets the state of the mocap lab, including the IK and the marker traces.
         """
@@ -2874,7 +2874,7 @@ class StreamingMocapLab():
         """
         This sets an anthropometric prior used to help condition the body to keep reasonable scalings.
         """
-    def startGUIThread(self, gui: nimblephysics_libs._nimblephysics.server.GUIStateMachine) -> None: 
+    def startGUIThread(self, gui: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.server.GUIStateMachine) -> None: 
         """
         This method starts a thread that periodically updates a GUI server state, though at a much lower framerate than the IK solver.
         """
@@ -3080,7 +3080,7 @@ class SubjectOnDisk():
         """
         This is functionally the same as readSkel(), except that it returns the entire OpenSim file object, which in addition to the Skeleton also contains the markerset.This will read the entire OpenSim file from the binary, and optionally use the passed in :code:`geometryFolder` to load meshes. 
         """
-    def readSkel(self, processingPass: int, geometryFolder: str = '', ignoreGeometry: bool = False) -> nimblephysics_libs._nimblephysics.dynamics.Skeleton: 
+    def readSkel(self, processingPass: int, geometryFolder: str = '', ignoreGeometry: bool = False) -> nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.Skeleton: 
         """
         This will read the skeleton from the binary, and optionally use the passed in :code:`geometryFolder` to load meshes. We do not bundle meshes with :code:`SubjectOnDisk` files, to save space. If you do not pass in :code:`geometryFolder`, expect to get warnings about being unable to load meshes, and expect that your skeleton will not display if you attempt to visualize it.
         """
@@ -3165,9 +3165,9 @@ class SubjectOnDiskTrial():
     pass
 class SubjectOnDiskTrialPass():
     def __init__(self) -> None: ...
-    def computeKinematicValues(self, skel: nimblephysics_libs._nimblephysics.dynamics.Skeleton, timestep: float, poses: numpy.ndarray[numpy.float64, _Shape[m, n]], rootHistoryLen: int = 5, rootHistoryStride: int = 1, explicitVels: numpy.ndarray[numpy.float64, _Shape[m, n]] = array([], shape=(0, 0), dtype=float64), explicitAccs: numpy.ndarray[numpy.float64, _Shape[m, n]] = array([], shape=(0, 0), dtype=float64)) -> None: ...
-    def computeValues(self, skel: nimblephysics_libs._nimblephysics.dynamics.Skeleton, timestep: float, poses: numpy.ndarray[numpy.float64, _Shape[m, n]], footBodyNames: typing.List[str], forces: numpy.ndarray[numpy.float64, _Shape[m, n]], moments: numpy.ndarray[numpy.float64, _Shape[m, n]], cops: numpy.ndarray[numpy.float64, _Shape[m, n]], rootHistoryLen: int = 5, rootHistoryStride: int = 1) -> None: ...
-    def computeValuesFromForcePlates(self, skel: nimblephysics_libs._nimblephysics.dynamics.Skeleton, timestep: float, poses: numpy.ndarray[numpy.float64, _Shape[m, n]], footBodyNames: typing.List[str], forcePlates: typing.List[ForcePlate], rootHistoryLen: int = 5, rootHistoryStride: int = 1, explicitVels: numpy.ndarray[numpy.float64, _Shape[m, n]] = array([], shape=(0, 0), dtype=float64), explicitAccs: numpy.ndarray[numpy.float64, _Shape[m, n]] = array([], shape=(0, 0), dtype=float64), forcePlateZeroThresholdNewtons: float = 3.0) -> None: ...
+    def computeKinematicValues(self, skel: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.Skeleton, timestep: float, poses: numpy.ndarray[numpy.float64, _Shape[m, n]], rootHistoryLen: int = 5, rootHistoryStride: int = 1, explicitVels: numpy.ndarray[numpy.float64, _Shape[m, n]] = array([], shape=(0, 0), dtype=float64), explicitAccs: numpy.ndarray[numpy.float64, _Shape[m, n]] = array([], shape=(0, 0), dtype=float64)) -> None: ...
+    def computeValues(self, skel: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.Skeleton, timestep: float, poses: numpy.ndarray[numpy.float64, _Shape[m, n]], footBodyNames: typing.List[str], forces: numpy.ndarray[numpy.float64, _Shape[m, n]], moments: numpy.ndarray[numpy.float64, _Shape[m, n]], cops: numpy.ndarray[numpy.float64, _Shape[m, n]], rootHistoryLen: int = 5, rootHistoryStride: int = 1) -> None: ...
+    def computeValuesFromForcePlates(self, skel: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.Skeleton, timestep: float, poses: numpy.ndarray[numpy.float64, _Shape[m, n]], footBodyNames: typing.List[str], forcePlates: typing.List[ForcePlate], rootHistoryLen: int = 5, rootHistoryStride: int = 1, explicitVels: numpy.ndarray[numpy.float64, _Shape[m, n]] = array([], shape=(0, 0), dtype=float64), explicitAccs: numpy.ndarray[numpy.float64, _Shape[m, n]] = array([], shape=(0, 0), dtype=float64), forcePlateZeroThresholdNewtons: float = 3.0) -> None: ...
     def copyValuesFrom(self, other: SubjectOnDiskTrialPass) -> None: ...
     def getAccs(self) -> numpy.ndarray[numpy.float64, _Shape[m, n]]: ...
     def getAngularResidual(self) -> typing.List[float]: ...
@@ -3267,25 +3267,25 @@ class TraceHead():
         :type: std::__1::weak_ptr<dart::biomechanics::TraceHead>
         """
     pass
-copOutsideConvexFootError: nimblephysics_libs._nimblephysics.biomechanics.MissingGRFReason # value = <MissingGRFReason.copOutsideConvexFootError: 16>
-extendedToNearestPeakForce: nimblephysics_libs._nimblephysics.biomechanics.MissingGRFReason # value = <MissingGRFReason.extendedToNearestPeakForce: 18>
-footContactDetectedButNoForce: nimblephysics_libs._nimblephysics.biomechanics.MissingGRFReason # value = <MissingGRFReason.footContactDetectedButNoForce: 3>
-forceDiscrepancy: nimblephysics_libs._nimblephysics.biomechanics.MissingGRFReason # value = <MissingGRFReason.forceDiscrepancy: 5>
-hasInputOutliers: nimblephysics_libs._nimblephysics.biomechanics.MissingGRFReason # value = <MissingGRFReason.hasInputOutliers: 13>
-hasNoForcePlateData: nimblephysics_libs._nimblephysics.biomechanics.MissingGRFReason # value = <MissingGRFReason.hasNoForcePlateData: 14>
-interpolatedClippedGRF: nimblephysics_libs._nimblephysics.biomechanics.MissingGRFReason # value = <MissingGRFReason.interpolatedClippedGRF: 11>
-manualReview: nimblephysics_libs._nimblephysics.biomechanics.MissingGRFReason # value = <MissingGRFReason.manualReview: 10>
-measuredGrfZeroWhenAccelerationNonZero: nimblephysics_libs._nimblephysics.biomechanics.MissingGRFReason # value = <MissingGRFReason.measuredGrfZeroWhenAccelerationNonZero: 1>
-missingBlip: nimblephysics_libs._nimblephysics.biomechanics.MissingGRFReason # value = <MissingGRFReason.missingBlip: 8>
-missingImpact: nimblephysics_libs._nimblephysics.biomechanics.MissingGRFReason # value = <MissingGRFReason.missingImpact: 7>
-no: nimblephysics_libs._nimblephysics.biomechanics.MissingGRFStatus # value = <MissingGRFStatus.no: 0>
-notMissingGRF: nimblephysics_libs._nimblephysics.biomechanics.MissingGRFReason # value = <MissingGRFReason.notMissingGRF: 0>
-notOverForcePlate: nimblephysics_libs._nimblephysics.biomechanics.MissingGRFReason # value = <MissingGRFReason.notOverForcePlate: 6>
-shiftGRF: nimblephysics_libs._nimblephysics.biomechanics.MissingGRFReason # value = <MissingGRFReason.shiftGRF: 9>
-tooHighMarkerRMS: nimblephysics_libs._nimblephysics.biomechanics.MissingGRFReason # value = <MissingGRFReason.tooHighMarkerRMS: 12>
-torqueDiscrepancy: nimblephysics_libs._nimblephysics.biomechanics.MissingGRFReason # value = <MissingGRFReason.torqueDiscrepancy: 4>
-unknown: nimblephysics_libs._nimblephysics.biomechanics.MissingGRFStatus # value = <MissingGRFStatus.unknown: 1>
-unmeasuredExternalForceDetected: nimblephysics_libs._nimblephysics.biomechanics.MissingGRFReason # value = <MissingGRFReason.unmeasuredExternalForceDetected: 2>
-velocitiesStillTooHighAfterFiltering: nimblephysics_libs._nimblephysics.biomechanics.MissingGRFReason # value = <MissingGRFReason.velocitiesStillTooHighAfterFiltering: 15>
-yes: nimblephysics_libs._nimblephysics.biomechanics.MissingGRFStatus # value = <MissingGRFStatus.yes: 2>
-zeroForceFrame: nimblephysics_libs._nimblephysics.biomechanics.MissingGRFReason # value = <MissingGRFReason.zeroForceFrame: 17>
+copOutsideConvexFootError: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.biomechanics.MissingGRFReason # value = <MissingGRFReason.copOutsideConvexFootError: 16>
+extendedToNearestPeakForce: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.biomechanics.MissingGRFReason # value = <MissingGRFReason.extendedToNearestPeakForce: 18>
+footContactDetectedButNoForce: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.biomechanics.MissingGRFReason # value = <MissingGRFReason.footContactDetectedButNoForce: 3>
+forceDiscrepancy: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.biomechanics.MissingGRFReason # value = <MissingGRFReason.forceDiscrepancy: 5>
+hasInputOutliers: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.biomechanics.MissingGRFReason # value = <MissingGRFReason.hasInputOutliers: 13>
+hasNoForcePlateData: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.biomechanics.MissingGRFReason # value = <MissingGRFReason.hasNoForcePlateData: 14>
+interpolatedClippedGRF: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.biomechanics.MissingGRFReason # value = <MissingGRFReason.interpolatedClippedGRF: 11>
+manualReview: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.biomechanics.MissingGRFReason # value = <MissingGRFReason.manualReview: 10>
+measuredGrfZeroWhenAccelerationNonZero: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.biomechanics.MissingGRFReason # value = <MissingGRFReason.measuredGrfZeroWhenAccelerationNonZero: 1>
+missingBlip: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.biomechanics.MissingGRFReason # value = <MissingGRFReason.missingBlip: 8>
+missingImpact: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.biomechanics.MissingGRFReason # value = <MissingGRFReason.missingImpact: 7>
+no: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.biomechanics.MissingGRFStatus # value = <MissingGRFStatus.no: 0>
+notMissingGRF: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.biomechanics.MissingGRFReason # value = <MissingGRFReason.notMissingGRF: 0>
+notOverForcePlate: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.biomechanics.MissingGRFReason # value = <MissingGRFReason.notOverForcePlate: 6>
+shiftGRF: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.biomechanics.MissingGRFReason # value = <MissingGRFReason.shiftGRF: 9>
+tooHighMarkerRMS: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.biomechanics.MissingGRFReason # value = <MissingGRFReason.tooHighMarkerRMS: 12>
+torqueDiscrepancy: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.biomechanics.MissingGRFReason # value = <MissingGRFReason.torqueDiscrepancy: 4>
+unknown: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.biomechanics.MissingGRFStatus # value = <MissingGRFStatus.unknown: 1>
+unmeasuredExternalForceDetected: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.biomechanics.MissingGRFReason # value = <MissingGRFReason.unmeasuredExternalForceDetected: 2>
+velocitiesStillTooHighAfterFiltering: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.biomechanics.MissingGRFReason # value = <MissingGRFReason.velocitiesStillTooHighAfterFiltering: 15>
+yes: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.biomechanics.MissingGRFStatus # value = <MissingGRFStatus.yes: 2>
+zeroForceFrame: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.biomechanics.MissingGRFReason # value = <MissingGRFReason.zeroForceFrame: 17>

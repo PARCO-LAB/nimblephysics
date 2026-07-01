@@ -7,12 +7,11 @@ from . import collision
 from . import common
 from . import constraint
 from . import dynamics
+from . import exo
 from . import math
 from . import neural
 from . import performance
-from . import realtime
-from . import server
 from . import simulation
 from . import trajectory
 from . import utils
-__all__ = ['biomechanics', 'collision', 'common', 'constraint', 'dynamics', 'math', 'neural', 'performance', 'realtime', 'server', 'simulation', 'trajectory', 'utils']
+__all__: list[str] = ['biomechanics', 'collision', 'common', 'constraint', 'dynamics', 'exo', 'math', 'neural', 'performance', 'simulation', 'trajectory', 'utils']

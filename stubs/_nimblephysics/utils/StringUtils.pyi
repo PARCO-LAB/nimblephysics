@@ -1,5 +1,5 @@
 from __future__ import annotations
-__all__ = ['ltrim', 'rtrim', 'trim']
+__all__: list[str] = ['ltrim', 'rtrim', 'trim']
 def ltrim(s: str) -> str:
     ...
 def rtrim(s: str) -> str:

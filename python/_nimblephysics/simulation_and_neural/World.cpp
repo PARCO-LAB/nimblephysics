@@ -81,7 +81,8 @@ void World(
           ::py::return_value_policy::reference_internal)
       .def(
           "setGravity",
-          +[](dart::simulation::World* self, const Eigen::Vector3s _gravity)
+          +[](dart::simulation::World* self,
+              const Eigen::Ref<const Eigen::Vector3s>& _gravity)
               -> void { return self->setGravity(_gravity); },
           ::py::arg("gravity"))
       .def(
@@ -131,8 +132,8 @@ void World(
           "loadSkeleton",
           +[](dart::simulation::World* self,
               const std::string& path,
-              Eigen::Vector3s basePosition,
-              Eigen::Vector3s baseEulerAnglesXYZ)
+              const Eigen::Ref<const Eigen::Vector3s>& basePosition,
+              const Eigen::Ref<const Eigen::Vector3s>& baseEulerAnglesXYZ)
               -> dart::dynamics::SkeletonPtr {
             return dart::utils::UniversalLoader::loadSkeleton(
                 self, path, basePosition, baseEulerAnglesXYZ);
@@ -263,7 +264,8 @@ void World(
           ::py::arg("resetCommand"))
       .def(
           "integratePositions",
-          +[](dart::simulation::World* self, Eigen::VectorXs initialVelocity)
+          +[](dart::simulation::World* self,
+              const Eigen::Ref<const Eigen::VectorXs>& initialVelocity)
               -> void { return self->integratePositions(initialVelocity); },
           ::py::arg("initialVelocity"))
       .def(
@@ -315,8 +317,8 @@ void World(
           +[](dart::simulation::World* self,
               dynamics::BodyNode* node,
               neural::WrtMassBodyNodeEntryType type,
-              Eigen::VectorXs upperBound,
-              Eigen::VectorXs lowerBound) -> void {
+              const Eigen::Ref<const Eigen::VectorXs>& upperBound,
+              const Eigen::Ref<const Eigen::VectorXs>& lowerBound) -> void {
             self->tuneMass(node, type, upperBound, lowerBound);
           })
       .def(
@@ -386,50 +388,60 @@ void World(
           })
       .def(
           "setPositions",
-          +[](dart::simulation::World* self, Eigen::VectorXs positions)
+          +[](dart::simulation::World* self,
+              const Eigen::Ref<const Eigen::VectorXs>& positions)
               -> void { self->setPositions(positions); })
       .def(
           "setVelocities",
-          +[](dart::simulation::World* self, Eigen::VectorXs velocities)
+          +[](dart::simulation::World* self,
+              const Eigen::Ref<const Eigen::VectorXs>& velocities)
               -> void { self->setVelocities(velocities); })
       .def(
           "setControlForces",
-          +[](dart::simulation::World* self, Eigen::VectorXs forces) -> void {
+          +[](dart::simulation::World* self,
+              const Eigen::Ref<const Eigen::VectorXs>& forces) -> void {
             self->setControlForces(forces);
           })
       .def(
           "setMasses",
-          +[](dart::simulation::World* self, Eigen::VectorXs forces) -> void {
+          +[](dart::simulation::World* self,
+              const Eigen::Ref<const Eigen::VectorXs>& forces) -> void {
             self->setMasses(forces);
           })
       .def(
           "setControlForcesUpperLimits",
-          +[](dart::simulation::World* self, Eigen::VectorXs limits) -> void {
+          +[](dart::simulation::World* self,
+              const Eigen::Ref<const Eigen::VectorXs>& limits) -> void {
             self->setControlForceUpperLimits(limits);
           })
       .def(
           "setControlForcesLowerLimits",
-          +[](dart::simulation::World* self, Eigen::VectorXs limits) -> void {
+          +[](dart::simulation::World* self,
+              const Eigen::Ref<const Eigen::VectorXs>& limits) -> void {
             self->setControlForceLowerLimits(limits);
           })
       .def(
           "setPositionUpperLimits",
-          +[](dart::simulation::World* self, Eigen::VectorXs limits) -> void {
+          +[](dart::simulation::World* self,
+              const Eigen::Ref<const Eigen::VectorXs>& limits) -> void {
             self->setPositionUpperLimits(limits);
           })
       .def(
           "setPositionLowerLimits",
-          +[](dart::simulation::World* self, Eigen::VectorXs limits) -> void {
+          +[](dart::simulation::World* self,
+              const Eigen::Ref<const Eigen::VectorXs>& limits) -> void {
             self->setPositionLowerLimits(limits);
           })
       .def(
           "setVelocityUpperLimits",
-          +[](dart::simulation::World* self, Eigen::VectorXs limits) -> void {
+          +[](dart::simulation::World* self,
+              const Eigen::Ref<const Eigen::VectorXs>& limits) -> void {
             self->setVelocityUpperLimits(limits);
           })
       .def(
           "setVelocityLowerLimits",
-          +[](dart::simulation::World* self, Eigen::VectorXs limits) -> void {
+          +[](dart::simulation::World* self,
+              const Eigen::Ref<const Eigen::VectorXs>& limits) -> void {
             self->setVelocityLowerLimits(limits);
           })
       .def(

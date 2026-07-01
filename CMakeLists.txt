@@ -235,7 +235,10 @@ elseif(CMAKE_COMPILER_IS_GNUCXX)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror -Wno-sign-compare -Wno-deprecated-copy -Wno-deprecated-declarations -Wno-reorder")
   endif()
 
-  add_compile_options(-Wno-error=overloaded-virtual -Wno-error=template-id-cdtor)
+  add_compile_options(-Wno-error=overloaded-virtual)
+  if(CMAKE_CXX_COMPILER_VERSION VERSION_LESS "13")
+    add_compile_options(-Wno-error=template-id-cdtor)
+  endif()
 
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -fPIC")
   execute_process(

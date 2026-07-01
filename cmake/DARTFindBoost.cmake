@@ -12,10 +12,8 @@ if(MSVC)
 endif()
 add_definitions(-DBOOST_TEST_DYN_LINK)
 
-# Add this policy to ensure CMake respects the BOOST_ROOT variable
+# Add this policy to ensure CMake respects the BOOST_ROOT variable.
 cmake_policy(SET CMP0074 NEW)
-
-set(BOOST_ROOT /opt/homebrew/opt/boost)
 
 set(Boost_USE_MULTITHREADED ON)
 set(Boost_USE_STATIC_RUNTIME OFF)

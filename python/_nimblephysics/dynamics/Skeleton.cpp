@@ -556,7 +556,8 @@ void Skeleton(
           })
       .def(
           "setGravity",
-          +[](dart::dynamics::Skeleton* self, const Eigen::Vector3s& _gravity)
+          +[](dart::dynamics::Skeleton* self,
+              const Eigen::Ref<const Eigen::Vector3s>& _gravity)
               -> void { return self->setGravity(_gravity); },
           ::py::arg("gravity"))
       .def(
@@ -825,25 +826,43 @@ void Skeleton(
           ::py::arg("treeIndex"))
       .def(
           "getHeight",
-          &dart::dynamics::Skeleton::getHeight,
+          +[](const dart::dynamics::Skeleton* self,
+              const Eigen::Ref<const Eigen::VectorXs>& pos,
+              const Eigen::Ref<const Eigen::Vector3s>& up = Eigen::Vector3s::UnitY())
+              -> s_t { return self->getHeight(pos, up); },
           ::py::arg("pos"),
           ::py::arg("up") = Eigen::Vector3s::UnitY())
       .def(
           "getGradientOfHeightWrtBodyScales",
-          &dart::dynamics::Skeleton::getGradientOfHeightWrtBodyScales,
+          +[](const dart::dynamics::Skeleton* self,
+              const Eigen::Ref<const Eigen::VectorXs>& pos,
+              const Eigen::Ref<const Eigen::Vector3s>& up = Eigen::Vector3s::UnitY())
+              -> Eigen::VectorXs {
+            return self->getGradientOfHeightWrtBodyScales(pos, up);
+          },
           ::py::arg("pos"),
           ::py::arg("up") = Eigen::Vector3s::UnitY())
       .def(
           "getLowestPoint",
-          &dart::dynamics::Skeleton::getLowestPoint,
+          +[](const dart::dynamics::Skeleton* self,
+              const Eigen::Ref<const Eigen::Vector3s>& up = Eigen::Vector3s::UnitY())
+              -> s_t { return self->getLowestPoint(up); },
           ::py::arg("up") = Eigen::Vector3s::UnitY())
       .def(
           "getGradientOfLowestPointWrtBodyScales",
-          &dart::dynamics::Skeleton::getGradientOfLowestPointWrtBodyScales,
+          +[](const dart::dynamics::Skeleton* self,
+              const Eigen::Ref<const Eigen::Vector3s>& up = Eigen::Vector3s::UnitY())
+              -> Eigen::VectorXs {
+            return self->getGradientOfLowestPointWrtBodyScales(up);
+          },
           ::py::arg("up") = Eigen::Vector3s::UnitY())
       .def(
           "getGradientOfLowestPointWrtJoints",
-          &dart::dynamics::Skeleton::getGradientOfLowestPointWrtJoints,
+          +[](const dart::dynamics::Skeleton* self,
+              const Eigen::Ref<const Eigen::Vector3s>& up = Eigen::Vector3s::UnitY())
+              -> Eigen::VectorXs {
+            return self->getGradientOfLowestPointWrtJoints(up);
+          },
           ::py::arg("up") = Eigen::Vector3s::UnitY())
       .def("getRandomPose", &dart::dynamics::Skeleton::getRandomPose)
       .def(
@@ -882,28 +901,35 @@ void Skeleton(
           })
       .def(
           "setControlForcesUpperLimits",
-          +[](dart::dynamics::Skeleton* self, Eigen::VectorXs limits) -> void {
+          +[](dart::dynamics::Skeleton* self,
+              const Eigen::Ref<const Eigen::VectorXs>& limits) -> void {
             self->setControlForceUpperLimits(limits);
           })
       .def(
           "setControlForcesLowerLimits",
-          +[](dart::dynamics::Skeleton* self, Eigen::VectorXs limits) -> void {
+          +[](dart::dynamics::Skeleton* self,
+              const Eigen::Ref<const Eigen::VectorXs>& limits) -> void {
             self->setControlForceLowerLimits(limits);
           })
       .def(
           "setPositionUpperLimits",
-          +[](dart::dynamics::Skeleton* self, Eigen::VectorXs limits) -> void {
+          +[](dart::dynamics::Skeleton* self,
+              const Eigen::Ref<const Eigen::VectorXs>& limits) -> void {
             self->setPositionUpperLimits(limits);
           })
       .def(
           "setPositionLowerLimits",
-          +[](dart::dynamics::Skeleton* self, Eigen::VectorXs limits) -> void {
+          +[](dart::dynamics::Skeleton* self,
+              const Eigen::Ref<const Eigen::VectorXs>& limits) -> void {
             self->setPositionLowerLimits(limits);
           })
       .def("getBodyScales", &dart::dynamics::Skeleton::getBodyScales)
       .def(
           "setBodyScales",
-          &dart::dynamics::Skeleton::setBodyScales,
+          +[](dart::dynamics::Skeleton* self,
+              const Eigen::Ref<const Eigen::VectorXs>& scales) {
+            self->setBodyScales(scales);
+          },
           ::py::arg("scales"))
       .def(
           "clampPositionsToLimits",
@@ -973,18 +999,28 @@ void Skeleton(
           ::py::arg("uniform") = true)
       .def(
           "setLinkMasses",
-          &dart::dynamics::Skeleton::setLinkMasses,
+          +[](dart::dynamics::Skeleton* self,
+              const Eigen::Ref<const Eigen::VectorXs>& masses) {
+            self->setLinkMasses(masses);
+          },
           ::py::arg("masses"))
       .def("getLinkMasses", &dart::dynamics::Skeleton::getLinkMasses)
       .def(
           "setGroupScales",
-          &dart::dynamics::Skeleton::setGroupScales,
+          +[](dart::dynamics::Skeleton* self,
+              const Eigen::Ref<const Eigen::VectorXs>& scales,
+              bool silentlyClamp = false) {
+            self->setGroupScales(scales, silentlyClamp);
+          },
           ::py::arg("scales"),
           ::py::arg("silentlyClamp") = false)
       .def("getGroupScales", &dart::dynamics::Skeleton::getGroupScales)
       .def(
           "setGroupMasses",
-          &dart::dynamics::Skeleton::setGroupMasses,
+          +[](dart::dynamics::Skeleton* self,
+              const Eigen::Ref<const Eigen::VectorXs>& masses) {
+            self->setGroupMasses(masses);
+          },
           ::py::arg("masses"))
       .def("getGroupMasses", &dart::dynamics::Skeleton::getGroupMasses)
       .def(
@@ -995,7 +1031,10 @@ void Skeleton(
           &dart::dynamics::Skeleton::getGroupMassesLowerBound)
       .def(
           "setGroupInertias",
-          &dart::dynamics::Skeleton::setGroupInertias,
+          +[](dart::dynamics::Skeleton* self,
+              const Eigen::Ref<const Eigen::VectorXs>& inertias) {
+            self->setGroupInertias(inertias);
+          },
           ::py::arg("inertias"))
       .def("getGroupInertias", &dart::dynamics::Skeleton::getGroupInertias)
       .def(
@@ -1006,7 +1045,10 @@ void Skeleton(
           &dart::dynamics::Skeleton::getGroupInertiasLowerBound)
       .def(
           "setGroupCOMs",
-          &dart::dynamics::Skeleton::setGroupCOMs,
+          +[](dart::dynamics::Skeleton* self,
+              const Eigen::Ref<const Eigen::VectorXs>& coms) {
+            self->setGroupCOMs(coms);
+          },
           ::py::arg("coms"))
       .def("getGroupCOMs", &dart::dynamics::Skeleton::getGroupCOMs)
       .def(
@@ -1060,7 +1102,7 @@ void Skeleton(
           "fitJointsToWorldPositions",
           +[](dart::dynamics::Skeleton* self,
               const std::vector<dynamics::Joint*>& positionJoints,
-              Eigen::VectorXs targetPositions,
+              const Eigen::Ref<const Eigen::VectorXs>& targetPositions,
               bool scaleBodies,
               double convergenceThreshold,
               int maxStepCount,
@@ -1091,8 +1133,8 @@ void Skeleton(
           +[](dart::dynamics::Skeleton* self,
               const std::vector<
                   std::pair<dynamics::BodyNode*, Eigen::Vector3s>>& markers,
-              Eigen::VectorXs targetPositions,
-              Eigen::VectorXs markerWeights,
+              const Eigen::Ref<const Eigen::VectorXs>& targetPositions,
+              const Eigen::Ref<const Eigen::VectorXs>& markerWeights,
               bool scaleBodies,
               double convergenceThreshold,
               int maxStepCount,
@@ -1181,7 +1223,13 @@ This returns the Jacobian relating changes in the `wrt` quantity to changes in a
     )docs")
       .def(
           "getMagnetometerReadings",
-          &dart::dynamics::Skeleton::getMagnetometerReadings,
+          +[](const dart::dynamics::Skeleton* self,
+              const std::vector<std::pair<dart::dynamics::BodyNode*,
+                                          Eigen::Isometry3s>>& mags,
+              const Eigen::Ref<const Eigen::Vector3s>& magneticField)
+              -> Eigen::VectorXs {
+            return self->getMagnetometerReadings(mags, magneticField);
+          },
           ::py::arg("mags"),
           ::py::arg("magneticField"),
           R"docs(
@@ -1189,7 +1237,14 @@ These are a set of bodies, and offsets in local body space where magnetometers a
     )docs")
       .def(
           "getMagnetometerReadingsJacobianWrt",
-          &dart::dynamics::Skeleton::getMagnetometerReadingsJacobianWrt,
+          +[](const dart::dynamics::Skeleton* self,
+              const std::vector<std::pair<dart::dynamics::BodyNode*,
+                                          Eigen::Isometry3s>>& mags,
+              const Eigen::Ref<const Eigen::Vector3s>& magneticField,
+              dart::neural::WithRespectTo* wrt) -> Eigen::MatrixXs {
+            return self->getMagnetometerReadingsJacobianWrt(
+                mags, magneticField, wrt);
+          },
           ::py::arg("mags"),
           ::py::arg("magneticField"),
           ::py::arg("wrt"),
@@ -1198,8 +1253,14 @@ This returns the Jacobian relating changes in the `wrt` quantity to changes in m
     )docs")
       .def(
           "getMagnetometerReadingsJacobianWrtMagneticField",
-          &dart::dynamics::Skeleton::
-              getMagnetometerReadingsJacobianWrtMagneticField,
+          +[](const dart::dynamics::Skeleton* self,
+              const std::vector<std::pair<dart::dynamics::BodyNode*,
+                                          Eigen::Isometry3s>>& mags,
+              const Eigen::Ref<const Eigen::Vector3s>& magneticField)
+              -> Eigen::MatrixXs {
+            return self->getMagnetometerReadingsJacobianWrtMagneticField(
+                mags, magneticField);
+          },
           ::py::arg("mags"),
           ::py::arg("magneticField"),
           R"docs(
@@ -1213,12 +1274,14 @@ This returns the Jacobian relating changes in the magnetic field to changes in m
           &dart::dynamics::Skeleton::getBodyLocalAccelerations)
       .def(
           "setVelocityUpperLimits",
-          +[](dart::dynamics::Skeleton* self, Eigen::VectorXs limits) -> void {
+          +[](dart::dynamics::Skeleton* self,
+              const Eigen::Ref<const Eigen::VectorXs>& limits) -> void {
             self->setVelocityUpperLimits(limits);
           })
       .def(
           "setVelocityLowerLimits",
-          +[](dart::dynamics::Skeleton* self, Eigen::VectorXs limits) -> void {
+          +[](dart::dynamics::Skeleton* self,
+              const Eigen::Ref<const Eigen::VectorXs>& limits) -> void {
             self->setVelocityLowerLimits(limits);
           })
       .def(
@@ -1230,8 +1293,8 @@ This returns the Jacobian relating changes in the magnetic field to changes in m
       .def(
           "integratePositionsExplicit",
           +[](dart::dynamics::Skeleton* self,
-              Eigen::VectorXs _pos,
-              Eigen::VectorXs _vel,
+              const Eigen::Ref<const Eigen::VectorXs>& _pos,
+              const Eigen::Ref<const Eigen::VectorXs>& _vel,
               s_t _dt) -> Eigen::VectorXs {
             return self->integratePositionsExplicit(_pos, _vel, _dt);
           },
@@ -1248,8 +1311,9 @@ This returns the Jacobian relating changes in the magnetic field to changes in m
       .def(
           "getPositionDifferences",
           +[](const dart::dynamics::Skeleton* self,
-              const Eigen::VectorXs& _q2,
-              const Eigen::VectorXs& _q1) -> Eigen::VectorXs {
+              const Eigen::Ref<const Eigen::VectorXs>& _q2,
+              const Eigen::Ref<const Eigen::VectorXs>& _q1)
+              -> Eigen::VectorXs {
             return self->getPositionDifferences(_q2, _q1);
           },
           ::py::arg("q2"),
@@ -1257,8 +1321,9 @@ This returns the Jacobian relating changes in the magnetic field to changes in m
       .def(
           "getVelocityDifferences",
           +[](const dart::dynamics::Skeleton* self,
-              const Eigen::VectorXs& _dq2,
-              const Eigen::VectorXs& _dq1) -> Eigen::VectorXs {
+              const Eigen::Ref<const Eigen::VectorXs>& _dq2,
+              const Eigen::Ref<const Eigen::VectorXs>& _dq1)
+              -> Eigen::VectorXs {
             return self->getVelocityDifferences(_dq2, _dq1);
           },
           ::py::arg("dq2"),
@@ -1410,7 +1475,7 @@ This returns the Jacobian relating changes in the magnetic field to changes in m
           "updateBiasImpulse",
           +[](dart::dynamics::Skeleton* self,
               dart::dynamics::BodyNode* _bodyNode,
-              const Eigen::Vector6s& _imp) -> void {
+              const Eigen::Ref<const Eigen::Vector6s>& _imp) -> void {
             return self->updateBiasImpulse(_bodyNode, _imp);
           },
           ::py::arg("bodyNode"),
@@ -1419,9 +1484,9 @@ This returns the Jacobian relating changes in the magnetic field to changes in m
           "updateBiasImpulse",
           +[](dart::dynamics::Skeleton* self,
               dart::dynamics::BodyNode* _bodyNode1,
-              const Eigen::Vector6s& _imp1,
+              const Eigen::Ref<const Eigen::Vector6s>& _imp1,
               dart::dynamics::BodyNode* _bodyNode2,
-              const Eigen::Vector6s& _imp2) -> void {
+              const Eigen::Ref<const Eigen::Vector6s>& _imp2) -> void {
             return self->updateBiasImpulse(
                 _bodyNode1, _imp1, _bodyNode2, _imp2);
           },
@@ -1435,7 +1500,7 @@ This returns the Jacobian relating changes in the magnetic field to changes in m
             +[](dart::dynamics::Skeleton* self,
                 dart::dynamics::SoftBodyNode* _softBodyNode,
                 dart::dynamics::PointMass* _pointMass,
-                const Eigen::Vector3s& _imp) -> void {
+                const Eigen::Ref<const Eigen::Vector3s>& _imp) -> void {
               return self->updateBiasImpulse(_softBodyNode, _pointMass, _imp);
             },
             ::py::arg("softBodyNode"),
@@ -1483,7 +1548,8 @@ This returns the Jacobian relating changes in the magnetic field to changes in m
           "getJacobian",
           +[](const dart::dynamics::Skeleton* self,
               const dart::dynamics::JacobianNode* _node,
-              const Eigen::Vector3s& _localOffset) -> dart::math::Jacobian {
+              const Eigen::Ref<const Eigen::Vector3s>& _localOffset)
+              -> dart::math::Jacobian {
             return self->getJacobian(_node, _localOffset);
           },
           ::py::arg("node"),
@@ -1492,7 +1558,7 @@ This returns the Jacobian relating changes in the magnetic field to changes in m
           "getJacobian",
           +[](const dart::dynamics::Skeleton* self,
               const dart::dynamics::JacobianNode* _node,
-              const Eigen::Vector3s& _localOffset,
+              const Eigen::Ref<const Eigen::Vector3s>& _localOffset,
               const dart::dynamics::Frame* _inCoordinatesOf)
               -> dart::math::Jacobian {
             return self->getJacobian(_node, _localOffset, _inCoordinatesOf);
@@ -1504,7 +1570,7 @@ This returns the Jacobian relating changes in the magnetic field to changes in m
           "getWorldPositionJacobian",
           +[](const dart::dynamics::Skeleton* self,
               const dart::dynamics::JacobianNode* _node,
-              const Eigen::Vector3s& _localOffset
+              const Eigen::Ref<const Eigen::Vector3s>& _localOffset
               = Eigen::Vector3s::Zero()) -> dart::math::Jacobian {
             return self->getWorldPositionJacobian(_node, _localOffset);
           },
@@ -1520,7 +1586,8 @@ This returns the Jacobian relating changes in the magnetic field to changes in m
           "getWorldJacobian",
           +[](const dart::dynamics::Skeleton* self,
               const dart::dynamics::JacobianNode* _node,
-              const Eigen::Vector3s& _localOffset) -> dart::math::Jacobian {
+              const Eigen::Ref<const Eigen::Vector3s>& _localOffset)
+              -> dart::math::Jacobian {
             return self->getWorldJacobian(_node, _localOffset);
           },
           ::py::arg("node"),
@@ -1547,7 +1614,7 @@ This returns the Jacobian relating changes in the magnetic field to changes in m
           "getLinearJacobian",
           +[](const dart::dynamics::Skeleton* self,
               const dart::dynamics::JacobianNode* _node,
-              const Eigen::Vector3s& _localOffset)
+              const Eigen::Ref<const Eigen::Vector3s>& _localOffset)
               -> dart::math::LinearJacobian {
             return self->getLinearJacobian(_node, _localOffset);
           },
@@ -1557,7 +1624,7 @@ This returns the Jacobian relating changes in the magnetic field to changes in m
           "getLinearJacobian",
           +[](const dart::dynamics::Skeleton* self,
               const dart::dynamics::JacobianNode* _node,
-              const Eigen::Vector3s& _localOffset,
+              const Eigen::Ref<const Eigen::Vector3s>& _localOffset,
               const dart::dynamics::Frame* _inCoordinatesOf)
               -> dart::math::LinearJacobian {
             return self->getLinearJacobian(
@@ -1570,8 +1637,8 @@ This returns the Jacobian relating changes in the magnetic field to changes in m
           "getLinearJacobian",
           +[](const dart::dynamics::Skeleton* self,
               const dart::dynamics::JacobianNode* _node,
-              const Eigen::Vector3s& _localOffset,
-              const Eigen::Matrix3s& _localRotation)
+              const Eigen::Ref<const Eigen::Vector3s>& _localOffset,
+              const Eigen::Ref<const Eigen::Matrix3s>& _localRotation)
               -> dart::math::LinearJacobian {
             return _localRotation
                    * self->getLinearJacobian(_node, _localOffset);
@@ -1601,7 +1668,7 @@ This returns the Jacobian relating changes in the magnetic field to changes in m
           "getAngularJacobian",
           +[](const dart::dynamics::Skeleton* self,
               const dart::dynamics::JacobianNode* _node,
-              const Eigen::Matrix3s& _rotation) -> dart::math::AngularJacobian {
+              const Eigen::Ref<const Eigen::Matrix3s>& _rotation) -> dart::math::AngularJacobian {
             return _rotation * self->getAngularJacobian(_node);
           },
           ::py::arg("node"),
@@ -1628,7 +1695,8 @@ This returns the Jacobian relating changes in the magnetic field to changes in m
           "getJacobianSpatialDeriv",
           +[](const dart::dynamics::Skeleton* self,
               const dart::dynamics::JacobianNode* _node,
-              const Eigen::Vector3s& _localOffset) -> dart::math::Jacobian {
+              const Eigen::Ref<const Eigen::Vector3s>& _localOffset)
+              -> dart::math::Jacobian {
             return self->getJacobianSpatialDeriv(_node, _localOffset);
           },
           ::py::arg("node"),
@@ -1637,7 +1705,7 @@ This returns the Jacobian relating changes in the magnetic field to changes in m
           "getJacobianSpatialDeriv",
           +[](const dart::dynamics::Skeleton* self,
               const dart::dynamics::JacobianNode* _node,
-              const Eigen::Vector3s& _localOffset,
+              const Eigen::Ref<const Eigen::Vector3s>& _localOffset,
               const dart::dynamics::Frame* _inCoordinatesOf)
               -> dart::math::Jacobian {
             return self->getJacobianSpatialDeriv(
@@ -1668,7 +1736,8 @@ This returns the Jacobian relating changes in the magnetic field to changes in m
           "getJacobianClassicDeriv",
           +[](const dart::dynamics::Skeleton* self,
               const dart::dynamics::JacobianNode* _node,
-              const Eigen::Vector3s& _localOffset) -> dart::math::Jacobian {
+              const Eigen::Ref<const Eigen::Vector3s>& _localOffset)
+              -> dart::math::Jacobian {
             return self->getJacobianClassicDeriv(_node, _localOffset);
           },
           ::py::arg("node"),
@@ -1677,7 +1746,7 @@ This returns the Jacobian relating changes in the magnetic field to changes in m
           "getJacobianClassicDeriv",
           +[](const dart::dynamics::Skeleton* self,
               const dart::dynamics::JacobianNode* _node,
-              const Eigen::Vector3s& _localOffset,
+              const Eigen::Ref<const Eigen::Vector3s>& _localOffset,
               const dart::dynamics::Frame* _inCoordinatesOf)
               -> dart::math::Jacobian {
             return self->getJacobianClassicDeriv(
@@ -1708,7 +1777,7 @@ This returns the Jacobian relating changes in the magnetic field to changes in m
           "getLinearJacobianDeriv",
           +[](const dart::dynamics::Skeleton* self,
               const dart::dynamics::JacobianNode* _node,
-              const Eigen::Vector3s& _localOffset)
+              const Eigen::Ref<const Eigen::Vector3s>& _localOffset)
               -> dart::math::LinearJacobian {
             return self->getLinearJacobianDeriv(_node, _localOffset);
           },
@@ -1718,7 +1787,7 @@ This returns the Jacobian relating changes in the magnetic field to changes in m
           "getLinearJacobianDeriv",
           +[](const dart::dynamics::Skeleton* self,
               const dart::dynamics::JacobianNode* _node,
-              const Eigen::Vector3s& _localOffset,
+              const Eigen::Ref<const Eigen::Vector3s>& _localOffset,
               const dart::dynamics::Frame* _inCoordinatesOf)
               -> dart::math::LinearJacobian {
             return self->getLinearJacobianDeriv(

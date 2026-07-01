@@ -2,9 +2,12 @@
 Bindings for Eigen geometric types.
 """
 from __future__ import annotations
+import _nimblephysics.dynamics
+import collections.abc
 import numpy
+import numpy.typing
 import typing
-__all__ = ['AdR', 'AdT', 'AngleAxis', 'BoundingBox', 'GraphFlowDiscretizer', 'Isometry3', 'MultivariateGaussian', 'ParticlePath', 'Quaternion', 'Random', 'dAdInvT', 'dAdT', 'eulerXYXToMatrix', 'eulerXYZToMatrix', 'eulerXZXToMatrix', 'eulerXZYToMatrix', 'eulerYXYToMatrix', 'eulerYXZToMatrix', 'eulerYZXToMatrix', 'eulerYZYToMatrix', 'eulerZXYToMatrix', 'eulerZXZToMatrix', 'eulerZYXToMatrix', 'eulerZYZToMatrix', 'expAngular', 'expMap', 'expMapJac', 'expMapRot', 'expToQuat', 'leftMultiplyInFreeJointSpace', 'logMap', 'matrixToEulerXYX', 'matrixToEulerXYZ', 'matrixToEulerXZY', 'matrixToEulerYXZ', 'matrixToEulerYZX', 'matrixToEulerZXY', 'matrixToEulerZYX', 'quatToExp', 'rightMultiplyInFreeJointSpace', 'transformBy', 'verifyRotation', 'verifyTransform']
+__all__: list[str] = ['AdR', 'AdT', 'AngleAxis', 'BoundingBox', 'GraphFlowDiscretizer', 'Isometry3', 'MultivariateGaussian', 'ParticlePath', 'PolynomialFitter', 'Quaternion', 'Random', 'RelativeFilter', 'dAdInvT', 'dAdT', 'distancePointToConvexHull2D', 'distancePointToConvexHullProjectedTo2D', 'eulerXYXToMatrix', 'eulerXYZToMatrix', 'eulerXZXToMatrix', 'eulerXZYToMatrix', 'eulerYXYToMatrix', 'eulerYXZToMatrix', 'eulerYZXToMatrix', 'eulerYZYToMatrix', 'eulerZXYToMatrix', 'eulerZXZToMatrix', 'eulerZYXToMatrix', 'eulerZYZToMatrix', 'expAngular', 'expMap', 'expMapJac', 'expMapRot', 'expToQuat', 'leftMultiplyInFreeJointSpace', 'logMap', 'matrixToEulerXYX', 'matrixToEulerXYZ', 'matrixToEulerXZY', 'matrixToEulerYXZ', 'matrixToEulerYZX', 'matrixToEulerZXY', 'matrixToEulerZYX', 'quatToExp', 'rightMultiplyInFreeJointSpace', 'roundEulerAnglesToNearest', 'transformBy', 'verifyRotation', 'verifyTransform']
 class AngleAxis:
     """
     Bindings for Eigen::AngleAxis<>.
@@ -16,13 +19,13 @@ class AngleAxis:
     def __init__(self) -> None:
         ...
     @typing.overload
-    def __init__(self, angle: float, axis: numpy.ndarray[numpy.float64[3, 1]]) -> None:
+    def __init__(self, angle: typing.SupportsFloat | typing.SupportsIndex, axis: typing.Annotated[numpy.typing.NDArray[numpy.float64], "[3, 1]"]) -> None:
         ...
     @typing.overload
     def __init__(self, quaternion: Quaternion) -> None:
         ...
     @typing.overload
-    def __init__(self, rotation: numpy.ndarray[numpy.float64[3, 3]]) -> None:
+    def __init__(self, rotation: typing.Annotated[numpy.typing.NDArray[numpy.float64], "[3, 3]", "flags.f_contiguous"]) -> None:
         ...
     @typing.overload
     def __init__(self, other: AngleAxis) -> None:
@@ -31,7 +34,7 @@ class AngleAxis:
         ...
     def angle(self) -> float:
         ...
-    def axis(self) -> numpy.ndarray[numpy.float64[3, 1]]:
+    def axis(self) -> typing.Annotated[numpy.typing.NDArray[numpy.float64], "[3, 1]"]:
         ...
     def inverse(self) -> AngleAxis:
         ...
@@ -39,43 +42,43 @@ class AngleAxis:
         ...
     def quaternion(self) -> Quaternion:
         ...
-    def rotation(self) -> numpy.ndarray[numpy.float64[3, 3]]:
+    def rotation(self) -> typing.Annotated[numpy.typing.NDArray[numpy.float64], "[3, 3]"]:
         ...
-    def set_angle(self, angle: float) -> None:
+    def set_angle(self, angle: typing.SupportsFloat | typing.SupportsIndex) -> None:
         ...
-    def set_axis(self, axis: numpy.ndarray[numpy.float64[3, 1]]) -> None:
+    def set_axis(self, axis: typing.Annotated[numpy.typing.NDArray[numpy.float64], "[3, 1]"]) -> None:
         ...
     def set_quaternion(self, arg0: Quaternion) -> None:
         ...
-    def set_rotation(self, arg0: numpy.ndarray[numpy.float64[3, 3]]) -> None:
+    def set_rotation(self, arg0: typing.Annotated[numpy.typing.NDArray[numpy.float64], "[3, 3]", "flags.f_contiguous"]) -> None:
         ...
-    def to_rotation_matrix(self) -> numpy.ndarray[numpy.float64[3, 3]]:
+    def to_rotation_matrix(self) -> typing.Annotated[numpy.typing.NDArray[numpy.float64], "[3, 3]"]:
         ...
 class BoundingBox:
     @typing.overload
     def __init__(self) -> None:
         ...
     @typing.overload
-    def __init__(self, min: numpy.ndarray[numpy.float64[3, 1]], max: numpy.ndarray[numpy.float64[3, 1]]) -> None:
+    def __init__(self, min: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[3, 1]"], max: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[3, 1]"]) -> None:
         ...
-    def computeCenter(self) -> numpy.ndarray[numpy.float64[3, 1]]:
+    def computeCenter(self) -> typing.Annotated[numpy.typing.NDArray[numpy.float64], "[3, 1]"]:
         ...
-    def computeFullExtents(self) -> numpy.ndarray[numpy.float64[3, 1]]:
+    def computeFullExtents(self) -> typing.Annotated[numpy.typing.NDArray[numpy.float64], "[3, 1]"]:
         ...
-    def computeHalfExtents(self) -> numpy.ndarray[numpy.float64[3, 1]]:
+    def computeHalfExtents(self) -> typing.Annotated[numpy.typing.NDArray[numpy.float64], "[3, 1]"]:
         ...
-    def getMax(self) -> numpy.ndarray[numpy.float64[3, 1]]:
+    def getMax(self) -> typing.Annotated[numpy.typing.NDArray[numpy.float64], "[3, 1]"]:
         ...
-    def getMin(self) -> numpy.ndarray[numpy.float64[3, 1]]:
+    def getMin(self) -> typing.Annotated[numpy.typing.NDArray[numpy.float64], "[3, 1]"]:
         ...
 class GraphFlowDiscretizer:
-    def __init__(self, numNodes: int, arcs: list[tuple[int, int]], nodeAttachedToSink: list[bool]) -> None:
+    def __init__(self, numNodes: typing.SupportsInt | typing.SupportsIndex, arcs: collections.abc.Sequence[tuple[typing.SupportsInt | typing.SupportsIndex, typing.SupportsInt | typing.SupportsIndex]], nodeAttachedToSink: collections.abc.Sequence[bool]) -> None:
         ...
-    def cleanUpArcRates(self, energyLevels: numpy.ndarray[numpy.float64[m, n]], arcRates: numpy.ndarray[numpy.float64[m, n]]) -> numpy.ndarray[numpy.float64[m, n]]:
+    def cleanUpArcRates(self, energyLevels: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[m, n]"], arcRates: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[m, n]"]) -> typing.Annotated[numpy.typing.NDArray[numpy.float64], "[m, n]"]:
         """
         This will find the least-squares closest rates of transfer across the arcs to end up with the energy levels at each node we got over time. The idea here is that arc rates may not perfectly reflect the observed changes in energy levels.
         """
-    def discretize(self, maxSimultaneousParticles: int, energyLevels: numpy.ndarray[numpy.float64[m, n]], arcRates: numpy.ndarray[numpy.float64[m, n]]) -> list[ParticlePath]:
+    def discretize(self, maxSimultaneousParticles: typing.SupportsInt | typing.SupportsIndex, energyLevels: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[m, n]"], arcRates: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[m, n]"]) -> list[ParticlePath]:
         """
         This will attempt to create a set of ParticlePath objects that map the recorded graph node levels and flows as closely as possible. The particles can be created and destroyed within the arcs.
         """
@@ -87,13 +90,13 @@ class Isometry3:
     def __init__(self) -> None:
         ...
     @typing.overload
-    def __init__(self, matrix: numpy.ndarray[numpy.float64[4, 4]]) -> None:
+    def __init__(self, matrix: typing.Annotated[numpy.typing.NDArray[numpy.float64], "[4, 4]", "flags.f_contiguous"]) -> None:
         ...
     @typing.overload
-    def __init__(self, rotation: numpy.ndarray[numpy.float64[3, 3]], translation: numpy.ndarray[numpy.float64[3, 1]]) -> None:
+    def __init__(self, rotation: typing.Annotated[numpy.typing.NDArray[numpy.float64], "[3, 3]", "flags.f_contiguous"], translation: typing.Annotated[numpy.typing.NDArray[numpy.float64], "[3, 1]"]) -> None:
         ...
     @typing.overload
-    def __init__(self, quaternion: Quaternion, translation: numpy.ndarray[numpy.float64[3, 1]]) -> None:
+    def __init__(self, quaternion: Quaternion, translation: typing.Annotated[numpy.typing.NDArray[numpy.float64], "[3, 1]"]) -> None:
         ...
     @typing.overload
     def __init__(self, other: Isometry3) -> None:
@@ -102,76 +105,98 @@ class Isometry3:
         ...
     def inverse(self) -> Isometry3:
         ...
-    def matrix(self) -> numpy.ndarray[numpy.float64[4, 4]]:
+    def matrix(self) -> typing.Annotated[numpy.typing.NDArray[numpy.float64], "[4, 4]"]:
         ...
     @typing.overload
     def multiply(self, other: Isometry3) -> Isometry3:
         ...
     @typing.overload
-    def multiply(self, position: numpy.ndarray[numpy.float64[3, 1]]) -> numpy.ndarray[numpy.float64[3, 1]]:
+    def multiply(self, position: typing.Annotated[numpy.typing.ArrayLike, numpy.float64]) -> numpy.typing.NDArray[numpy.float64]:
         ...
-    def pretranslate(self, other: numpy.ndarray[numpy.float64[3, 1]]) -> None:
+    def pretranslate(self, other: typing.Annotated[numpy.typing.NDArray[numpy.float64], "[3, 1]"]) -> None:
         ...
     def quaternion(self) -> Quaternion:
         ...
-    def rotation(self) -> numpy.ndarray[numpy.float64[3, 3]]:
+    def rotation(self) -> typing.Annotated[numpy.typing.NDArray[numpy.float64], "[3, 3]"]:
         ...
-    def set_matrix(self, arg0: numpy.ndarray[numpy.float64[4, 4]]) -> None:
+    def set_matrix(self, arg0: typing.Annotated[numpy.typing.NDArray[numpy.float64], "[4, 4]", "flags.f_contiguous"]) -> None:
         ...
     def set_quaternion(self, arg0: Quaternion) -> None:
         ...
-    def set_rotation(self, arg0: numpy.ndarray[numpy.float64[3, 3]]) -> None:
+    def set_rotation(self, arg0: typing.Annotated[numpy.typing.NDArray[numpy.float64], "[3, 3]", "flags.f_contiguous"]) -> None:
         ...
-    def set_translation(self, arg0: numpy.ndarray[numpy.float64[3, 1]]) -> None:
+    def set_translation(self, arg0: typing.Annotated[numpy.typing.NDArray[numpy.float64], "[3, 1]"]) -> None:
         ...
-    def translate(self, other: numpy.ndarray[numpy.float64[3, 1]]) -> None:
+    def translate(self, other: typing.Annotated[numpy.typing.NDArray[numpy.float64], "[3, 1]"]) -> None:
         ...
-    def translation(self) -> numpy.ndarray[numpy.float64[3, 1]]:
+    def translation(self) -> typing.Annotated[numpy.typing.NDArray[numpy.float64], "[3, 1]"]:
         ...
 class MultivariateGaussian:
     @staticmethod
-    def loadFromCSV(file: str, columns: list[str], units: float = ...) -> MultivariateGaussian:
+    def loadFromCSV(file: str, columns: collections.abc.Sequence[str], units: typing.SupportsFloat | typing.SupportsIndex = 1.0) -> MultivariateGaussian:
         ...
-    def __init__(self, variables: list[str], mu: numpy.ndarray[numpy.float64[m, 1]], cov: numpy.ndarray[numpy.float64[m, n]]) -> None:
+    def __init__(self, variables: collections.abc.Sequence[str], mu: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[m, 1]"], cov: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[m, n]"]) -> None:
         ...
-    def computeLogPDF(self, values: numpy.ndarray[numpy.float64[m, 1]], normalized: bool = ...) -> float:
+    def computeLogPDF(self, values: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[m, 1]"], normalized: bool = True) -> float:
         ...
-    def computeLogPDFGrad(self, x: numpy.ndarray[numpy.float64[m, 1]]) -> numpy.ndarray[numpy.float64[m, 1]]:
+    def computeLogPDFGrad(self, x: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[m, 1]"]) -> typing.Annotated[numpy.typing.NDArray[numpy.float64], "[m, 1]"]:
         ...
-    def computePDF(self, values: numpy.ndarray[numpy.float64[m, 1]]) -> float:
+    def computePDF(self, values: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[m, 1]"]) -> float:
         ...
-    def condition(self, observedValues: dict[str, float]) -> MultivariateGaussian:
+    def condition(self, observedValues: collections.abc.Mapping[str, typing.SupportsFloat | typing.SupportsIndex]) -> MultivariateGaussian:
         ...
-    def convertFromMap(self, values: dict[str, float]) -> numpy.ndarray[numpy.float64[m, 1]]:
+    def convertFromMap(self, values: collections.abc.Mapping[str, typing.SupportsFloat | typing.SupportsIndex]) -> typing.Annotated[numpy.typing.NDArray[numpy.float64], "[m, 1]"]:
         ...
-    def convertToMap(self, values: numpy.ndarray[numpy.float64[m, 1]]) -> dict[str, float]:
+    def convertToMap(self, values: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[m, 1]"]) -> dict[str, float]:
         ...
     def debugToStdout(self) -> None:
         ...
-    def getCov(self) -> numpy.ndarray[numpy.float64[m, n]]:
+    def getCov(self) -> typing.Annotated[numpy.typing.NDArray[numpy.float64], "[m, n]"]:
         ...
-    def getCovSubset(self, rowIndices: list[int], colIndices: list[int]) -> numpy.ndarray[numpy.float64[m, n]]:
+    def getCovSubset(self, rowIndices: collections.abc.Sequence[typing.SupportsInt | typing.SupportsIndex], colIndices: collections.abc.Sequence[typing.SupportsInt | typing.SupportsIndex]) -> typing.Annotated[numpy.typing.NDArray[numpy.float64], "[m, n]"]:
         ...
     def getLogNormalizationConstant(self) -> float:
         ...
     def getMean(self, variable: str) -> float:
         ...
-    def getMu(self) -> numpy.ndarray[numpy.float64[m, 1]]:
+    def getMu(self) -> typing.Annotated[numpy.typing.NDArray[numpy.float64], "[m, 1]"]:
         ...
-    def getMuSubset(self, indices: list[int]) -> numpy.ndarray[numpy.float64[m, 1]]:
+    def getMuSubset(self, indices: collections.abc.Sequence[typing.SupportsInt | typing.SupportsIndex]) -> typing.Annotated[numpy.typing.NDArray[numpy.float64], "[m, 1]"]:
         ...
-    def getObservedIndices(self, observedValues: dict[str, float]) -> list[int]:
+    def getObservedIndices(self, observedValues: collections.abc.Mapping[str, typing.SupportsFloat | typing.SupportsIndex]) -> list[int]:
         ...
-    def getUnobservedIndices(self, observedValues: dict[str, float]) -> list[int]:
+    def getUnobservedIndices(self, observedValues: collections.abc.Mapping[str, typing.SupportsFloat | typing.SupportsIndex]) -> list[int]:
         ...
-    def getVariableNameAtIndex(self, i: int) -> str:
+    def getVariableNameAtIndex(self, i: typing.SupportsInt | typing.SupportsIndex) -> str:
         ...
     def getVariableNames(self) -> list[str]:
         ...
 class ParticlePath:
-    energyValue: float
-    nodeHistory: list[int]
-    startTime: int
+    @property
+    def energyValue(self) -> float:
+        ...
+    @energyValue.setter
+    def energyValue(self, arg0: typing.SupportsFloat | typing.SupportsIndex) -> None:
+        ...
+    @property
+    def nodeHistory(self) -> list[int]:
+        ...
+    @nodeHistory.setter
+    def nodeHistory(self, arg0: collections.abc.Sequence[typing.SupportsInt | typing.SupportsIndex]) -> None:
+        ...
+    @property
+    def startTime(self) -> int:
+        ...
+    @startTime.setter
+    def startTime(self, arg0: typing.SupportsInt | typing.SupportsIndex) -> None:
+        ...
+class PolynomialFitter:
+    def __init__(self, timesteps: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[m, 1]"], order: typing.SupportsInt | typing.SupportsIndex) -> None:
+        ...
+    def calcCoeffs(self, values: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[m, 1]"]) -> typing.Annotated[numpy.typing.NDArray[numpy.float64], "[m, 1]"]:
+        ...
+    def projectPosVelAccAtTime(self, timestep: typing.SupportsFloat | typing.SupportsIndex, pastValues: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[m, 1]"]) -> typing.Annotated[numpy.typing.NDArray[numpy.float64], "[3, 1]"]:
+        ...
 class Quaternion:
     """
     Provides a unit quaternion binding of Eigen::Quaternion<>.
@@ -183,13 +208,13 @@ class Quaternion:
     def __init__(self) -> None:
         ...
     @typing.overload
-    def __init__(self, wxyz: numpy.ndarray[numpy.float64[4, 1]]) -> None:
+    def __init__(self, wxyz: typing.Annotated[numpy.typing.NDArray[numpy.float64], "[4, 1]"]) -> None:
         ...
     @typing.overload
-    def __init__(self, w: float, x: float, y: float, z: float) -> None:
+    def __init__(self, w: typing.SupportsFloat | typing.SupportsIndex, x: typing.SupportsFloat | typing.SupportsIndex, y: typing.SupportsFloat | typing.SupportsIndex, z: typing.SupportsFloat | typing.SupportsIndex) -> None:
         ...
     @typing.overload
-    def __init__(self, rotation: numpy.ndarray[numpy.float64[3, 3]]) -> None:
+    def __init__(self, rotation: typing.Annotated[numpy.typing.NDArray[numpy.float64], "[3, 3]", "flags.f_contiguous"]) -> None:
         ...
     @typing.overload
     def __init__(self, other: Quaternion) -> None:
@@ -204,27 +229,27 @@ class Quaternion:
     def multiply(self, arg0: Quaternion) -> Quaternion:
         ...
     @typing.overload
-    def multiply(self, position: numpy.ndarray[numpy.float64[3, 1]]) -> numpy.ndarray[numpy.float64[3, 1]]:
+    def multiply(self, position: typing.Annotated[numpy.typing.ArrayLike, numpy.float64]) -> numpy.typing.NDArray[numpy.float64]:
         ...
-    def rotation(self) -> numpy.ndarray[numpy.float64[3, 3]]:
+    def rotation(self) -> typing.Annotated[numpy.typing.NDArray[numpy.float64], "[3, 3]"]:
         ...
-    def set_rotation(self, arg0: numpy.ndarray[numpy.float64[3, 3]]) -> None:
-        ...
-    @typing.overload
-    def set_wxyz(self, wxyz: numpy.ndarray[numpy.float64[4, 1]]) -> None:
+    def set_rotation(self, arg0: typing.Annotated[numpy.typing.NDArray[numpy.float64], "[3, 3]", "flags.f_contiguous"]) -> None:
         ...
     @typing.overload
-    def set_wxyz(self, w: float, x: float, y: float, z: float) -> None:
+    def set_wxyz(self, wxyz: typing.Annotated[numpy.typing.NDArray[numpy.float64], "[4, 1]"]) -> None:
         ...
-    def to_rotation_matrix(self) -> numpy.ndarray[numpy.float64[3, 3]]:
+    @typing.overload
+    def set_wxyz(self, w: typing.SupportsFloat | typing.SupportsIndex, x: typing.SupportsFloat | typing.SupportsIndex, y: typing.SupportsFloat | typing.SupportsIndex, z: typing.SupportsFloat | typing.SupportsIndex) -> None:
+        ...
+    def to_rotation_matrix(self) -> typing.Annotated[numpy.typing.NDArray[numpy.float64], "[3, 3]"]:
         ...
     def w(self) -> float:
         ...
-    def wxyz(self) -> numpy.ndarray[numpy.float64[4, 1]]:
+    def wxyz(self) -> typing.Annotated[numpy.typing.NDArray[numpy.float64], "[4, 1]"]:
         ...
     def x(self) -> float:
         ...
-    def xyz(self) -> numpy.ndarray[numpy.float64[3, 1]]:
+    def xyz(self) -> typing.Annotated[numpy.typing.NDArray[numpy.float64], "[3, 1]"]:
         ...
     def y(self) -> float:
         ...
@@ -235,80 +260,132 @@ class Random:
     def getSeed() -> int:
         ...
     @staticmethod
-    def setSeed(seed: int) -> None:
+    def setSeed(seed: typing.SupportsInt | typing.SupportsIndex) -> None:
         ...
     @staticmethod
-    def uniform(min: float, max: float) -> float:
+    def uniform(min: typing.SupportsFloat | typing.SupportsIndex, max: typing.SupportsFloat | typing.SupportsIndex) -> float:
         ...
     def __init__(self) -> None:
         ...
-def AdR(R: numpy.ndarray[numpy.float64[3, 3]], S: numpy.ndarray[numpy.float64[6, 1]]) -> numpy.ndarray[numpy.float64[6, 1]]:
+class RelativeFilter:
+    @staticmethod
+    def skew_symmetric(v: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[3, 1]"]) -> typing.Annotated[numpy.typing.NDArray[numpy.float64], "[3, 3]"]:
+        """
+        Compute the skew-symmetric matrix for a given 3D vector.
+        """
+    def __init__(self, acc_std: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[3, 1]"] = ..., gyro_std: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[3, 1]"] = ..., mag_std: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[3, 1]"] = ...) -> None:
+        ...
+    def get_H_jacobian(self, R_wp: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[3, 3]"], R_wc: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[3, 3]"], acc_jc_p: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[3, 1]"], acc_jc_c: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[3, 1]"], mag_jc_p: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[3, 1]"], mag_jc_c: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[3, 1]"]) -> typing.Annotated[numpy.typing.NDArray[numpy.float64], "[m, n]"]:
+        """
+        Compute the Jacobian of the measurement function h.
+        """
+    def get_M_jacobian(self, R_wp: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[3, 3]"], R_wc: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[3, 3]"], update: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[6, 1]"] = ...) -> typing.Annotated[numpy.typing.NDArray[numpy.float64], "[m, n]"]:
+        """
+        Compute the Jacobian of the measurement function for sensor noise.
+        """
+    def get_R_pc(self) -> typing.Annotated[numpy.typing.NDArray[numpy.float64], "[3, 3]"]:
+        """
+        Get the rotation matrix representing the relative rotation between parent and child.
+        """
+    def get_h(self, R_wp: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[3, 3]"], R_wc: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[3, 3]"], acc_jc_p: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[3, 1]"], acc_jc_c: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[3, 1]"], mag_jc_p: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[3, 1]"], mag_jc_c: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[3, 1]"], perturbation: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[6, 1]"] = ...) -> typing.Annotated[numpy.typing.NDArray[numpy.float64], "[m, 1]"]:
+        """
+        Compute the measurement function h with optional perturbations.
+        """
+    def get_q_pc(self) -> Quaternion:
+        """
+        Get the quaternion representing the relative rotation between parent and child.
+        """
+    def set_qs(self, q_wp: Quaternion, q_wc: Quaternion) -> None:
+        """
+        Set the quaternions for parent and child.
+        """
+    def update(self, gyro_p: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[3, 1]"], gyro_c: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[3, 1]"], acc_jc_p: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[3, 1]"], acc_jc_c: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[3, 1]"], mag_p: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[3, 1]"], mag_c: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[3, 1]"], dt: typing.SupportsFloat | typing.SupportsIndex) -> None:
+        """
+        Update the filter with new sensor readings and timestep.
+        """
+    @property
+    def Q(self) -> typing.Annotated[numpy.typing.NDArray[numpy.float64], "[m, n]"]:
+        """
+        Covariance matrix for gyro sensor noise.
+        """
+    @property
+    def R(self) -> typing.Annotated[numpy.typing.NDArray[numpy.float64], "[m, n]"]:
+        """
+        Covariance matrix for accelerometer and magnetometer sensor noise.
+        """
+def AdR(R: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[3, 3]"], S: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[6, 1]"]) -> typing.Annotated[numpy.typing.NDArray[numpy.float64], "[6, 1]"]:
     ...
-def AdT(R: numpy.ndarray[numpy.float64[3, 3]], p: numpy.ndarray[numpy.float64[3, 1]], S: numpy.ndarray[numpy.float64[6, 1]]) -> numpy.ndarray[numpy.float64[6, 1]]:
+def AdT(R: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[3, 3]"], p: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[3, 1]"], S: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[6, 1]"]) -> typing.Annotated[numpy.typing.NDArray[numpy.float64], "[6, 1]"]:
     ...
-def dAdInvT(R: numpy.ndarray[numpy.float64[3, 3]], p: numpy.ndarray[numpy.float64[3, 1]], S: numpy.ndarray[numpy.float64[6, 1]]) -> numpy.ndarray[numpy.float64[6, 1]]:
+def dAdInvT(R: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[3, 3]"], p: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[3, 1]"], S: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[6, 1]"]) -> typing.Annotated[numpy.typing.NDArray[numpy.float64], "[6, 1]"]:
     ...
-def dAdT(R: numpy.ndarray[numpy.float64[3, 3]], p: numpy.ndarray[numpy.float64[3, 1]], S: numpy.ndarray[numpy.float64[6, 1]]) -> numpy.ndarray[numpy.float64[6, 1]]:
+def dAdT(R: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[3, 3]"], p: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[3, 1]"], S: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[6, 1]"]) -> typing.Annotated[numpy.typing.NDArray[numpy.float64], "[6, 1]"]:
     ...
-def eulerXYXToMatrix(angle: numpy.ndarray[numpy.float64[3, 1]]) -> numpy.ndarray[numpy.float64[3, 3]]:
+def distancePointToConvexHull2D(P: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[2, 1]"], points: collections.abc.Sequence[typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[2, 1]"]]) -> float:
     ...
-def eulerXYZToMatrix(angle: numpy.ndarray[numpy.float64[3, 1]]) -> numpy.ndarray[numpy.float64[3, 3]]:
+def distancePointToConvexHullProjectedTo2D(P: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[3, 1]"], points: collections.abc.Sequence[typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[3, 1]"]], normal: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[3, 1]"] = ...) -> float:
     ...
-def eulerXZXToMatrix(angle: numpy.ndarray[numpy.float64[3, 1]]) -> numpy.ndarray[numpy.float64[3, 3]]:
+def eulerXYXToMatrix(angle: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[3, 1]"]) -> typing.Annotated[numpy.typing.NDArray[numpy.float64], "[3, 3]"]:
     ...
-def eulerXZYToMatrix(angle: numpy.ndarray[numpy.float64[3, 1]]) -> numpy.ndarray[numpy.float64[3, 3]]:
+def eulerXYZToMatrix(angle: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[3, 1]"]) -> typing.Annotated[numpy.typing.NDArray[numpy.float64], "[3, 3]"]:
     ...
-def eulerYXYToMatrix(angle: numpy.ndarray[numpy.float64[3, 1]]) -> numpy.ndarray[numpy.float64[3, 3]]:
+def eulerXZXToMatrix(angle: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[3, 1]"]) -> typing.Annotated[numpy.typing.NDArray[numpy.float64], "[3, 3]"]:
     ...
-def eulerYXZToMatrix(angle: numpy.ndarray[numpy.float64[3, 1]]) -> numpy.ndarray[numpy.float64[3, 3]]:
+def eulerXZYToMatrix(angle: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[3, 1]"]) -> typing.Annotated[numpy.typing.NDArray[numpy.float64], "[3, 3]"]:
     ...
-def eulerYZXToMatrix(angle: numpy.ndarray[numpy.float64[3, 1]]) -> numpy.ndarray[numpy.float64[3, 3]]:
+def eulerYXYToMatrix(angle: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[3, 1]"]) -> typing.Annotated[numpy.typing.NDArray[numpy.float64], "[3, 3]"]:
     ...
-def eulerYZYToMatrix(angle: numpy.ndarray[numpy.float64[3, 1]]) -> numpy.ndarray[numpy.float64[3, 3]]:
+def eulerYXZToMatrix(angle: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[3, 1]"]) -> typing.Annotated[numpy.typing.NDArray[numpy.float64], "[3, 3]"]:
     ...
-def eulerZXYToMatrix(angle: numpy.ndarray[numpy.float64[3, 1]]) -> numpy.ndarray[numpy.float64[3, 3]]:
+def eulerYZXToMatrix(angle: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[3, 1]"]) -> typing.Annotated[numpy.typing.NDArray[numpy.float64], "[3, 3]"]:
     ...
-def eulerZXZToMatrix(angle: numpy.ndarray[numpy.float64[3, 1]]) -> numpy.ndarray[numpy.float64[3, 3]]:
+def eulerYZYToMatrix(angle: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[3, 1]"]) -> typing.Annotated[numpy.typing.NDArray[numpy.float64], "[3, 3]"]:
     ...
-def eulerZYXToMatrix(angle: numpy.ndarray[numpy.float64[3, 1]]) -> numpy.ndarray[numpy.float64[3, 3]]:
+def eulerZXYToMatrix(angle: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[3, 1]"]) -> typing.Annotated[numpy.typing.NDArray[numpy.float64], "[3, 3]"]:
     ...
-def eulerZYZToMatrix(angle: numpy.ndarray[numpy.float64[3, 1]]) -> numpy.ndarray[numpy.float64[3, 3]]:
+def eulerZXZToMatrix(angle: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[3, 1]"]) -> typing.Annotated[numpy.typing.NDArray[numpy.float64], "[3, 3]"]:
     ...
-def expAngular(s: numpy.ndarray[numpy.float64[3, 1]]) -> Isometry3:
+def eulerZYXToMatrix(angle: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[3, 1]"]) -> typing.Annotated[numpy.typing.NDArray[numpy.float64], "[3, 3]"]:
     ...
-def expMap(S: numpy.ndarray[numpy.float64[6, 1]]) -> Isometry3:
+def eulerZYZToMatrix(angle: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[3, 1]"]) -> typing.Annotated[numpy.typing.NDArray[numpy.float64], "[3, 3]"]:
     ...
-def expMapJac(expmap: numpy.ndarray[numpy.float64[3, 1]]) -> numpy.ndarray[numpy.float64[3, 3]]:
+def expAngular(s: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[3, 1]"]) -> Isometry3:
     ...
-def expMapRot(expmap: numpy.ndarray[numpy.float64[3, 1]]) -> numpy.ndarray[numpy.float64[3, 3]]:
+def expMap(S: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[6, 1]"]) -> Isometry3:
     ...
-def expToQuat(v: numpy.ndarray[numpy.float64[3, 1]]) -> Quaternion:
+def expMapJac(expmap: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[3, 1]"]) -> typing.Annotated[numpy.typing.NDArray[numpy.float64], "[3, 3]"]:
     ...
-def leftMultiplyInFreeJointSpace(R: numpy.ndarray[numpy.float64[3, 3]], p: numpy.ndarray[numpy.float64[3, 1]], S: numpy.ndarray[numpy.float64[6, 1]]) -> numpy.ndarray[numpy.float64[6, 1]]:
+def expMapRot(expmap: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[3, 1]"]) -> typing.Annotated[numpy.typing.NDArray[numpy.float64], "[3, 3]"]:
     ...
-def logMap(S: numpy.ndarray[numpy.float64[3, 3]]) -> numpy.ndarray[numpy.float64[3, 1]]:
+def expToQuat(v: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[3, 1]"]) -> Quaternion:
     ...
-def matrixToEulerXYX(R: numpy.ndarray[numpy.float64[3, 3]]) -> numpy.ndarray[numpy.float64[3, 1]]:
+def leftMultiplyInFreeJointSpace(R: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[3, 3]"], p: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[3, 1]"], S: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[6, 1]"]) -> typing.Annotated[numpy.typing.NDArray[numpy.float64], "[6, 1]"]:
     ...
-def matrixToEulerXYZ(R: numpy.ndarray[numpy.float64[3, 3]]) -> numpy.ndarray[numpy.float64[3, 1]]:
+def logMap(S: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[3, 3]"]) -> typing.Annotated[numpy.typing.NDArray[numpy.float64], "[3, 1]"]:
     ...
-def matrixToEulerXZY(R: numpy.ndarray[numpy.float64[3, 3]]) -> numpy.ndarray[numpy.float64[3, 1]]:
+def matrixToEulerXYX(R: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[3, 3]"]) -> typing.Annotated[numpy.typing.NDArray[numpy.float64], "[3, 1]"]:
     ...
-def matrixToEulerYXZ(R: numpy.ndarray[numpy.float64[3, 3]]) -> numpy.ndarray[numpy.float64[3, 1]]:
+def matrixToEulerXYZ(R: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[3, 3]"]) -> typing.Annotated[numpy.typing.NDArray[numpy.float64], "[3, 1]"]:
     ...
-def matrixToEulerYZX(R: numpy.ndarray[numpy.float64[3, 3]]) -> numpy.ndarray[numpy.float64[3, 1]]:
+def matrixToEulerXZY(R: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[3, 3]"]) -> typing.Annotated[numpy.typing.NDArray[numpy.float64], "[3, 1]"]:
     ...
-def matrixToEulerZXY(R: numpy.ndarray[numpy.float64[3, 3]]) -> numpy.ndarray[numpy.float64[3, 1]]:
+def matrixToEulerYXZ(R: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[3, 3]"]) -> typing.Annotated[numpy.typing.NDArray[numpy.float64], "[3, 1]"]:
     ...
-def matrixToEulerZYX(R: numpy.ndarray[numpy.float64[3, 3]]) -> numpy.ndarray[numpy.float64[3, 1]]:
+def matrixToEulerYZX(R: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[3, 3]"]) -> typing.Annotated[numpy.typing.NDArray[numpy.float64], "[3, 1]"]:
     ...
-def quatToExp(q: Quaternion) -> numpy.ndarray[numpy.float64[3, 1]]:
+def matrixToEulerZXY(R: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[3, 3]"]) -> typing.Annotated[numpy.typing.NDArray[numpy.float64], "[3, 1]"]:
     ...
-def rightMultiplyInFreeJointSpace(R: numpy.ndarray[numpy.float64[3, 3]], p: numpy.ndarray[numpy.float64[3, 1]], S: numpy.ndarray[numpy.float64[6, 1]]) -> numpy.ndarray[numpy.float64[6, 1]]:
+def matrixToEulerZYX(R: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[3, 3]"]) -> typing.Annotated[numpy.typing.NDArray[numpy.float64], "[3, 1]"]:
     ...
-def transformBy(T: Isometry3, p: numpy.ndarray[numpy.float64[3, 1]]) -> numpy.ndarray[numpy.float64[3, 1]]:
+def quatToExp(q: Quaternion) -> typing.Annotated[numpy.typing.NDArray[numpy.float64], "[3, 1]"]:
     ...
-def verifyRotation(R: numpy.ndarray[numpy.float64[3, 3]]) -> bool:
+def rightMultiplyInFreeJointSpace(R: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[3, 3]"], p: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[3, 1]"], S: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[6, 1]"]) -> typing.Annotated[numpy.typing.NDArray[numpy.float64], "[6, 1]"]:
+    ...
+def roundEulerAnglesToNearest(angle: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[3, 1]"], previousAngle: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[3, 1]"], axisOrder: _nimblephysics.dynamics.AxisOrder = ...) -> typing.Annotated[numpy.typing.NDArray[numpy.float64], "[3, 1]"]:
+    ...
+def transformBy(T: Isometry3, p: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[3, 1]"]) -> typing.Annotated[numpy.typing.NDArray[numpy.float64], "[3, 1]"]:
+    ...
+def verifyRotation(R: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, "[3, 3]"]) -> bool:
     ...
 def verifyTransform(T: Isometry3) -> bool:
     ...

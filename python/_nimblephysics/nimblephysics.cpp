@@ -56,8 +56,10 @@ void dart_simulation_and_neural(
     ::py::class_<dart::neural::WithRespectTo>& withRespectTo);
 void dart_trajectory(py::module& m);
 void dart_performance(py::module& m);
+#ifdef DART_HAS_GRPC
 void dart_realtime(py::module& m);
 void dart_server(py::module& m);
+#endif
 void dart_biomechanics(py::module& m);
 void dart_exo(py::module& m);
 
@@ -81,8 +83,10 @@ PYBIND11_MODULE(_nimblephysics, m)
   dart_simulation_and_neural(m, neural, withRespectTo);
   dart_utils(m);
   dart_trajectory(m);
+#ifdef DART_HAS_GRPC
   dart_realtime(m);
   dart_server(m);
+#endif
   dart_biomechanics(m);
   dart_exo(m);
 }

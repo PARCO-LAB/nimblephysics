@@ -56,6 +56,16 @@ message(STATUS "pybind11_INCLUDE_DIRS: ${pybind11_INCLUDE_DIRS}")
 file(GLOB_RECURSE _nimblephysics_headers "*.h" "*.hpp")
 file(GLOB_RECURSE _nimblephysics_sources "*.cpp")
 
+if(NOT gRPC_FOUND)
+  set(_nimblephysics_sources_filtered)
+  foreach(source ${_nimblephysics_sources})
+    if(NOT source MATCHES "/(realtime|server)/")
+      list(APPEND _nimblephysics_sources_filtered "${source}")
+    endif()
+  endforeach()
+  set(_nimblephysics_sources ${_nimblephysics_sources_filtered})
+endif()
+
 # Build a Python extension module:
 # pybind11_add_module(<name> [MODULE | SHARED] [EXCLUDE_FROM_ALL]
 #                     [NO_EXTRAS] [SYSTEM] [THIN_LTO] source1 [source2 ...])
@@ -68,6 +78,11 @@ pybind11_add_module(_nimblephysics
 
 # Add C++14 support
 set_property(TARGET _nimblephysics PROPERTY CXX_STANDARD 14)
+target_compile_options(_nimblephysics PRIVATE -fpermissive)
+target_link_options(_nimblephysics PRIVATE
+  "-Wl,-rpath,/tmp/nimblephysics-deps/usr/lib/x86_64-linux-gnu"
+  "-Wl,-rpath,/tmp/nimblephysics-deps/draco-root/usr/lib/x86_64-linux-gnu"
+)
 
 target_include_directories(_nimblephysics
   SYSTEM PUBLIC

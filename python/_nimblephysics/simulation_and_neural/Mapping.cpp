@@ -66,19 +66,40 @@ void Mapping(py::module& m)
           "vector expected by setControlForces().")
       .def(
           "setPositions",
-          &dart::neural::Mapping::setPositions,
+          +[](dart::neural::Mapping* self,
+              std::shared_ptr<dart::simulation::World> world,
+              const Eigen::Ref<Eigen::VectorXs>& positions) {
+            self->setPositions(world, positions);
+          },
           ::py::arg("world"),
           ::py::arg("positions"))
       .def(
           "setVelocities",
-          &dart::neural::Mapping::setVelocities,
+          +[](dart::neural::Mapping* self,
+              std::shared_ptr<dart::simulation::World> world,
+              const Eigen::Ref<Eigen::VectorXs>& velocities) {
+            self->setVelocities(world, velocities);
+          },
           ::py::arg("world"),
           ::py::arg("velocities"))
       .def(
           "setControlForces",
-          &dart::neural::Mapping::setControlForces,
+          +[](dart::neural::Mapping* self,
+              std::shared_ptr<dart::simulation::World> world,
+              const Eigen::Ref<Eigen::VectorXs>& forces) {
+            self->setControlForces(world, forces);
+          },
           ::py::arg("world"),
           ::py::arg("forces"))
+      .def(
+          "setMasses",
+          +[](dart::neural::Mapping* self,
+              std::shared_ptr<dart::simulation::World> world,
+              const Eigen::Ref<Eigen::VectorXs>& masses) {
+            self->setMasses(world, masses);
+          },
+          ::py::arg("world"),
+          ::py::arg("masses"))
       .def(
           "getPositions",
           &dart::neural::Mapping::getPositions,

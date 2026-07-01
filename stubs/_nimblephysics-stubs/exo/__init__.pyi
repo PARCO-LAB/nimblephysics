@@ -1,8 +1,8 @@
 """This provides exoskeleton control and design utilities in Nimble."""
 from __future__ import annotations
-import nimblephysics_libs._nimblephysics.exo
+import nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.exo
 import typing
-import nimblephysics_libs._nimblephysics.dynamics
+import nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics
 import numpy
 _Shape = typing.Tuple[int, ...]
 
@@ -12,7 +12,7 @@ __all__ = [
 
 
 class ExoSolverPinnedContact():
-    def __init__(self, realSkel: nimblephysics_libs._nimblephysics.dynamics.Skeleton, virtualSkel: nimblephysics_libs._nimblephysics.dynamics.Skeleton) -> None: 
+    def __init__(self, realSkel: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.Skeleton, virtualSkel: nimblephysics_libs.nimblephysics_libs.nimblephysics_libs.nimblephysics_libs._nimblephysics.dynamics.Skeleton) -> None: 
         """
         Both the real and virtual skeletons must be identical in their number of DOFs and their structure (names of bodies, etc). The key difference is the masses, inertias, gravity, and spring forces of the virtual skeleton.
         """

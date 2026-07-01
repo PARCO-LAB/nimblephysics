@@ -1,7 +1,7 @@
 from __future__ import annotations
 import _nimblephysics.dynamics
 import _nimblephysics.simulation
-__all__ = ['readSkeleton', 'readWorld', 'writeSkeleton']
+__all__: list[str] = ['readSkeleton', 'readWorld', 'writeSkeleton']
 def readSkeleton(path: str) -> _nimblephysics.dynamics.Skeleton:
     ...
 def readWorld(path: str) -> _nimblephysics.simulation.World:
