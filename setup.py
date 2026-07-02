@@ -214,7 +214,7 @@ if not VERSION:
 print("VERSION: " + VERSION)
 
 setup(
-    name='nimblephysics',
+    name='nimblephysics-parco',
     version=VERSION,
     author='Keenon Werling',
     author_email='keenonwerling@gmail.com',
