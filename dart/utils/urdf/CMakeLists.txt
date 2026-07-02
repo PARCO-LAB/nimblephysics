@@ -44,6 +44,10 @@ install(FILES ${DART_UTILS_BACKWARDCOMPATIBILITY_HPP_OUT}
 
 # Add target
 dart_add_library(${target_name} ${hdrs} ${srcs})
+target_include_directories(${target_name} BEFORE PRIVATE
+  ${CMAKE_SOURCE_DIR}
+  ${CMAKE_BINARY_DIR}
+)
 target_link_libraries(${target_name} PUBLIC dart-utils urdfdom)
 
 # Component

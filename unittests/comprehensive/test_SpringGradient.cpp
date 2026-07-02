@@ -34,6 +34,7 @@
 
 #include <gtest/gtest.h>
 
+#include "dart/collision/dart/DARTCollisionDetector.hpp"
 #include "dart/collision/CollisionObject.hpp"
 #include "dart/collision/Contact.hpp"
 #include "dart/constraint/BoxedLcpConstraintSolver.hpp"
@@ -386,7 +387,7 @@ void testRobotArm(
   // World
   WorldPtr world = World::create();
   auto collision_detector
-      = collision::CollisionDetector::getFactory()->create("dart");
+      = collision::DARTCollisionDetector::create();
   world->getConstraintSolver()->setCollisionDetector(collision_detector);
   world->setGravity(Eigen::Vector3s(0, -9.81, 0));
   world->setContactClippingDepth(1.);
@@ -515,7 +516,7 @@ void testRobotArmNoContact(
   // World
   WorldPtr world = World::create();
   auto collision_detector
-      = collision::CollisionDetector::getFactory()->create("dart");
+      = collision::DARTCollisionDetector::create();
   world->getConstraintSolver()->setCollisionDetector(collision_detector);
   world->setGravity(Eigen::Vector3s(0, -9.81, 0));
   world->setContactClippingDepth(1.);

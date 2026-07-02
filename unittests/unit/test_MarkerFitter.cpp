@@ -5570,7 +5570,7 @@ TEST(MarkerFitter, MULTI_TRIAL_WELK)
             << std::endl;
 
   fitter.saveTrajectoryAndMarkersToGUI(
-      "../../../javascript/src/data/movement.bin",
+      "marker_fit_output.bin",
       inits[0],
       markerObservationTrials[0],
       &c3ds[0]);
@@ -8418,7 +8418,7 @@ TEST(MarkerFitter, RECOVER_SYNTHETIC_DATA_END_TO_END_SPRINTING)
       motFiles,
       68,
       "male",
-      "../../../python/research/synthetic_recovery/sprinting");
+      "../../../data/test/synthetic_recovery/sprinting");
 }
 #endif
 
@@ -8435,7 +8435,7 @@ TEST(MarkerFitter, RECOVER_SYNTHETIC_DATA_END_TO_END_DJ2)
       motFiles,
       68,
       "male",
-      "../../../python/research/synthetic_recovery/sprinting");
+      "../../../data/test/synthetic_recovery/sprinting");
 }
 #endif
 

@@ -68,14 +68,6 @@ void postProcess(
 } // anonymous namespace
 
 //==============================================================================
-DARTCollisionDetector::Registrar<DARTCollisionDetector>
-    DARTCollisionDetector::mRegistrar{
-        DARTCollisionDetector::getStaticType(),
-        []() -> std::shared_ptr<dart::collision::DARTCollisionDetector> {
-          return dart::collision::DARTCollisionDetector::create();
-        }};
-
-//==============================================================================
 std::shared_ptr<DARTCollisionDetector> DARTCollisionDetector::create()
 {
   clearCcdCache();

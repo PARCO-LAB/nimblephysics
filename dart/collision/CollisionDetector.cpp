@@ -43,13 +43,6 @@
 namespace dart {
 namespace collision {
 
-//==============================================================================
-CollisionDetector::Factory* CollisionDetector::getFactory()
-{
-  return SingletonFactory::getSingletonPtr();
-}
-
-//==============================================================================
 std::shared_ptr<CollisionGroup>
 CollisionDetector::createCollisionGroupAsSharedPtr()
 {

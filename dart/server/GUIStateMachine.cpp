@@ -3,10 +3,10 @@
 #include <chrono>
 #include <cstring>
 #include <fstream>
+#include <filesystem>
 #include <sstream>
 
 #include <assimp/scene.h>
-#include <boost/filesystem.hpp>
 // #include <urdf_sensor/sensor.h>
 
 #include "dart/collision/CollisionResult.hpp"
@@ -1052,12 +1052,11 @@ void GUIStateMachine::createMeshASSIMP(
         textureStartIndices.push_back(vertices.size());
         if (mTextures.find(newTexturePath) == mTextures.end())
         {
-          boost::filesystem::path fullPath = boost::filesystem::canonical(
-              boost::filesystem::path(currentTexturePath),
-              boost::filesystem::path(
-                  meshPath.substr(0, meshPath.find_last_of("/"))));
+          const auto fullPath = std::filesystem::canonical(
+              std::filesystem::path(meshPath).parent_path() /
+              std::filesystem::path(currentTexturePath));
 
-          createTextureFromFile(newTexturePath, std::string(fullPath.c_str()));
+          createTextureFromFile(newTexturePath, fullPath.string());
         }
       }
     }

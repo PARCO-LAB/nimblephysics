@@ -718,10 +718,7 @@ simulation::WorldPtr readWorld(
     {
       const auto cdType = getValueString(physicsElement, "collision_detector");
 
-      collision_detector
-          = collision::CollisionDetector::getFactory()->create(cdType);
-
-      if (!collision_detector)
+      if (cdType != "dart")
       {
         dtwarn << "Unknown collision detector[" << cdType << "]. "
                << "Default collision detector[dart] will be loaded.\n";
@@ -729,8 +726,7 @@ simulation::WorldPtr readWorld(
     }
 
     if (!collision_detector)
-      collision_detector
-          = collision::CollisionDetector::getFactory()->create("dart");
+      collision_detector = collision::DARTCollisionDetector::create();
 
     newWorld->getConstraintSolver()->setCollisionDetector(collision_detector);
   }

@@ -89,6 +89,7 @@ data/skel/test/gazebo/drop_test.skel
 data/skel/test/gazebo/force_torque_test.skel
 data/skel/test/gazebo/force_torque_test2.skel
 python/dummy.py
+python/dartpy/__init__.py
 python/new_examples/arm_ik.py
 python/new_examples/atlas.py
 python/new_examples/atlas_inv_dyn.py
@@ -261,12 +262,6 @@ python/nimblephysics_libs/utils/SdfParser/__init__.pyi
 python/nimblephysics_libs/utils/SkelParser/__init__.pyi
 python/nimblephysics_libs/utils/StringUtils/__init__.pyi
 python/nimblephysics_libs/utils/UniversalLoader/__init__.pyi
-python/research/marker_fit/marker_fit_api.py
-python/research/marker_fit/marker_fit_raw_api.py
-python/research/mujoco_loader/ant_test.py
-python/research/mujoco_loader/osim_test.py
-python/research/sprinter_fit/marker_fit.py
-python/research/synthetic_joint_recovery/plot.py
 python/tests/__init__.py
 python/tests/util.py
 python/tests/unit/__init__.py

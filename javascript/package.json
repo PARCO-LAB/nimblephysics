@@ -7,13 +7,13 @@
     "embedded": "embedded.js"
   },
   "scripts": {
-    "dev": "webpack-dev-server --config webpack.config.devserver.js",
-    "dev-python": "webpack-dev-server --config webpack.config.devserver-python.js",
-    "dev-screenshot": "webpack-dev-server --config webpack.config.devserver-screenshot.js",
+    "dev": "webpack-dev-server --env target=dev",
+    "dev-python": "webpack-dev-server --env target=dev-python",
+    "dev-screenshot": "webpack-dev-server --env target=dev-screenshot",
     "watch": "webpack --watch --mode=development",
-    "prod": "webpack --mode=production",
-    "build": "webpack && tsc || true && cp src/types.d.ts dist/types.d.ts && echo \"Success!\"",
-    "build-for-python": "webpack --config webpack.config.python.js",
+    "prod": "webpack --mode=production --env target=package",
+    "build": "webpack --env target=package && tsc || true && cp src/types.d.ts dist/types.d.ts && echo \"Success!\"",
+    "build-for-python": "webpack --env target=python",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Keenon Werling",
@@ -24,14 +24,9 @@
     "@babel/preset-env": "^7.11.5",
     "@babel/preset-typescript": "^7.10.4",
     "@types/react": "^17.0.37",
-    "arraybuffer-loader": "^1.0.8",
     "babel-loader": "^8.1.0",
     "css-loader": "^4.3.0",
-    "declaration-bundler-webpack-plugin": "^1.0.3",
-    "file-loader": "^6.2.0",
     "html-webpack-plugin": "^4.5.0",
-    "path": "^0.12.7",
-    "raw-loader": "^4.0.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "sass": "^1.26.11",
@@ -46,7 +41,6 @@
   },
   "dependencies": {
     "google-protobuf": "^3.20.1",
-    "sha256-uint8array": "^0.10.3",
     "three": "0.121.1"
   }
 }

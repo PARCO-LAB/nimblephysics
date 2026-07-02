@@ -2,10 +2,10 @@
 
 #include <chrono>
 #include <fstream>
+#include <filesystem>
 #include <sstream>
 
 #include <assimp/scene.h>
-#include <boost/filesystem.hpp>
 
 #include "dart/collision/CollisionResult.hpp"
 #include "dart/common/Aspect.hpp"

@@ -35,7 +35,7 @@
 
 #include <memory>
 #include <string>
-#include <boost/filesystem.hpp>
+#include <filesystem>
 #include "dart/common/Platform.hpp"
 
 #if DART_OS_LINUX
@@ -89,7 +89,7 @@ public:
   /// \return Pointer to the created SharedLibrary upon success in loading.
   /// Otherwise, returns nullptr.
   static std::shared_ptr<SharedLibrary> create(
-      const boost::filesystem::path& path);
+      const std::filesystem::path& path);
 
   /// Constructs from a path to the shared library.
   ///
@@ -103,13 +103,13 @@ public:
   /// \return Pointer to the created SharedLibrary upon success in loading.
   /// Otherwise, returns nullptr.
   explicit SharedLibrary(
-      ProtectedConstructionTag, const boost::filesystem::path& path);
+      ProtectedConstructionTag, const std::filesystem::path& path);
 
   /// Destructor.
   virtual ~SharedLibrary();
 
   /// Returns the path to the shared library file.
-  const boost::filesystem::path& getCanonicalPath() const;
+  const std::filesystem::path& getCanonicalPath() const;
 
   /// Returns true if the shared library loading was successful.
   bool isValid() const;
@@ -127,7 +127,7 @@ protected:
   /// Canonical path to the shared library where a canonical path is an absolute
   /// path that has no elements which are symbolic links, and no dot or dot dot
   /// elements such as "/path/../to/yourfile".
-  boost::filesystem::path mCanonicalPath;
+  std::filesystem::path mCanonicalPath;
 
   /// Handle to the loaded library.
   DYNLIB_HANDLE mInstance;

@@ -57,14 +57,14 @@ namespace common {
 
 //==============================================================================
 std::shared_ptr<SharedLibrary> SharedLibrary::create(
-    const boost::filesystem::path& path)
+    const std::filesystem::path& path)
 {
   return detail::SharedLibraryManager::getSingleton().load(path);
 }
 
 //==============================================================================
 SharedLibrary::SharedLibrary(
-    ProtectedConstructionTag, const boost::filesystem::path& canonicalPath)
+    ProtectedConstructionTag, const std::filesystem::path& canonicalPath)
   : mCanonicalPath(canonicalPath), mInstance(nullptr)
 {
   mInstance
@@ -91,7 +91,7 @@ SharedLibrary::~SharedLibrary()
 }
 
 //==============================================================================
-const boost::filesystem::path& SharedLibrary::getCanonicalPath() const
+const std::filesystem::path& SharedLibrary::getCanonicalPath() const
 {
   return mCanonicalPath;
 }

@@ -26,7 +26,11 @@ set(component_name utils)
 
 # Add target
 dart_add_library(${target_name} ${hdrs} ${srcs} ${dart_utils_headers} ${dart_utils_sources})
-target_link_libraries(${target_name} PUBLIC dart tinyxml2::tinyxml2)
+target_include_directories(${target_name} BEFORE PRIVATE
+  ${CMAKE_SOURCE_DIR}
+  ${CMAKE_BINARY_DIR}
+)
+target_link_libraries(${target_name} PUBLIC dart Eigen3::Eigen tinyxml2::tinyxml2)
 
 # Component
 add_component(${PROJECT_NAME} ${component_name})

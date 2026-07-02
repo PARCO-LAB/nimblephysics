@@ -2,6 +2,7 @@
 
 #include <gtest/gtest.h>
 
+#include "dart/collision/dart/DARTCollisionDetector.hpp"
 #include "dart/collision/CollisionObject.hpp"
 #include "dart/collision/Contact.hpp"
 #include "dart/constraint/ContactConstraint.hpp"
@@ -64,7 +65,7 @@ void testVertexFaceCollision(bool isSelfCollision)
   // World
   WorldPtr world = World::create();
   auto collision_detector
-      = collision::CollisionDetector::getFactory()->create("dart");
+      = collision::DARTCollisionDetector::create();
   world->getConstraintSolver()->setCollisionDetector(collision_detector);
   world->setGravity(Eigen::Vector3s(0, -9.81, 0));
 
@@ -171,7 +172,7 @@ void testEdgeEdgeCollision(bool isSelfCollision, bool useMesh)
   // World
   WorldPtr world = World::create();
   auto collision_detector
-      = collision::CollisionDetector::getFactory()->create("dart");
+      = collision::DARTCollisionDetector::create();
   world->getConstraintSolver()->setCollisionDetector(collision_detector);
   world->setGravity(Eigen::Vector3s(0, -9.81, 0));
 
@@ -362,7 +363,7 @@ void testSphereBoxCollision(bool isSelfCollision, int numFaces)
   // World
   WorldPtr world = World::create();
   auto collision_detector
-      = collision::CollisionDetector::getFactory()->create("dart");
+      = collision::DARTCollisionDetector::create();
   world->getConstraintSolver()->setCollisionDetector(collision_detector);
   world->setGravity(Eigen::Vector3s(0, -9.81, 0));
 
@@ -487,7 +488,7 @@ void testSphereSphereCollision(bool isSelfCollision, s_t radius1, s_t radius2)
   // World
   WorldPtr world = World::create();
   auto collision_detector
-      = collision::CollisionDetector::getFactory()->create("dart");
+      = collision::DARTCollisionDetector::create();
   world->getConstraintSolver()->setCollisionDetector(collision_detector);
   world->setGravity(Eigen::Vector3s(0, -9.81, 0));
 
@@ -563,7 +564,7 @@ void testSphereMeshCollision(bool isSelfCollision, int numFaces)
   // World
   WorldPtr world = World::create();
   auto collision_detector
-      = collision::CollisionDetector::getFactory()->create("dart");
+      = collision::DARTCollisionDetector::create();
   world->getConstraintSolver()->setCollisionDetector(collision_detector);
   world->setGravity(Eigen::Vector3s(0, -9.81, 0));
 
@@ -742,7 +743,7 @@ void testSphereCapsuleCollision(bool isSelfCollision, int type)
   // World
   WorldPtr world = World::create();
   auto collision_detector
-      = collision::CollisionDetector::getFactory()->create("dart");
+      = collision::DARTCollisionDetector::create();
   world->getConstraintSolver()->setCollisionDetector(collision_detector);
   world->setGravity(Eigen::Vector3s(0, -9.81, 0));
 
@@ -892,7 +893,7 @@ void testCapsuleCapsuleCollision(bool isSelfCollision, int type)
   // World
   WorldPtr world = World::create();
   auto collision_detector
-      = collision::CollisionDetector::getFactory()->create("dart");
+      = collision::DARTCollisionDetector::create();
   world->getConstraintSolver()->setCollisionDetector(collision_detector);
   world->setGravity(Eigen::Vector3s(0, -9.81, 0));
 
@@ -1077,7 +1078,7 @@ void testBoxCapsuleCollision(bool isSelfCollision, bool useMesh, int type)
   // World
   WorldPtr world = World::create();
   auto collision_detector
-      = collision::CollisionDetector::getFactory()->create("dart");
+      = collision::DARTCollisionDetector::create();
   world->getConstraintSolver()->setCollisionDetector(collision_detector);
   world->setPenetrationCorrectionEnabled(false);
   world->setGravity(Eigen::Vector3s(0, -9.81, 0));

@@ -4,3 +4,8 @@ atlas_recording.json
 movement2.bin
 movement2.bin.gz
 *.bin
+*.bin.gz
+*.txt
+!.gitignore
+!.npmignore
+!preview.json

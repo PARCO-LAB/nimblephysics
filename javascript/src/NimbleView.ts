@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { CapsuleBufferGeometry } from "./threejs_lib/three-js-capsule-geometry/CapsuleBufferGeometry";
+import { CapsuleBufferGeometry } from "./geometry/CapsuleBufferGeometry";
 import "./style.scss";
 
 import View from "./components/View";
@@ -9,10 +9,10 @@ import RichPlot from "./components/RichPlot";
 import { dart } from './proto/GUI';
 import { MeshLine, MeshLineMaterial } from './THREE.MeshLine';
 import VERSION_NUM from "../../VERSION.txt";
-import logoSvg from "!!raw-loader!./nimblelogo.svg";
-import leftMouseSvg from "!!raw-loader!./leftMouse.svg";
-import rightMouseSvg from "!!raw-loader!./rightMouse.svg";
-import scrollMouseSvg from "!!raw-loader!./scrollMouse.svg";
+import logoSvg from "./nimblelogo.svg";
+import leftMouseSvg from "./leftMouse.svg";
+import rightMouseSvg from "./rightMouse.svg";
+import scrollMouseSvg from "./scrollMouse.svg";
 
 const SCALE_FACTOR = 100;
 

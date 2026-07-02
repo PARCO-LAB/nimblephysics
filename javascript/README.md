@@ -7,3 +7,5 @@ Run `npm run build` to rebuild the `dist` folder.
 If you're missing the `*.d.ts` files in `dist`, run `tsc` on its own. This should create those files.
 
 Now run `npm publish`.
+
+Use `npm`. Do not commit `yarn.lock`.

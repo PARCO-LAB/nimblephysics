@@ -32,6 +32,8 @@
 
 #include "dart/common/detail/SharedLibraryManager.hpp"
 
+#include <cassert>
+
 #include "dart/common/SharedLibrary.hpp"
 #include "dart/common/Console.hpp"
 
@@ -41,10 +43,10 @@ namespace detail {
 
 //==============================================================================
 std::shared_ptr<SharedLibrary> SharedLibraryManager::load(
-    const boost::filesystem::path& path)
+    const std::filesystem::path& path)
 {
   // Check if the given path exits
-  const bool exists = boost::filesystem::exists(path);
+  const bool exists = std::filesystem::exists(path);
   if (!exists)
   {
     dtwarn << "[SharedLibraryManager::load] The given path doesn't exist. "
@@ -53,7 +55,7 @@ std::shared_ptr<SharedLibrary> SharedLibraryManager::load(
   }
 
   // Convert the given path to the canonical path
-  const auto canonicalPath = boost::filesystem::canonical(path);
+  const auto canonicalPath = std::filesystem::canonical(path);
 
   const auto iter = mLibraries.find(canonicalPath);
 

@@ -11,10 +11,15 @@
 If you want to use this checkout in another project, build and install the wheel:
 
 ```bash
-python -m pip install build wheel
-python -m build --wheel
-python -m pip install dist/nimblephysics-*.whl
+python -m venv .venv-build
+.venv-build/bin/python -m pip install --upgrade pip setuptools wheel build pybind11 pybind11-stubgen
+.venv-build/bin/python setup.py bdist_wheel
+.venv-build/bin/python -m pip install --force-reinstall dist/nimblephysics-*.whl
 ```
+
+If you are building from a fresh clone, populate `.deps/` first. The build will
+recreate local helper symlinks such as `Eigen` and `unsupported` if your
+environment needs them, then you can rerun `setup.py bdist_wheel`.
 
 If you're developing inside this repo, use an editable install:
 

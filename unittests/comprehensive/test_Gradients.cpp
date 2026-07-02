@@ -34,6 +34,7 @@
 
 #include <gtest/gtest.h>
 
+#include "dart/collision/dart/DARTCollisionDetector.hpp"
 #include "dart/collision/CollisionObject.hpp"
 #include "dart/collision/Contact.hpp"
 #include "dart/constraint/BoxedLcpConstraintSolver.hpp"
@@ -1075,13 +1076,13 @@ void testRobotArm(
   // World
   WorldPtr world = World::create();
   /*
-  for (auto key : collision::CollisionDetector::getFactory()->getKeys())
+  for (auto key : std::vector<std::string>{"dart"})
   {
     std::cout << "Option: " << key << std::endl;
   }
   */
   auto collision_detector
-      = collision::CollisionDetector::getFactory()->create("dart");
+      = collision::DARTCollisionDetector::create();
   world->getConstraintSolver()->setCollisionDetector(collision_detector);
   world->setGravity(Eigen::Vector3s(0, -9.81, 0));
   world->setContactClippingDepth(1.);

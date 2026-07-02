@@ -1,4 +1,5 @@
 #include <memory>
+#include <cstddef>
 
 #include <Eigen/Dense>
 #include <dart/biomechanics/DynamicsFitter.hpp>

@@ -99,8 +99,6 @@ protected:
   // Documentation inherited
   void refreshCollisionObject(CollisionObject* object) override;
 
-private:
-  static Registrar<DARTCollisionDetector> mRegistrar;
 };
 
 }  // namespace collision

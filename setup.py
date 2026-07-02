@@ -223,7 +223,7 @@ setup(
     long_description_content_type='text/markdown',
     license='MIT',
     package_dir={'': 'python'},
-    packages=['nimblephysics'],
+    packages=['nimblephysics', 'dartpy', 'dartpy.common'],
     package_data={'nimblephysics': ['web_gui/*', 'web_gui/*/*',
                                     'web_gui/*/*/*', 'models/*', 'models/*/*', 'models/*/*/*']},
     ext_package='nimblephysics_libs',

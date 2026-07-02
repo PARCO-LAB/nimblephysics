@@ -26,9 +26,9 @@ Dynamic: summary
 
 `pip3 install nimblephysics`
 
-### Build wheel locale
+### Build a local wheel
 
-Se vuoi usare questa checkout in un altro progetto, costruisci e installa il wheel:
+If you want to use this checkout in another project, build and install the wheel:
 
 ```bash
 python -m pip install build wheel
@@ -36,7 +36,7 @@ python -m build --wheel
 python -m pip install dist/nimblephysics-*.whl
 ```
 
-Se invece stai sviluppando dentro la repo, usa l'editable install:
+If you're developing inside this repo, use an editable install:
 
 ```bash
 python -m pip install -e .

@@ -35,22 +35,8 @@
 
 #include <memory>
 #include <unordered_map>
-#include <boost/filesystem.hpp>
+#include <filesystem>
 #include "dart/common/Singleton.hpp"
-
-#include <boost/functional/hash.hpp>
-
-namespace std {
-
-template<> struct hash<boost::filesystem::path>
-{
-  size_t operator()(const boost::filesystem::path& p) const
-  {
-    return boost::filesystem::hash_value(p);
-  }
-};
-
-} // namespace std
 
 namespace dart {
 namespace common {
@@ -70,7 +56,7 @@ public:
   /// Windows).
   /// \return Pointer to the shared library upon success. Otherwise, returns
   /// nullptr.
-  std::shared_ptr<SharedLibrary> load(const boost::filesystem::path& path);
+  std::shared_ptr<SharedLibrary> load(const std::filesystem::path& path);
 
 protected:
   friend class Singleton<SharedLibraryManager>;
@@ -78,7 +64,7 @@ protected:
 protected:
   /// Map from library path to the library instances.
   std::unordered_map<
-      boost::filesystem::path, std::weak_ptr<SharedLibrary>> mLibraries;
+      std::filesystem::path, std::weak_ptr<SharedLibrary>> mLibraries;
 };
 
 } // namespace detail

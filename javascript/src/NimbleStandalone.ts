@@ -1,12 +1,11 @@
 import NimbleView from "./NimbleView";
-// import logoSvg from "!!raw-loader!./nimblelogo.svg";
+// import logoSvg from "./nimblelogo.svg";
 import { CommandRecording } from "./types";
 import protobuf from 'google-protobuf';
 import {dart} from './proto/GUI';
-import { createHash } from 'sha256-uint8array';
-import playSvg from "!!raw-loader!./play.svg";
-import pauseSvg from "!!raw-loader!./pause.svg";
-import warningSvg from "!!raw-loader!./warning.svg";
+import playSvg from "./play.svg";
+import pauseSvg from "./pause.svg";
+import warningSvg from "./warning.svg";
 
 class WarningSpan {
   standalone: NimbleStandalone;
@@ -91,7 +90,6 @@ class WarningSpan {
 
 class NimbleStandalone {
   view: NimbleView | null;
-  lastRecordingHash: string;
   rawBytes: Uint8Array;
   rawFrameBytes: Uint8Array[];
   estimatedTotalFrames: number;
@@ -289,7 +287,6 @@ class NimbleStandalone {
       }
     });
 
-    this.lastRecordingHash = "";
     this.rawFrameBytes = [];
     this.estimatedTotalFrames = 100;
     this.animationKey = 0;

@@ -34,6 +34,7 @@
 
 #include <gtest/gtest.h>
 
+#include "dart/collision/dart/DARTCollisionDetector.hpp"
 #include "dart/collision/collision.hpp"
 #include "dart/common/common.hpp"
 #include "dart/config.hpp"
@@ -1058,18 +1059,6 @@ TEST_F(Collision, CollisionOfPrescribedJoints)
 #ifdef ALL_TESTS
 TEST_F(Collision, Factory)
 {
-  EXPECT_TRUE(collision::CollisionDetector::getFactory()->canCreate("dart"));
-
-#if HAVE_BULLET
-  EXPECT_TRUE(collision::CollisionDetector::getFactory()->canCreate("bullet"));
-#else
-  EXPECT_TRUE(!collision::CollisionDetector::getFactory()->canCreate("bullet"));
-#endif
-
-#if HAVE_ODE
-  EXPECT_TRUE(collision::CollisionDetector::getFactory()->canCreate("ode"));
-#else
-  EXPECT_TRUE(!collision::CollisionDetector::getFactory()->canCreate("ode"));
-#endif
+  EXPECT_TRUE(collision::DARTCollisionDetector::create() != nullptr);
 }
 #endif

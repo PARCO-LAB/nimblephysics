@@ -116,14 +116,13 @@ get_property(dart_core_sources GLOBAL PROPERTY DART_CORE_SOURCES)
 # Add target
 dart_add_library(dart ${dart_core_headers} ${dart_core_sources})
 target_include_directories(dart BEFORE
-  PUBLIC
+  PRIVATE
   ${Protobuf_INCLUDE_DIRS}
   $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}>
   $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}>
-  $<INSTALL_INTERFACE:include>
 )
 target_link_libraries(dart
-  PUBLIC
+  PRIVATE
   ${CMAKE_DL_LIBS}
   ${PROJECT_NAME}-external-odelcpsolver
   Eigen3::Eigen
@@ -140,7 +139,7 @@ target_link_libraries(dart
 if(gRPC_FOUND)
   target_compile_definitions(dart PUBLIC DART_HAS_GRPC)
   target_link_libraries(dart
-    PUBLIC
+    PRIVATE
       # protobuf::libprotobuf-lite
       # protobuf::libprotoc
       gRPC::grpc++
@@ -163,25 +162,25 @@ endif()
 
 if(PerfUtils_FOUND)
   target_link_libraries(dart
-    PUBLIC
+    PRIVATE
     PerfUtils
   )
 endif()
 
 if(DART_USE_ARBITRARY_PRECISION)
   target_link_libraries(dart
-    PUBLIC
+    PRIVATE
     gmp
     mpfr
   )
 endif()
 
 if(TARGET octomap)
-  target_link_libraries(dart PUBLIC octomap)
+  target_link_libraries(dart PRIVATE octomap)
 endif()
 
 if(NOT MSVC)
-  target_link_libraries(dart PUBLIC Boost::regex)
+  target_link_libraries(dart PRIVATE Boost::regex)
 endif()
 
 if(CMAKE_VERSION VERSION_LESS 3.8.2)
